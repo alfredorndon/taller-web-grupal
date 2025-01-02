@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es-VE">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta author="Oscar Manrique"/>
+    <meta name="description" content="Este es un juego de Batalla Naval" />
+    <meta name="keywords" content="Batalla Naval, juego, taller, semestre" />
+    <meta name="robots" content="index,follow" />
+    <title>Batalla Naval | Tablero Barcos</title>
+    <link rel="icon" href="https://seguropordias.com/img/contenido/barco-famoso-titanic.jpg" type="image/png" size="16x16 32x32 64x64" />
+    <link rel="stylesheet" href="styles/styles.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/tablero-barcos-styles.css" type="text/css"/>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <div id="crea-tu-tablero"><h1>Crea tu Tablero</h1></div>
+        </header>
+        <main>
+            <section id="creacion">
+                <div class="tablero" id="tabla-p1"></div>
+                <div id="piezas">
+                    <h2>Tus piezas</h2>
+                    <div>
+                        <div class="pieza-portaavion"></div>
+                        <div class="pieza-acorazado"></div>
+                        <div class="pieza-crucero"></div>
+                        <div class="pieza-submarino"></div>
+                        <div class="pieza-destructor"></div>
+                    </div>
+                    <h2>Sus barcos disponibles</h2>
+                    <section id="preparacion">
+                        <ul id="lista-barcos">
+                            <li id="portaavion">1 Portaaviones (5 casillas)</li>
+                            <li id="acorazado">1 Acorazado (4 casillas)</li>
+                            <li id="crucero">1 Crucero (3 casillas)</li>
+                            <li id="submarino">1 Submarino (3 casillas)</li>
+                            <li id="destructor">1 Destructor (2 casillas)</li>
+                        </ul>
+                        <a href="juego.html">Estoy Listo</a>
+                    </section>
+                </div>
+            </section>
+            <section id="volver-inicio">
+                <h2>Volver al Inicio</h2>
+                <a href="inicio.html">Volver</a>
+            </section>
+        </main>
+    </div>
+    <script src="script/script.js" type="text/javascript"></script>
+</body>
+</html>

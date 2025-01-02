@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es-VE">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta author="Oscar Manrique"/>
+    <meta name="description" content="Este es un juego de Batalla Naval" />
+    <meta name="keywords" content="Batalla Naval, juego, taller, semestre" />
+    <meta name="robots" conten="index,follow" />
+    <title>Batalla Naval | Inicio</title>
+    <link rel="icon" href="https://seguropordias.com/img/contenido/barco-famoso-titanic.jpg" type="image/png" size="16x16 32x32 64x64" />
+    <link rel="stylesheet" href="styles/styles.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/print-style.css" media="print" type="text/css"/>
+    <script src="script/script.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <h1>Batalla Naval</h1>
+            <nav class="NavPrimario">
+                <ul>
+                    <li><a href="#inicio">¿Qué es "Batalla Naval"?</a></li>
+                    <li><a href="#jugar">Jugar</a></li>
+                    <li><a href="#instrucciones">Instrucciones</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h2 id="inicio">¿Qué es "Batalla Naval"?</h2>
+            <p>
+                Batalla naval es un juego por turnos dónde el objetivo es hundir la flota del enemigo tratando de adivinar la ubicación <br/> 
+                de los barcos hostiles dentro de un tablero con coordenadas preestablecidas. ¡Sé más rápido que tus contrincantes y <br/>
+                alcanza la victoria en medio del océano!
+            </p>
+            <h2 id="jugar">Jugar</h2>
+            <form>
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" placeholder="Nombre"/>
+            </form>
+            <br/>
+            <button type="button" onclick=""><a href="modos.html">Empezar</a></button>
+        </main>
+        <footer>
+            <h2 id="instrucciones">Instrucciones</h2>
+            <nav class="NavSecundario">
+                <ul>
+                    <li><a href="#"></a></li>
+                </ul>
+            </nav>
+            <h3 id="comoJugar">¿Cómo se juega?</h3>
+            <p>
+                El objetivo del juego es lanzar misiles en coordenadas donde se suponga que hay un barco enemigo. Las coordenadas vienen dadas por un tablero<br/>
+                con columnas alfabéticas y filas numéricas. Gana aquél que hunda la flota completa del otro jugador. Los jugadores disponen de una interfaz en<br/>
+                en la que se colocan los barcos al indicar las coordenadas donde quieren colocarlos y en la que, mediante el mismo método de indicación de<br/>
+                coordenadas, es posible atacar al rival una vez por turno.
+            </p>
+            <h3 id="lecturaCoord">¿Cómo se leen y escriben las coordenadas?</h3>
+            <p>
+                La lectura de coordenadas comienza con la lectura de la columna alfabética y su posterior fila numérica (Ej: a1, b2, d5, e7, etc.). La escritura<br/>
+                es en letras minúsculas y con la letra y el número pegados. Es importante resaltar que cada combinación de letra con número referencia una casilla.
+            </p>
+            <h3 id="ponerBarcos">¿Cómo se colocan los Barcos?</h3>
+            <p>
+                Para colocar los barcos primero debemos establecer que tipo de barco colocaremos y cuántas casillas ocupan, una vez hecho esto hay una regla MUY<br/>
+                importante y es que NO se pueden colocar barcos en diagonal, tome esto en cuenta cuándo escriba las posiciones que su navío vaya a ocupar, con esto<br/>
+                presente es cuestión de tomar un valor de casilla inicial (Ej:a1) y un valor de casilla final (Ej:a3), tenga en consideración que la coordenada final<br/>
+                da la orientación del barco (Horizontal o Vertical), colocarlas en sus casillas correspondientes, después de click en "Colocar Barco".
+            </p>
+            <h3 id="atacar">¿Cómo atacar?</h3>
+            <p>
+                Para poder atacar al enemigo primero debe ver su tablero de ataque o el tablero de los otros enemigos (si es que está en un modo de más de 2<br/>
+                jugadores), una vez allí vaya a la casilla
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
