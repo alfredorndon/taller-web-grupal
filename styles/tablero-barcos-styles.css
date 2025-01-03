@@ -27,9 +27,12 @@
 
 #tableros {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: space-around;
+    align-items: baseline;
     gap: 3rem;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    flex-direction: row;
 }
 
 #piezas ul {

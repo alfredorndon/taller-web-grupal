@@ -26,17 +26,22 @@
     grid-template-columns: repeat(calc(var(--tablero-columns) + 1), 1fr);
     grid-template-rows: repeat(calc(var(--tablero-columns) + 1), 1fr);
     gap: var(--tablero-gap);
-    padding: var(--tablero-padding);
+    padding-right: 5.5px;
     max-width: var(--tablero-width);
     height: var(--tablero-height);
     background: var(--position-bg-color);
-    border-radius: 15px;
     box-shadow: 0px 0px 50px #0009;
+    background:#F7F7F7 url('/taller-web-grupal/images/sea.jpg') 0 0 no-repeat;
     overflow: visible;
 }
 
-.tablero h2 {
-    position: absolute;
+.tablero-juego{
+    padding: 60px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.tablero-juego h2 {
     top: -10px;
     left: 204px;
     padding:0;
@@ -49,7 +54,6 @@
     justify-content: center;
     width: var(--position-width);
     height: var(--position-height);
-    background:#F7F7F7 url('/images/sea.jpg') 0 0 no-repeat;
     overflow: visible;
     position: relative;
 }
@@ -60,62 +64,105 @@
 }
 
 .barco-portaaviones {
-    position: absolute;
     background: transparent url('../images/ship0.png') 0 0 no-repeat;
     background-size: cover;
-    width: 100%;
-    height: 185px;
-    display:block;
-    bottom:0;
+    text-indent: 150%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.barco-portaaviones.tile-2{
+    background-position: 0 calc(var(--position-height) * -1);
+}
+.barco-portaaviones.tile-3{
+    background-position: 0 calc(var(--position-height) * -1.1);
+}
+
+.barco-portaaviones.tile-4{
+    background-position: 0 calc(var(--position-height) * -1.2);
+}
+
+.barco-portaaviones.tile-5{
+    background-position: 0 calc(var(--position-height) * -1.4);
+}
+.barco-crucero{
+    background: transparent url('/taller-web-grupal/images/ship3.png') 0 0 no-repeat;
+    background-size: cover;
+    text-indent: 150%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.barco-crucero.tile-2{
+    background-position: 0 calc(var(--position-height) * -1);
+}
+
+.barco-crucero.tile-3{
+    background-position: 0 calc(var(--position-height) * -2.3);
 }
 
 .barco-acorazado {
-    position: absolute;
-    background: transparent url('../images/ship1.png') 0 0 no-repeat;
+    background: transparent url('/taller-web-grupal/images/ship1.png') 0 0 no-repeat;
     background-size: cover;
-    width: 100%;
-    height: 148px;
-    display:block;
-    bottom:0;
-    overflow: visible;
+    text-indent: 150%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+  
+.barco-acorazado.tile-2 {
+    background-position: 0 calc(var(--position-height) * -1);
+}
+  
+.barco-acorazado.tile-3 {
+    background-position: 0 calc(var(--position-height) * -2.3);
+}
+  
+.barco-acorazado.tile-4 {
+    background-position: 0 calc(var(--position-height) * -3.4);
 }
 
-.barco-crucero {
-    position: absolute;
-    background: transparent url('../images/ship3.png') 0 0 no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 111px;
-    display:block;
-    bottom:0;
-}
-
-.barco-submarino {
-    position: absolute;
+.barco-submarino{
     background: transparent url('../images/ship4.png') 0 0 no-repeat;
     background-size: cover;
-    width: 100%;
-    height: 111px;
-    display:block;
-    bottom:0;
+    text-indent: 150%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.barco-submarino.tile-2{
+    background-position: 0 calc(var(--position-height) * -1);
+}
+
+.barco-submarino.tile-3{
+    background-position: 0 calc(var(--position-height) * -2.3);
 }
 
 .barco-destructor {
-    position: absolute;
     background: transparent url('../images/ship5.png') 0 0 no-repeat;
     background-size: cover;
-    width: 100%;
-    height: 74px;
-    display:block;
-    bottom:0;
+    text-indent: 150%;
+    white-space: nowrap;
+    overflow: hidden;
 }
+
+.barco-destructor.tile-2{
+    background-position: 0 calc(var(--position-height) * -1);
+}
+
+.barco
 
 .horizontal { 
     transform: rotate(90deg);
-    transform-origin: bottom left;
-    left: 0;
-    bottom:50px;
 }
+
+.barco-destructor.horizontal{
+    transform: rotate(-90deg);
+}
+
+.barco-portaaviones.horizontal{
+    transform: rotate(-90deg);
+}
+
 
 .hit {
     position: absolute;
