@@ -222,3 +222,11 @@ function crearTablero (jugadores)
         tableroJuego.appendChild(tablero);
     }
 }
+
+function alterarLobby(cantidadJugadores, gameId){
+    let titulo= document.getElementById('etapa');
+    if (cantidadJugadores!=8)
+        titulo.innerHTML='Modo de Juego: Partida de '+cantidadJugadores+' Jugadores </br>ID: '+gameId;
+    else
+        titulo.innerHTML='Modo de Juego: Torneo </br>ID: '+gameId;
+}
