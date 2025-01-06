@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({host:'0.0.0.0', port: 8080 });
 const games = {};
 
 wss.on("connection", function connection(ws) {
