@@ -135,7 +135,7 @@ function handleJoinGame(ws, gameId,playerName) {
 /**
  * Maneja el inicio de un juego.
  *
- * @param {WebSocket} aaaaa - La conexión WebSocket del jugador.
+ * @param {WebSocket} ws - La conexión WebSocket del jugador.
  * @param {string} gameId - El ID del juego a iniciar.
  */
 function handleStartGame(ws, gameId) {
