@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-#crea-tu-tablero {
+#crea-tu-tablero #container-tablero-barcos {
     font-family: 'Jaro', sans-serif;
     font-size: 50px;
     width: 100%;
@@ -10,7 +10,7 @@
     background-color: white;
 }
 
-#piezas, #volver-inicio {
+#piezas, #volver-inicio #container-tablero-barcos {
     background-color: #F7F7F7;
     width: 750px;
     text-align: center;
@@ -20,12 +20,12 @@
     padding-bottom: 30px;
 }
 
-#volver-inicio {
+#volver-inicio #container-tablero-barcos {
     margin: 80px;
     width: 400px;
 }
 
-#tableros {
+#tableros #container-tablero-barcos {
     display: flex;
     justify-content: space-around;
     align-items: baseline;
@@ -35,14 +35,14 @@
     flex-direction: row;
 }
 
-#piezas ul {
+#piezas ul #container-tablero-barcos {
     list-style: none;
     padding:0;
     margin:0;
     margin-bottom: 35px;
 }
 
-#piezas a, #volver-inicio a{
+#piezas a, #volver-inicio a #container-tablero-barcos {
     color:#0C2C85;
     text-decoration: none;
     font-size: 20px;
@@ -54,19 +54,19 @@
     border-radius: 10px;
 }
 
-#piezas a {
+#piezas a #container-tablero-barcos {
     background-color: #0C2C85;
     color: white;
 }
 
-#piezas a:hover, #volver-inicio a:hover {
+#piezas a:hover, #volver-inicio a:hover #container-tablero-barcos {
     color:white;
     text-decoration: none;
     background-color: #68BAFA;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#piezas {
+#piezas #container-tablero-barcos {
     position: relative;
     height: auto;
     display: flex;
@@ -76,19 +76,19 @@
     height: auto;
 }
 
-#piezas > :nth-child(2){
+#piezas > :nth-child(2) #container-tablero-barcos {
     position: relative;
     height: 150px;
     width: 750px;
     overflow: visible;
 }
 
-#piezas h2 {
+#piezas h2 #container-tablero-barcos {
     flex-basis: 100%;
     margin: 0;
 }
 
-.pieza-portaavion {
+.pieza-portaavion #container-tablero-barcos {
     position: absolute;
     background: transparent url('../images/ship0.png') 0 0 no-repeat;
     background-size: cover;
@@ -99,7 +99,7 @@
     left: 150px;
 }
 
-.pieza-acorazado {
+.pieza-acorazado #container-tablero-barcos {
     position: absolute;
     background: transparent url('../images/ship1.png') 0 0 no-repeat;
     background-size: cover;
@@ -110,7 +110,7 @@
     left: 250px;
 }
 
-.pieza-crucero {
+.pieza-crucero #container-tablero-barcos {
     position: absolute;
     background: transparent url('../images/ship3.png') 0 0 no-repeat;
     background-size: cover;
@@ -121,7 +121,7 @@
     left: 350px;
 }
 
-.pieza-submarino {
+.pieza-submarino #container-tablero-barcos {
     position: absolute;
     background: transparent url('../images/ship4.png') 0 0 no-repeat;
     background-size: cover;
@@ -132,7 +132,7 @@
     left: 450px;
 }
 
-.pieza-destructor {
+.pieza-destructor #container-tablero-barcos {
     position: absolute;
     background: transparent url('../images/ship5.png') 0 0 no-repeat;
     background-size: cover;
@@ -143,24 +143,24 @@
     left: 550px;
 }
 
-header {
+header #container-tablero-barcos {
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-h2{
+h2 #container-tablero-barcos {
     font-family: 'Jaro', sans-serif;
     font-size: 30px;
     color: #0C2C85;
 }
 
-p, label, li, a{
+p, label, li, a #container-tablero-barcos {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-body {
+body #container-tablero-barcos {
     margin: 0;
     padding: 0;
     background-image: url('../images/mar3.jpg');
@@ -168,7 +168,7 @@ body {
     background-position: 30% 40%;
 }
 
-main {
+main #container-tablero-barcos {
     display: flex;
     flex-direction: column;
     align-items: center;
