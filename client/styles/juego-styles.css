@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-header #container-juego {
+header {
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-header h2 #container-juego {
+header h2{
     width: 80%;
     border-radius: 15px;
     text-align: center;
@@ -15,7 +15,7 @@ header h2 #container-juego {
     background-color: white;
 }
 
-#modo-juego #container-juego {
+#modo-juego {
     font-family: 'Jaro', sans-serif;
     font-size: 50px;
     width: 100%;
@@ -25,7 +25,7 @@ header h2 #container-juego {
     background-color: white;
 }
 
-#anuncio #container-juego {
+#anuncio {
     font-family: 'Roboto Condensed', sans-serif;
     background-color: #0C2C85;
     width: 95%;
@@ -37,7 +37,7 @@ header h2 #container-juego {
     color:white !important; 
 }
 
-#tableros #container-juego {
+#tableros {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
@@ -46,11 +46,11 @@ header h2 #container-juego {
 
 }
 
-#tableros > :nth-last-child(2) #container-juego {
+#tableros > :nth-last-child(2) {
     flex-basis: 100%;
 }
 
-#boosters #container-juego {
+#boosters{
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -61,7 +61,7 @@ header h2 #container-juego {
     width: 50%;
 }
 
-#boosters ul #container-juego {
+#boosters ul{
     list-style: none;
     padding:0;
     display:flex;
@@ -72,7 +72,7 @@ header h2 #container-juego {
     gap: 1rem;
 }
 
-#boosters ul li #container-juego {
+#boosters ul li{
     border: 1px solid #000;
     padding: 20px;
     margin:10px;
@@ -81,17 +81,17 @@ header h2 #container-juego {
     cursor: pointer;
 }
 
-#boosters ul li:hover #container-juego {
+#boosters ul li:hover{
     color:white;
     background-color: #68BAFA;
     border: 1px solid;
 }
 
-#puntaje #container-juego {
+#puntaje {
     font-size: 20px;
 }
 
-#compra-potenciador #container-juego {
+#compra-potenciador {
     border: 1px solid;
     color: white; 
     height: 40px; 
@@ -109,11 +109,11 @@ header h2 #container-juego {
     margin: 20px;
 }
 
-#compra-potenciador:hover #container-juego {
+#compra-potenciador:hover {
     background-color:#1449DB;
 }
 
-#salir-del-juego #container-juego {
+#salir-del-juego {
     width: 500px;
     text-align: center;
     border-radius: 15px;
@@ -122,7 +122,7 @@ header h2 #container-juego {
     padding-bottom:40px;
 }
 
-#salir-del-juego a #container-juego {
+#salir-del-juego a{
     color:#0C2C85;
     text-decoration: none;
     font-size: 20px;
@@ -135,24 +135,24 @@ header h2 #container-juego {
     border-radius: 10px;
 }
 
-#salir-del-juego a:hover #container-juego {
+#salir-del-juego a:hover {
     color:white;
     text-decoration: none;
     background-color: #68BAFA;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h2 #container-juego {
+h2{
     font-family: 'Jaro', sans-serif;
     font-size: 30px;
     color: #0C2C85;
 }
 
-p, label, li, a #container-juego {
+p, label, li, a{
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-body #container-juego {
+body {
     margin: 0;
     padding: 0;
     background-image: url('../images/mar3.jpg');
@@ -160,7 +160,7 @@ body #container-juego {
     background-position: 50% 70%;
 }
 
-main #container-juego {
+main {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-header #container-lobby {
+header {
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-header div #container-lobby {
+header div{
     font-family: 'Jaro', sans-serif;
     font-size: 50px;
     width: 100%;
@@ -17,7 +17,7 @@ header div #container-lobby {
     background-color: white;
 }
 
-#etapa #container-lobby {
+#etapa{
     width: 80%;
     border-radius: 15px;
     text-align: center;
@@ -26,14 +26,14 @@ header div #container-lobby {
     color: white !important;
 }
 
-#interfaz #container-lobby{
+#interfaz {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#tabla-torneo #container-lobby{
+#tabla-torneo {
     margin-top: 40px;
     margin-bottom: 30px;
     margin: 25px 0;
@@ -45,30 +45,30 @@ header div #container-lobby {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-#tabla-torneo thead tr #container-lobby{
+#tabla-torneo thead tr{
     background-color: #0C2C85;
     color:white;
     text-align: center;
 
 }
 
-#tabla-torneo th, #tabla-torneo td #container-lobby {
+#tabla-torneo th, #tabla-torneo td {
     padding: 12px 15px;
 }
 
-#tabla-torneo tbody tr #container-lobby {
+#tabla-torneo tbody tr{
     border-bottom: 1px solid #dddddd;
 }
 
-#tabla-torneo tbody tr:nth-of-type(even) #container-lobby {
+#tabla-torneo tbody tr:nth-of-type(even){
     background-color: #e9e9e9;
 }
 
-#tabla-torneo tbody tr:last-of-type #container-lobby {
+#tabla-torneo tbody tr:last-of-type{
     border-bottom: 2px solid #0C2C85;
 }
 
-section #container-lobby {
+section {
     background-color: #F7F7F7;
     width: 750px;
     text-align: center;
@@ -77,7 +77,7 @@ section #container-lobby {
     border-radius: 15px;
 }
 
-#listo #container-lobby {
+#listo{
     border: 1px solid;
     color: white; 
     height: 40px; 
@@ -94,7 +94,7 @@ section #container-lobby {
     justify-content: center;
 }
 
-#salir-del-juego #container-lobby {
+#salir-del-juego {
     width: 500px;
     text-align: center;
     border-radius: 15px;
@@ -103,7 +103,7 @@ section #container-lobby {
     padding-bottom:40px;
 }
 
-#salir-del-juego a #container-lobby {
+#salir-del-juego a{
     color:#0C2C85;
     text-decoration: none;
     font-size: 20px;
@@ -116,24 +116,24 @@ section #container-lobby {
     border-radius: 10px;
 }
 
-#salir-del-juego a:hover #container-lobby {
+#salir-del-juego a:hover {
     color:white;
     text-decoration: none;
     background-color: #68BAFA;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h2 #container-lobby {
+h2{
     font-family: 'Jaro', sans-serif;
     font-size: 30px;
     color: #0C2C85;
 }
 
-p, label, li, a, td, th #container-lobby {
+p, label, li, a, td, th{
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-body #container-lobby {
+body {
     margin: 0;
     padding: 0;
     background-image: url('../images/mar3.jpg');
@@ -141,7 +141,7 @@ body #container-lobby {
     background-position: 30% 40%;
 }
 
-main #container-lobby {
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
