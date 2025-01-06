@@ -38,9 +38,8 @@
                             <li id="submarino">1 Submarino (3 casillas)</li>
                             <li id="destructor">1 Destructor (2 casillas)</li>
                         </ul>
-                        <a href="lobby.html">Estoy Listo</a>
-                        <a href="juego.html">Unirme a un juego</a>
-                        <a href="juego.html">Crear un juego</a>
+                        <a href="lobby.html" id="union-game">Unirme a un juego</a>
+                        <a href="lobby.html" id="creacion-game">Crear un juego</a>
                     </section>
                 </div>
             </section>
@@ -52,6 +51,60 @@
     </div>
     <script>
         crearTablero(1);
+
+        const ws= new WebSocket('ws://localhost:8080');
+        
+        ws.addEventListener('open', ()=>{
+            console.log('Conectado al servidor');
+        })
+
+        ws.addEventListener('close', ()=>{
+            console.log('desconectado del servidor');
+        })
+
+        ws.addEventListener('message', (event)=>{
+            try{
+                const mensaje= JSON.parse(event.data);
+                switch (mensaje.type){
+                    case 'gameCreated':{
+                        console.log(mensaje.players[0].name);
+                        alert('revisa la consola');
+                        localStorage.setItem('partidaActiva',mensaje.gameId);
+                    }
+                        break;
+                    case 'playerJoined':{
+                        console.log('te has unido a un juego exitosamente');
+                    }
+                        break;
+                    case 'start':{
+                        console.log('se ha iniciado el juego');
+                    } 
+                    case 'error':{
+                        alert(mensaje.message);
+                        event.preventDefault();
+                    }
+                    break;
+                    default:{
+                        alert('no se ha podido procesar el mensaje');
+                        event.preventDefault();
+                        }
+                }
+            }
+            catch(error)
+            {
+                alert('error al parsear el mensaje');
+            }
+        })
+
+        document.getElementById('creacion-game').addEventListener('click',()=>{
+
+            ws.send(JSON.stringify({type:'create', playerName: localStorage.getItem('nombreJugador')}))
+        })
+
+        document.getElementById('union-game').addEventListener('click',()=>{
+
+            ws.send(JSON.stringify({type:'join', playerName: localStorage.getItem('nombreJugador'), gameID:'124', cantidadJugadores: localStorage.getItem('cantidadJugadores')}))
+        })
         
     </script>
 </body>

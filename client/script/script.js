@@ -223,10 +223,18 @@ function crearTablero (jugadores)
     }
 }
 
-function alterarLobby(cantidadJugadores, gameId){
+function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
     let titulo= document.getElementById('etapa');
     if (cantidadJugadores!=8)
         titulo.innerHTML='Modo de Juego: Partida de '+cantidadJugadores+' Jugadores </br>ID: '+gameId;
     else
         titulo.innerHTML='Modo de Juego: Torneo </br>ID: '+gameId;
+    for (let i=1;i<=nombresJugadores.length;i++)
+    {
+        let jugador = document.getElementById('jugador'+i);
+        jugador.innerText=nombresJugadores[i-1];
+    }
+    let restantes=document.getElementById('restantes');
+    let faltantes=cantidadJugadores-nombresJugadores.length;
+    restantes.innerText='('+faltantes+') restantes';
 }

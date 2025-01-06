@@ -15,10 +15,9 @@ wss.on("connection", function connection(ws) {
         }
     });
     ws.on('close', () => {
-        ws.send("te saliste jaja");
         handleDisconnect(ws);
     });
-    ws.send("jaja ahora jugaras batalla naval");
+    console.log("jaja ahora jugaras batalla naval");
 });
 
 /**
@@ -76,9 +75,12 @@ function handleMessage(ws, message) {
             // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
             handleLeaveGame(ws, message.gameId,message.playerName);
             break;
+        case 'getPlayers':
+            getPlayers(ws,message.gameId);
+            break;
         default:
             // Si el tipo de mensaje no es reconocido, se envía un mensaje de error al jugador.
-            sendMessage(ws, { type: 'error', message: 'Unknown message type' });
+            sendMessage(ws, { type: "error" , message: 'Mensaje desconocido'});
     }
 }
 
@@ -105,7 +107,13 @@ function handleCreateGame(ws,playerName) {
     games[gameId] = { id: gameId, players: [{ws,name:playerName}], started: false, turn: 0 };
 
     // Se envía un mensaje de confirmación al jugador.
-    sendMessage(ws, { type: 'gameCreated', gameId });
+    sendMessage(ws, { type: 'gameCreated', gameId, players:[{ws,name:playerName}] });
+}
+
+function getPlayers(ws, gameId) {
+    const game= games[gameId];
+    const gamePlayers = game.players.map(player => player.name);
+    ws.send(JSON.stringify({type: 'getPlayers', gamePlayers:gamePlayers}));
 }
 
 /**
@@ -117,11 +125,11 @@ function handleCreateGame(ws,playerName) {
 function handleJoinGame(ws, gameId,playerName, cantidadJugadores) {
     const game = games[gameId];
     if (!game) {
-        sendMessage(ws, { type: 'error', message: 'Game not found' });
+        sendMessage(ws, { type: 'error', message: 'El juego no ha sido encontrado' });
         return;
     }
     if (game.players.length >= cantidadJugadores) {
-        sendMessage(ws, { type: 'error', message: 'Game is full' });
+        sendMessage(ws, { type: 'error', message: 'El juego esta lleno' });
         return;
     }
     game.players.push({ws,name:playerName});
