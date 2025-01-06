@@ -15,9 +15,10 @@ wss.on("connection", function connection(ws) {
         }
     });
     ws.on('close', () => {
+        ws.send("te saliste jaja");
         handleDisconnect(ws);
     });
-    ws.send("something");
+    ws.send("jaja ahora jugaras batalla naval");
 });
 
 /**
@@ -59,7 +60,7 @@ function handleMessage(ws, message) {
         case 'join':
             // Para manejar la unión a un juego existente, se necesita la conexión WebSocket del jugador y el ID del
             // juego al cual el jugador se desea unir.
-            handleJoinGame(ws, message.gameId,message.playerName);
+            handleJoinGame(ws, message.gameId,message.playerName,message.cantidadJugadores);
             break;
         case 'start':
             // Para manejar el inicio de un juego, se necesita la conexión WebSocket del jugador y el ID del juego a
@@ -73,7 +74,7 @@ function handleMessage(ws, message) {
             break;
         case 'leave':
             // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
-            handleLeaveGame(ws, message.gameId);
+            handleLeaveGame(ws, message.gameId,message.playerName);
             break;
         default:
             // Si el tipo de mensaje no es reconocido, se envía un mensaje de error al jugador.
@@ -113,23 +114,20 @@ function handleCreateGame(ws,playerName) {
  * @param {WebSocket} ws - La conexión WebSocket del jugador.
  * @param {string} gameId - El ID del juego al que unirse.
  */
-function handleJoinGame(ws, gameId,playerName) {
+function handleJoinGame(ws, gameId,playerName, cantidadJugadores) {
     const game = games[gameId];
     if (!game) {
         sendMessage(ws, { type: 'error', message: 'Game not found' });
         return;
     }
-    if (game.players.length >= 4) {
+    if (game.players.length >= cantidadJugadores) {
         sendMessage(ws, { type: 'error', message: 'Game is full' });
         return;
     }
     game.players.push({ws,name:playerName});
     game.players.forEach((player) => {
-        if (player !== ws) {
-            sendMessage(player, { type: 'playerJoined', gameId, playerCount: game.players.length });
-        }
+            sendMessage(player.ws, { type: 'playerJoined', gameId, name:playerName, playerCount: game.players.length });
     });
-    sendMessage(ws, { type: 'playerJoined', gameId, playerCount: game.players.length });
 }
 
 /**
@@ -138,7 +136,7 @@ function handleJoinGame(ws, gameId,playerName) {
  * @param {WebSocket} ws - La conexión WebSocket del jugador.
  * @param {string} gameId - El ID del juego a iniciar.
  */
-function handleStartGame(ws, gameId) {
+function handleStartGame(ws, gameId,cantidadJugadores) {
     const game = games[gameId];
     if (!game) {
         sendMessage(ws, { type: 'error', message: 'Game not found' });
@@ -148,17 +146,14 @@ function handleStartGame(ws, gameId) {
         sendMessage(ws, { type: 'error', message: 'Game already started' });
         return;
     }
-    if (game.players.length < 2) {
+    if (game.players.length < cantidadJugadores) {
         sendMessage(ws, { type: 'error', message: 'Not enough players to start' });
         return;
     }
     game.started = true;
     game.players.forEach((player) => {
-        if (player !== ws) {
-            sendMessage(player, { type: 'gameStarted', gameId });
-        }
+            sendMessage(player.ws, { type: 'gameStarted', gameId });
     });
-    sendMessage(ws, { type: 'gameStarted', gameId });
 }
 
 /**
@@ -184,7 +179,7 @@ function handleMove(ws, gameId, move) {
     }
     game.players.forEach((player) => {
         if (player !== ws) {
-            sendMessage(player, { type: 'move', gameId, move });
+            sendMessage(player.ws, { type: 'move', gameId, move });
         }
     });
     sendMessage(ws, { type: 'move', gameId, move });
@@ -197,7 +192,7 @@ function handleMove(ws, gameId, move) {
  * @param {WebSocket} ws - La conexión WebSocket del jugador.
  * @param {string} gameId - El ID del juego.
  */
-function handleLeaveGame(ws, gameId) {
+function handleLeaveGame(ws, gameId,playerName) {
     if (!gameId) {
         sendMessage(ws, { type: 'error', message: 'No game ID specified' });
         return;
@@ -216,11 +211,9 @@ function handleLeaveGame(ws, gameId) {
         delete games[gameId];
     } else {
         game.players.forEach((player) =>
-            sendMessage(player, { type: 'playerLeft', gameId, playerCount: game.players.length }),
+            sendMessage(player.ws, { type: 'playerLeft', gameId, name:playerName, playerCount: game.players.length }),
         );
     }
-
-    sendMessage(ws, { type: 'leftGame', gameId });
 }
 
 /**

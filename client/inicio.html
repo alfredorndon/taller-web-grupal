@@ -43,11 +43,10 @@
                 <br/>
                 <h3>Modos de Juego</h3>
                 <ul>
-                    <li><a href="tablero-barcos.html" id="individual">Individual</a></li>
                     <li><a href="tablero-barcos.html" id="2-jugadores">2 Jugadores</a></li>
                     <li><a href="tablero-barcos.html" id="3-jugadores">3 Jugadores</a></li>
                     <li><a href="tablero-barcos.html" id="4-jugadores">4 Jugadores</a></li>
-                    <li><a href="torneo.html" id="torneo">Torneo</a></li>
+                    <li><a href="lobby.html" id="torneo">Torneo</a></li>
                 </ul>
             </section>
             <section id="instrucciones-section">
@@ -106,9 +105,7 @@
         const nombreJug= document.getElementById('nombre-jugador');
         let confirmacionNombre= false;
         cantidadJug2.addEventListener ('click', function(event){
-            const nombre= document.getElementById('datos-del-jugador-frm-nombre');
-            const nombreSinEspacios= nombre.value.trim();
-            if (confirmacionNombre==false)
+            if (!confirmacionNombre)
             {
             alert('Por favor, confirme su nombre para jugar');
             event.preventDefault();
@@ -117,9 +114,7 @@
             localStorage.setItem('cantidadJugadores', '2');
         });
         cantidadJug3.addEventListener ('click', function(event){
-            const nombre= document.getElementById('datos-del-jugador-frm-nombre');
-            const nombreSinEspacios= nombre.value.trim();
-            if (confirmacionNombre==false)
+            if (!confirmacionNombre)
             {
             alert('Por favor, confirme su nombre para jugar');
             event.preventDefault();
@@ -128,9 +123,7 @@
             localStorage.setItem('cantidadJugadores', '3');
         });
         cantidadJug4.addEventListener ('click', function(event){
-            const nombre= document.getElementById('datos-del-jugador-frm-nombre');
-            const nombreSinEspacios= nombre.value.trim();
-            if (confirmacionNombre==false)
+            if (!confirmacionNombre)
             {
             alert('Por favor, confirme su nombre para jugar');
             event.preventDefault();
@@ -153,6 +146,15 @@
             alert('su nombre ha sido confirmado: '+nombreSinEspacios);
             }
         });
+        document.getElementById('torneo').addEventListener('click',function(event){
+            if (!confirmacionNombre)
+            {
+            alert('Por favor, confirme su nombre para jugar');
+            event.preventDefault();
+            }
+            else
+            localStorage.setItem('cantidadJugadores', '8');
+        })
     </script>
 </body>
 </html>
