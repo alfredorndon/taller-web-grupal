@@ -112,6 +112,16 @@ function handleCreateGame(ws,playerName) {
 
 function getPlayers(ws, gameId) {
     const game= games[gameId];
+    if (!game)
+    {
+        ws.send(JSON.stringify({type:'error', message: 'No se encontro la partida'}))
+        return;
+    }
+    if (game.players.length==0)
+    {
+        delete games[gameId];
+        return;
+    }
     const gamePlayers = game.players.map(player => player.name);
     ws.send(JSON.stringify({type: 'getPlayers', gamePlayers:gamePlayers}));
 }
@@ -133,8 +143,9 @@ function handleJoinGame(ws, gameId,playerName, cantidadJugadores) {
         return;
     }
     game.players.push({ws,name:playerName});
+    const gamePlayers = game.players.map(player => player.name);
     game.players.forEach((player) => {
-            sendMessage(player.ws, { type: 'playerJoined', gameId, name:playerName, playerCount: game.players.length });
+            sendMessage(player.ws, { type: 'playerJoined', gameId, name:playerName, gamePlayers: gamePlayers });
     });
 }
 
