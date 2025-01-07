@@ -71,9 +71,13 @@ function handleMessage(ws, message) {
             // juego y el movimiento del jugador. El movimiento se reenvía a todos los jugadores en el juego.
             handleMove(ws, message.gameId, message.move);
             break;
-        case 'leave':
+        case 'leave-party':
             // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
-            handleLeaveGame(ws, message.gameId,message.playerName);
+            handleLeaveGame(ws, message.gameId,message.playerName,'party');
+            break;
+        case 'leave-lobby':
+                // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
+            handleLeaveGame(ws, message.gameId,message.playerName,'lobby');
             break;
         case 'getPlayers':
             getPlayers(ws,message.gameId);
@@ -211,28 +215,40 @@ function handleMove(ws, gameId, move) {
  * @param {WebSocket} ws - La conexión WebSocket del jugador.
  * @param {string} gameId - El ID del juego.
  */
-function handleLeaveGame(ws, gameId,playerName) {
+function handleLeaveGame(ws, gameId,playerName, puntoDeSalida) {
     if (!gameId) {
         sendMessage(ws, { type: 'error', message: 'No game ID specified' });
         return;
     }
 
     const game = games[gameId];
+    const gamePlayersOriginal = game.players.map(player => player.name);
 
     if (!game) {
         sendMessage(ws, { type: 'error', message: `No game found with ID "${gameId}"` });
         return;
     }
 
-    game.players = game.players.filter((player) => player !== ws);
+    game.players = game.players.filter((player) => player.ws !== ws);
 
     if (game.players.length === 0) {
         delete games[gameId];
-    } else {
+        sendMessage(ws, { type: 'game-ended', gameId, message: 'Game ended'});
+    } else 
+    if (puntoDeSalida==='party') 
+    {
         game.players.forEach((player) =>
-            sendMessage(player.ws, { type: 'playerLeft', gameId, name:playerName, playerCount: game.players.length }),
+            sendMessage(player.ws, { type: 'playerLeft-party', gameId, name:playerName, gamePlayers: gamePlayersOriginal}),
         );
     }
+    else if (puntoDeSalida==='lobby') 
+    {
+        const gamePlayers = game.players.map(player => player.name);
+        game.players.forEach((player) =>
+            sendMessage(player.ws, { type: 'playerLeft-lobby', gameId, name:playerName, gamePlayers: gamePlayers }),
+        );
+    }
+
 }
 
 /**

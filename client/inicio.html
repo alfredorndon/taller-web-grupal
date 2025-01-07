@@ -716,7 +716,7 @@
             </section>
             <section id="salir-del-juego">
                 <h2>Salir del juego</h2>
-                <a href="inicio.html">Salir</a>
+                <a id="boton-salir">Salir</a>
             </section>
         </main>
     </div>
@@ -791,7 +791,7 @@
             </section>
             <section id="salir-del-juego">
                 <h2>Salir del juego</h2>
-                <a href="inicio.html">Salir</a>
+                <a id="boton-salir-lobby">Salir</a>
             </section>
         </main>
     </div>
@@ -874,11 +874,6 @@
             }
         })
 
-        document.getElementById('boton-volver').addEventListener('click',function (event){
-            cargarNuevaSeccion('container-inicio','container-tablero-barcos');
-        })
-
-        
         ws.addEventListener('open', ()=>{
             console.log('Conectado al servidor');
         })
@@ -920,6 +915,19 @@
                         alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),mensaje.gamePlayers);
                     }
                         break;
+                    case 'playerLeft-party':{
+                        if (localStorage.getItem('nombreJugador')===mensaje.name)
+                        eliminarTablas(mensaje.name,mensaje.gamePlayers);
+                    }
+                        break;
+                    case 'playerLeft-lobby':{
+                        console.log('el jugador '+mensaje.name+' ha salido de la lobby');
+                        alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),mensaje.gamePlayers);
+                    }
+                        break;
+                    case 'game-ended':
+                        console.log(mensaje.message);
+                        break;
                     default:{
                         alert('no se ha podido procesar el mensaje');
                         event.preventDefault();
@@ -944,7 +952,21 @@
         document.getElementById('listo').addEventListener('click',()=>{
 
         ws.send(JSON.stringify({type:'start', gameId: localStorage.getItem('partidaActiva')}))
+        
         })
+        document.getElementById('boton-volver').addEventListener('click',function (event){
+            cargarNuevaSeccion('container-inicio','container-tablero-barcos');
+        })
+
+        document.getElementById('boton-salir').addEventListener('click',function(event){
+            ws.send(JSON.stringify ({type:'leave-party', gameId: localStorage.getItem('partidaActiva'), playerName:localStorage.getItem('nombreJugador')}));
+            cargarNuevaSeccion('container-inicio','container-juego');
+        })
+        document.getElementById('boton-salir-lobby').addEventListener('click',function(event){
+            ws.send(JSON.stringify ({type:'leave-lobby', gameId: localStorage.getItem('partidaActiva'), playerName:localStorage.getItem('nombreJugador')}));
+            cargarNuevaSeccion('container-inicio','container-lobby');
+        })
+        
     </script>
 </body>
 </html>

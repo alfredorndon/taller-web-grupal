@@ -9,6 +9,7 @@ function crearTablero (jugadores, tableros)
     {
         let tableroJuego= document.createElement('div');
         tableroJuego.setAttribute('class','tablero-juego');
+        // tableroJuego.setAttribute('id',''); aca hay que colocar el nombre de los jugadores
         let tablero = document.createElement('div');
         tablero.setAttribute('class', 'tablero');
         tablero.setAttribute('id', 'tabla-p'+j)
@@ -253,4 +254,10 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores){
         document.querySelector('.tablero-juego').remove();
     if (idViejo==='container-juego')
         document.getElementById('tableros').innerHTML='';
+}
+
+function eliminarTablas(playerOut,gamePlayers){
+
+    const tablaPlayerOut= document.getElementById(playerOut);
+    tablaPlayerOut.remove();
 }
