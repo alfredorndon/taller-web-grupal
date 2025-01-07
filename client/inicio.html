@@ -797,7 +797,7 @@
     </div>
 
     <script>
-        const ws= new WebSocket('ws://localhost:8080');
+        const ws= new WebSocket('ws://taller-web-grupal-production.up.railway.app');
         const cantidadJug2=document.getElementById('2-jugadores');
         const cantidadJug3=document.getElementById('3-jugadores');
         const cantidadJug4=document.getElementById('4-jugadores');
@@ -936,6 +936,7 @@
             }
             catch(error)
             {
+                console.log(error);
                 alert('error al parsear el mensaje');
             }
         })
