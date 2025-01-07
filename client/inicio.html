@@ -51,10 +51,10 @@
                 <br/>
                 <h3>Modos de Juego</h3>
                 <ul>
-                    <li id="2-jugadores">2 Jugadores</li>
-                    <li id="3-jugadores">3 Jugadores</li>
-                    <li id="4-jugadores">4 Jugadores </li>
-                    <li id="torneo">Torneo</li>
+                    <li><a id="2-jugadores">2 Jugadores</a></li>
+                    <li><a id="3-jugadores">3 Jugadores</a></li>
+                    <li><a id="4-jugadores">4 Jugadores</a> </li>
+                    <li><a id="torneo">Torneo</a></li>
                 </ul>
             </section>
 
@@ -115,7 +115,7 @@
             <div id="crea-tu-tablero"><h1>Crea tu Tablero</h1></div>
         </header>
         <main>
-            <section id="tableros">
+            <section id="tableros-barcos">
                 <div id="piezas">
                     <h2>Tus piezas</h2>
                     <div>
@@ -141,7 +141,7 @@
             </section>
             <section id="volver-inicio">
                 <h2>Volver al Inicio</h2>
-                <p>Volver</p>
+                <p id="boton-volver">Volver</p>
             </section>
         </main>
     </div>
@@ -802,7 +802,14 @@
         const cantidadJug3=document.getElementById('3-jugadores');
         const cantidadJug4=document.getElementById('4-jugadores');
         const nombreJug= document.getElementById('nombre-jugador');
+        ocultarSeccion('container-juego');
+        ocultarSeccion('container-lobby');
+        ocultarSeccion('container-tablero-barcos');
+    
         let confirmacionNombre= false;
+
+        
+
         cantidadJug2.addEventListener ('click', function(event){
             if (!confirmacionNombre)
             {
@@ -810,7 +817,10 @@
             event.preventDefault();
             }
             else
-            localStorage.setItem('cantidadJugadores', '2');
+            {
+                localStorage.setItem('cantidadJugadores', '2');
+                cargarNuevaSeccion('container-tablero-barcos','container-inicio',localStorage.getItem('cantidadJugadores'));
+            }
         });
         cantidadJug3.addEventListener ('click', function(event){
             if (!confirmacionNombre)
@@ -819,7 +829,10 @@
             event.preventDefault();
             }
             else
-            localStorage.setItem('cantidadJugadores', '3');
+            {
+                localStorage.setItem('cantidadJugadores', '3');
+                cargarNuevaSeccion('container-tablero-barcos','container-inicio',localStorage.getItem('cantidadJugadores'));
+            }
         });
         cantidadJug4.addEventListener ('click', function(event){
             if (!confirmacionNombre)
@@ -828,7 +841,10 @@
             event.preventDefault();
             }
             else
-            localStorage.setItem('cantidadJugadores', '4');
+            {
+                localStorage.setItem('cantidadJugadores', '4');
+                cargarNuevaSeccion('container-tablero-barcos','container-inicio',localStorage.getItem('cantidadJugadores'));
+            }
         });
         nombreJug.addEventListener ('click', function(event){
             const nombre= document.getElementById('datos-del-jugador-frm-nombre');
@@ -852,7 +868,14 @@
             event.preventDefault();
             }
             else
-            localStorage.setItem('cantidadJugadores', '8');
+            {
+                localStorage.setItem('cantidadJugadores', '8');
+                cargarNuevaSeccion('container-tablero-barcos','container-inicio',localStorage.getItem('cantidadJugadores'));
+            }
+        })
+
+        document.getElementById('boton-volver').addEventListener('click',function (event){
+            cargarNuevaSeccion('container-inicio','container-tablero-barcos');
         })
 
         
@@ -871,10 +894,10 @@
                 switch (mensaje.type){
                     case 'gameCreated':{
                         console.log(mensaje.players[0].name);
-                        alert('revisa la consola');
                         localStorage.setItem('partidaActiva',mensaje.gameId);
                         const gamePlayers = mensaje.players.map(player => player.name);
                         alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),gamePlayers);
+                        cargarNuevaSeccion('container-lobby','container-tablero-barcos',localStorage.getItem('cantidadJugadores'));
                     }
                         break;
                     case 'playerJoined':{
@@ -916,6 +939,10 @@
         document.getElementById('union-game').addEventListener('click',()=>{
 
             ws.send(JSON.stringify({type:'join', playerName: localStorage.getItem('nombreJugador'), gameID:'124', cantidadJugadores: localStorage.getItem('cantidadJugadores')}))
+        })
+        document.getElementById('listo').addEventListener('click',()=>{
+
+        ws.send(JSON.stringify({type:'join', playerName: localStorage.getItem('nombreJugador'), gameID:'124', cantidadJugadores: localStorage.getItem('cantidadJugadores')}))
         })
     </script>
 </body>
