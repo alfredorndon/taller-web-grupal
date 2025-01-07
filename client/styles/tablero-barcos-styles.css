@@ -35,6 +35,16 @@
     flex-direction: row;
 }
 
+#tableros-barcos {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    gap: 3rem;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    flex-direction: row;
+}
+
 #piezas ul {
     list-style: none;
     padding:0;
@@ -42,7 +52,7 @@
     margin-bottom: 35px;
 }
 
-#piezas a, #volver-inicio a{
+#piezas p, #volver-inicio p{
     color:#0C2C85;
     text-decoration: none;
     font-size: 20px;
@@ -54,12 +64,13 @@
     border-radius: 10px;
 }
 
-#piezas a {
+#piezas p {
     background-color: #0C2C85;
     color: white;
+    width: auto;
 }
 
-#piezas a:hover, #volver-inicio a:hover {
+#piezas p:hover, #volver-inicio p:hover {
     color:white;
     text-decoration: none;
     background-color: #68BAFA;

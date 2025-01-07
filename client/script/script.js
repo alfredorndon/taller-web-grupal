@@ -3,12 +3,13 @@ const filas = 10;
 const columnas = 10;
 const jugadores = 1;
 
-function crearTablero (jugadores)
+function crearTablero (jugadores, tableros)
 {
     for (let j=1; j<=jugadores; j++)
     {
         let tableroJuego= document.createElement('div');
         tableroJuego.setAttribute('class','tablero-juego');
+        // tableroJuego.setAttribute('id',''); aca hay que colocar el nombre de los jugadores
         let tablero = document.createElement('div');
         tablero.setAttribute('class', 'tablero');
         tablero.setAttribute('id', 'tabla-p'+j)
@@ -196,7 +197,7 @@ function crearTablero (jugadores)
                 }
             }
         }
-        let section = document.getElementById('tableros');
+        let section = document.getElementById(tableros);
         let titulo= document.createElement('h2');
         if (j==1)
         {
@@ -221,4 +222,42 @@ function crearTablero (jugadores)
         tableroJuego.appendChild(titulo);
         tableroJuego.appendChild(tablero);
     }
+}
+
+function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
+    let titulo= document.getElementById('etapa');
+    if (cantidadJugadores!=8)
+        titulo.innerHTML='Modo de Juego: Partida de '+cantidadJugadores+' Jugadores </br>ID: '+gameId;
+    else
+        titulo.innerHTML='Modo de Juego: Torneo </br>ID: '+gameId;
+    for (let i=1;i<=nombresJugadores.length;i++)
+    {
+        let jugador = document.getElementById('jugador'+i);
+        jugador.innerText=nombresJugadores[i-1];
+    }
+    let restantes=document.getElementById('restantes');
+    let faltantes=cantidadJugadores-nombresJugadores.length;
+    restantes.innerText='('+faltantes+') restantes';
+}
+
+function ocultarSeccion(id) {
+    document.getElementById(id).style.display = "none";
+}
+function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores){
+    document.getElementById(idNuevo).style.display = "block";
+    ocultarSeccion(idViejo);
+    if (idNuevo==='container-tablero-barcos')  
+        crearTablero(1,'tableros-barcos');
+    if (idNuevo==='container-juego')
+        crearTablero(cantidadJugadores,'tableros');
+    if (idViejo==='container-tablero-barcos')
+        document.querySelector('.tablero-juego').remove();
+    if (idViejo==='container-juego')
+        document.getElementById('tableros').innerHTML='';
+}
+
+function eliminarTablas(playerOut,gamePlayers){
+
+    const tablaPlayerOut= document.getElementById(playerOut);
+    tablaPlayerOut.remove();
 }

@@ -17,7 +17,7 @@ wss.on("connection", function connection(ws) {
     ws.on('close', () => {
         handleDisconnect(ws);
     });
-    ws.send("something");
+    console.log("jaja ahora jugaras batalla naval");
 });
 
 /**
@@ -59,7 +59,7 @@ function handleMessage(ws, message) {
         case 'join':
             // Para manejar la unión a un juego existente, se necesita la conexión WebSocket del jugador y el ID del
             // juego al cual el jugador se desea unir.
-            handleJoinGame(ws, message.gameId,message.playerName);
+            handleJoinGame(ws, message.gameId,message.playerName,message.cantidadJugadores);
             break;
         case 'start':
             // Para manejar el inicio de un juego, se necesita la conexión WebSocket del jugador y el ID del juego a
@@ -71,13 +71,20 @@ function handleMessage(ws, message) {
             // juego y el movimiento del jugador. El movimiento se reenvía a todos los jugadores en el juego.
             handleMove(ws, message.gameId, message.move);
             break;
-        case 'leave':
+        case 'leave-party':
             // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
-            handleLeaveGame(ws, message.gameId);
+            handleLeaveGame(ws, message.gameId,message.playerName,'party');
+            break;
+        case 'leave-lobby':
+                // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
+            handleLeaveGame(ws, message.gameId,message.playerName,'lobby');
+            break;
+        case 'getPlayers':
+            getPlayers(ws,message.gameId);
             break;
         default:
             // Si el tipo de mensaje no es reconocido, se envía un mensaje de error al jugador.
-            sendMessage(ws, { type: 'error', message: 'Unknown message type' });
+            sendMessage(ws, { type: "error" , message: 'Mensaje desconocido'});
     }
 }
 
@@ -104,7 +111,23 @@ function handleCreateGame(ws,playerName) {
     games[gameId] = { id: gameId, players: [{ws,name:playerName}], started: false, turn: 0 };
 
     // Se envía un mensaje de confirmación al jugador.
-    sendMessage(ws, { type: 'gameCreated', gameId });
+    sendMessage(ws, { type: 'gameCreated', gameId, players:[{ws,name:playerName}] });
+}
+
+function getPlayers(ws, gameId) {
+    const game= games[gameId];
+    if (!game)
+    {
+        ws.send(JSON.stringify({type:'error', message: 'No se encontro la partida'}))
+        return;
+    }
+    if (game.players.length==0)
+    {
+        delete games[gameId];
+        return;
+    }
+    const gamePlayers = game.players.map(player => player.name);
+    ws.send(JSON.stringify({type: 'getPlayers', gamePlayers:gamePlayers}));
 }
 
 /**
@@ -113,23 +136,21 @@ function handleCreateGame(ws,playerName) {
  * @param {WebSocket} ws - La conexión WebSocket del jugador.
  * @param {string} gameId - El ID del juego al que unirse.
  */
-function handleJoinGame(ws, gameId,playerName) {
+function handleJoinGame(ws, gameId,playerName, cantidadJugadores) {
     const game = games[gameId];
     if (!game) {
-        sendMessage(ws, { type: 'error', message: 'Game not found' });
+        sendMessage(ws, { type: 'error', message: 'El juego no ha sido encontrado' });
         return;
     }
-    if (game.players.length >= 4) {
-        sendMessage(ws, { type: 'error', message: 'Game is full' });
+    if (game.players.length >= cantidadJugadores) {
+        sendMessage(ws, { type: 'error', message: 'El juego esta lleno' });
         return;
     }
     game.players.push({ws,name:playerName});
+    const gamePlayers = game.players.map(player => player.name);
     game.players.forEach((player) => {
-        if (player !== ws) {
-            sendMessage(player, { type: 'playerJoined', gameId, playerCount: game.players.length });
-        }
+            sendMessage(player.ws, { type: 'playerJoined', gameId, name:playerName, gamePlayers: gamePlayers });
     });
-    sendMessage(ws, { type: 'playerJoined', gameId, playerCount: game.players.length });
 }
 
 /**
@@ -138,7 +159,7 @@ function handleJoinGame(ws, gameId,playerName) {
  * @param {WebSocket} ws - La conexión WebSocket del jugador.
  * @param {string} gameId - El ID del juego a iniciar.
  */
-function handleStartGame(ws, gameId) {
+function handleStartGame(ws, gameId,cantidadJugadores) {
     const game = games[gameId];
     if (!game) {
         sendMessage(ws, { type: 'error', message: 'Game not found' });
@@ -148,17 +169,14 @@ function handleStartGame(ws, gameId) {
         sendMessage(ws, { type: 'error', message: 'Game already started' });
         return;
     }
-    if (game.players.length < 2) {
-        sendMessage(ws, { type: 'error', message: 'Not enough players to start' });
-        return;
-    }
+    // if (game.players.length < cantidadJugadores) {
+    //     sendMessage(ws, { type: 'error', message: 'Not enough players to start' });
+    //     return;
+    // }
     game.started = true;
     game.players.forEach((player) => {
-        if (player !== ws) {
-            sendMessage(player, { type: 'gameStarted', gameId });
-        }
+            sendMessage(player.ws, { type: 'gameStarted', gameId });
     });
-    sendMessage(ws, { type: 'gameStarted', gameId });
 }
 
 /**
@@ -184,7 +202,7 @@ function handleMove(ws, gameId, move) {
     }
     game.players.forEach((player) => {
         if (player !== ws) {
-            sendMessage(player, { type: 'move', gameId, move });
+            sendMessage(player.ws, { type: 'move', gameId, move });
         }
     });
     sendMessage(ws, { type: 'move', gameId, move });
@@ -197,30 +215,40 @@ function handleMove(ws, gameId, move) {
  * @param {WebSocket} ws - La conexión WebSocket del jugador.
  * @param {string} gameId - El ID del juego.
  */
-function handleLeaveGame(ws, gameId) {
+function handleLeaveGame(ws, gameId,playerName, puntoDeSalida) {
     if (!gameId) {
         sendMessage(ws, { type: 'error', message: 'No game ID specified' });
         return;
     }
 
     const game = games[gameId];
+    const gamePlayersOriginal = game.players.map(player => player.name);
 
     if (!game) {
         sendMessage(ws, { type: 'error', message: `No game found with ID "${gameId}"` });
         return;
     }
 
-    game.players = game.players.filter((player) => player !== ws);
+    game.players = game.players.filter((player) => player.ws !== ws);
 
     if (game.players.length === 0) {
         delete games[gameId];
-    } else {
+        sendMessage(ws, { type: 'game-ended', gameId, message: 'Game ended'});
+    } else 
+    if (puntoDeSalida==='party') 
+    {
         game.players.forEach((player) =>
-            sendMessage(player, { type: 'playerLeft', gameId, playerCount: game.players.length }),
+            sendMessage(player.ws, { type: 'playerLeft-party', gameId, name:playerName, gamePlayers: gamePlayersOriginal}),
+        );
+    }
+    else if (puntoDeSalida==='lobby') 
+    {
+        const gamePlayers = game.players.map(player => player.name);
+        game.players.forEach((player) =>
+            sendMessage(player.ws, { type: 'playerLeft-lobby', gameId, name:playerName, gamePlayers: gamePlayers }),
         );
     }
 
-    sendMessage(ws, { type: 'leftGame', gameId });
 }
 
 /**
