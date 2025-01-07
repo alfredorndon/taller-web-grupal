@@ -905,10 +905,11 @@
                         alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),mensaje.gamePlayers);
                     }
                         break;
-                    case 'start':{
+                    case 'gameStarted':{
                         console.log('se ha iniciado el juego');
-                        break;
+                        cargarNuevaSeccion('container-juego','container-lobby',localStorage.getItem('cantidadJugadores'));
                     } 
+                        break;
                     case 'error':{
                         alert(mensaje.message);
                         event.preventDefault();
@@ -942,7 +943,7 @@
         })
         document.getElementById('listo').addEventListener('click',()=>{
 
-        ws.send(JSON.stringify({type:'join', playerName: localStorage.getItem('nombreJugador'), gameID:'124', cantidadJugadores: localStorage.getItem('cantidadJugadores')}))
+        ws.send(JSON.stringify({type:'start', gameId: localStorage.getItem('partidaActiva')}))
         })
     </script>
 </body>

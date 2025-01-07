@@ -165,10 +165,10 @@ function handleStartGame(ws, gameId,cantidadJugadores) {
         sendMessage(ws, { type: 'error', message: 'Game already started' });
         return;
     }
-    if (game.players.length < cantidadJugadores) {
-        sendMessage(ws, { type: 'error', message: 'Not enough players to start' });
-        return;
-    }
+    // if (game.players.length < cantidadJugadores) {
+    //     sendMessage(ws, { type: 'error', message: 'Not enough players to start' });
+    //     return;
+    // }
     game.started = true;
     game.players.forEach((player) => {
             sendMessage(player.ws, { type: 'gameStarted', gameId });

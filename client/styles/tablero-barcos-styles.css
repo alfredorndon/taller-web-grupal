@@ -67,6 +67,7 @@
 #piezas p {
     background-color: #0C2C85;
     color: white;
+    width: auto;
 }
 
 #piezas p:hover, #volver-inicio p:hover {
