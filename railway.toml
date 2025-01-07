@@ -2,3 +2,4 @@
 type = "node"
 path = "./server"
 entry = "index.js"
+start = "node index.js"
