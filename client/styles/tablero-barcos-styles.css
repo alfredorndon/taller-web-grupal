@@ -42,7 +42,7 @@
     margin-bottom: 35px;
 }
 
-#piezas a, #volver-inicio a{
+#piezas p, #volver-inicio p{
     color:#0C2C85;
     text-decoration: none;
     font-size: 20px;
@@ -54,12 +54,12 @@
     border-radius: 10px;
 }
 
-#piezas a {
+#piezas p {
     background-color: #0C2C85;
     color: white;
 }
 
-#piezas a:hover, #volver-inicio a:hover {
+#piezas p:hover, #volver-inicio p:hover {
     color:white;
     text-decoration: none;
     background-color: #68BAFA;

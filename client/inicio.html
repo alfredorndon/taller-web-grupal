@@ -51,10 +51,10 @@
                 <br/>
                 <h3>Modos de Juego</h3>
                 <ul>
-                    <li><a href="tablero-barcos.html" id="2-jugadores">2 Jugadores</a></li>
-                    <li><a href="tablero-barcos.html" id="3-jugadores">3 Jugadores</a></li>
-                    <li><a href="tablero-barcos.html" id="4-jugadores">4 Jugadores</a></li>
-                    <li><a href="lobby.html" id="torneo">Torneo</a></li>
+                    <li id="2-jugadores">2 Jugadores</li>
+                    <li id="3-jugadores">3 Jugadores</li>
+                    <li id="4-jugadores">4 Jugadores </li>
+                    <li id="torneo">Torneo</li>
                 </ul>
             </section>
 
@@ -134,14 +134,14 @@
                             <li id="submarino">1 Submarino (3 casillas)</li>
                             <li id="destructor">1 Destructor (2 casillas)</li>
                         </ul>
-                        <a href="lobby.html" id="union-game">Unirme a un juego</a>
-                        <a href="lobby.html" id="creacion-game">Crear un juego</a>
+                        <p id="union-game">Unirme a un juego</p>
+                        <p id="creacion-game">Crear un juego</p>
                     </section>
                 </div>
             </section>
             <section id="volver-inicio">
                 <h2>Volver al Inicio</h2>
-                <a href="inicio.html">Volver</a>
+                <p>Volver</p>
             </section>
         </main>
     </div>
@@ -797,6 +797,7 @@
     </div>
 
     <script>
+        const ws= new WebSocket('ws://localhost:8080');
         const cantidadJug2=document.getElementById('2-jugadores');
         const cantidadJug3=document.getElementById('3-jugadores');
         const cantidadJug4=document.getElementById('4-jugadores');
@@ -852,6 +853,69 @@
             }
             else
             localStorage.setItem('cantidadJugadores', '8');
+        })
+
+        
+        ws.addEventListener('open', ()=>{
+            console.log('Conectado al servidor');
+        })
+
+        ws.addEventListener('close', ()=>{
+            console.log('desconectado del servidor');
+        })
+
+        ws.addEventListener('message', (event)=>{
+            try{
+                const mensaje= JSON.parse(event.data);
+                console.log(mensaje);
+                switch (mensaje.type){
+                    case 'gameCreated':{
+                        console.log(mensaje.players[0].name);
+                        alert('revisa la consola');
+                        localStorage.setItem('partidaActiva',mensaje.gameId);
+                        const gamePlayers = mensaje.players.map(player => player.name);
+                        alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),gamePlayers);
+                    }
+                        break;
+                    case 'playerJoined':{
+                        console.log('HOLA!: '+mensaje.name+'te has unido a un juego exitosamente');
+                        alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),mensaje.gamePlayers);
+                    }
+                        break;
+                    case 'start':{
+                        console.log('se ha iniciado el juego');
+                        break;
+                    } 
+                    case 'error':{
+                        alert(mensaje.message);
+                        event.preventDefault();
+                    }
+                        break;
+                    case 'getPlayers':{
+                        console.log(mensaje.gamePlayers);
+                        alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),mensaje.gamePlayers);
+                    }
+                        break;
+                    default:{
+                        alert('no se ha podido procesar el mensaje');
+                        event.preventDefault();
+                    }
+                }
+            }
+            catch(error)
+            {
+                alert('error al parsear el mensaje');
+            }
+        })
+
+        document.getElementById('creacion-game').addEventListener('click',()=>{
+
+            ws.send(JSON.stringify({type:'create', playerName: localStorage.getItem('nombreJugador')}))
+        })
+
+        document.getElementById('union-game').addEventListener('click',()=>{
+
+            ws.send(JSON.stringify({type:'join', playerName: localStorage.getItem('nombreJugador'), gameID:'124', cantidadJugadores: localStorage.getItem('cantidadJugadores')}))
         })
     </script>
 </body>
