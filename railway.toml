@@ -1,7 +1,4 @@
-[
-build
-]
+[build]
 type = "node"
-branch = "main"
-path = ".server/index.js"
+path = "./server"
 entry = "index.js"
