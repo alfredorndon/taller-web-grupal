@@ -261,3 +261,5 @@ function eliminarTablas(playerOut,gamePlayers){
     const tablaPlayerOut= document.getElementById(playerOut);
     tablaPlayerOut.remove();
 }
+
+
