@@ -902,7 +902,7 @@
                         break;
                     case 'gameStarted':{
                         console.log('se ha iniciado el juego');
-                        cargarNuevaSeccion('container-juego','container-lobby',localStorage.getItem('cantidadJugadores'));
+                        cargarNuevaSeccion('container-juego','container-lobby',localStorage.getItem('cantidadJugadores'),mensaje.gamePlayers);
                     } 
                         break;
                     case 'error':{
