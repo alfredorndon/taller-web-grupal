@@ -91,6 +91,16 @@ p, label, li, a{
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+p{
+    text-decoration: none;
+    color: #0C2C85;
+    transition: background-color 0.25s ease, color 0.25s ease; 
+}
+
+p:hover{
+    text-decoration: none;
+    color: #68BAFA;
+}
 a {
     text-decoration: none;
     color: #0C2C85;

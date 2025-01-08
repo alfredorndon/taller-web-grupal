@@ -51,10 +51,10 @@
                 <br/>
                 <h3>Modos de Juego</h3>
                 <ul>
-                    <li><a href="tablero-barcos.html" id="2-jugadores">2 Jugadores</a></li>
-                    <li><a href="tablero-barcos.html" id="3-jugadores">3 Jugadores</a></li>
-                    <li><a href="tablero-barcos.html" id="4-jugadores">4 Jugadores</a></li>
-                    <li><a href="lobby.html" id="torneo">Torneo</a></li>
+                    <li><a id="2-jugadores">2 Jugadores</a></li>
+                    <li><a id="3-jugadores">3 Jugadores</a></li>
+                    <li><a id="4-jugadores">4 Jugadores</a> </li>
+                    <li><a id="torneo">Torneo</a></li>
                 </ul>
             </section>
 
@@ -115,7 +115,7 @@
             <div id="crea-tu-tablero"><h1>Crea tu Tablero</h1></div>
         </header>
         <main>
-            <section id="tableros">
+            <section id="tableros-barcos">
                 <div id="piezas">
                     <h2>Tus piezas</h2>
                     <div>
@@ -134,14 +134,14 @@
                             <li id="submarino">1 Submarino (3 casillas)</li>
                             <li id="destructor">1 Destructor (2 casillas)</li>
                         </ul>
-                        <a href="lobby.html" id="union-game">Unirme a un juego</a>
-                        <a href="lobby.html" id="creacion-game">Crear un juego</a>
+                        <p id="union-game">Unirme a un juego</p>
+                        <p id="creacion-game">Crear un juego</p>
                     </section>
                 </div>
             </section>
             <section id="volver-inicio">
                 <h2>Volver al Inicio</h2>
-                <a href="inicio.html">Volver</a>
+                <p id="boton-volver">Volver</p>
             </section>
         </main>
     </div>
@@ -716,7 +716,7 @@
             </section>
             <section id="salir-del-juego">
                 <h2>Salir del juego</h2>
-                <a href="inicio.html">Salir</a>
+                <a id="boton-salir">Salir</a>
             </section>
         </main>
     </div>
@@ -791,17 +791,25 @@
             </section>
             <section id="salir-del-juego">
                 <h2>Salir del juego</h2>
-                <a href="inicio.html">Salir</a>
+                <a id="boton-salir-lobby">Salir</a>
             </section>
         </main>
     </div>
 
     <script>
+        const ws= new WebSocket('ws://taller-web-grupal-production.up.railway.app');
         const cantidadJug2=document.getElementById('2-jugadores');
         const cantidadJug3=document.getElementById('3-jugadores');
         const cantidadJug4=document.getElementById('4-jugadores');
         const nombreJug= document.getElementById('nombre-jugador');
+        ocultarSeccion('container-juego');
+        ocultarSeccion('container-lobby');
+        ocultarSeccion('container-tablero-barcos');
+    
         let confirmacionNombre= false;
+
+        
+
         cantidadJug2.addEventListener ('click', function(event){
             if (!confirmacionNombre)
             {
@@ -809,7 +817,10 @@
             event.preventDefault();
             }
             else
-            localStorage.setItem('cantidadJugadores', '2');
+            {
+                localStorage.setItem('cantidadJugadores', '2');
+                cargarNuevaSeccion('container-tablero-barcos','container-inicio',localStorage.getItem('cantidadJugadores'));
+            }
         });
         cantidadJug3.addEventListener ('click', function(event){
             if (!confirmacionNombre)
@@ -818,7 +829,10 @@
             event.preventDefault();
             }
             else
-            localStorage.setItem('cantidadJugadores', '3');
+            {
+                localStorage.setItem('cantidadJugadores', '3');
+                cargarNuevaSeccion('container-tablero-barcos','container-inicio',localStorage.getItem('cantidadJugadores'));
+            }
         });
         cantidadJug4.addEventListener ('click', function(event){
             if (!confirmacionNombre)
@@ -827,7 +841,10 @@
             event.preventDefault();
             }
             else
-            localStorage.setItem('cantidadJugadores', '4');
+            {
+                localStorage.setItem('cantidadJugadores', '4');
+                cargarNuevaSeccion('container-tablero-barcos','container-inicio',localStorage.getItem('cantidadJugadores'));
+            }
         });
         nombreJug.addEventListener ('click', function(event){
             const nombre= document.getElementById('datos-del-jugador-frm-nombre');
@@ -851,8 +868,106 @@
             event.preventDefault();
             }
             else
-            localStorage.setItem('cantidadJugadores', '8');
+            {
+                localStorage.setItem('cantidadJugadores', '8');
+                cargarNuevaSeccion('container-tablero-barcos','container-inicio',localStorage.getItem('cantidadJugadores'));
+            }
         })
+
+        ws.addEventListener('open', ()=>{
+            console.log('Conectado al servidor ' + ws);
+        })
+
+        ws.addEventListener('close', ()=>{
+            console.log('desconectado del servidor');
+        })
+
+        ws.addEventListener('message', (event)=>{
+            try{
+                const mensaje= JSON.parse(event.data);
+                console.log(mensaje);
+                switch (mensaje.type){
+                    case 'gameCreated':{
+                        console.log(mensaje.players[0].name);
+                        localStorage.setItem('partidaActiva',mensaje.gameId);
+                        const gamePlayers = mensaje.players.map(player => player.name);
+                        alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),gamePlayers);
+                        cargarNuevaSeccion('container-lobby','container-tablero-barcos',localStorage.getItem('cantidadJugadores'));
+                    }
+                        break;
+                    case 'playerJoined':{
+                        console.log('HOLA!: '+mensaje.name+'te has unido a un juego exitosamente');
+                        alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),mensaje.gamePlayers);
+                    }
+                        break;
+                    case 'gameStarted':{
+                        console.log('se ha iniciado el juego');
+                        cargarNuevaSeccion('container-juego','container-lobby',localStorage.getItem('cantidadJugadores'));
+                    } 
+                        break;
+                    case 'error':{
+                        alert(mensaje.message);
+                        event.preventDefault();
+                    }
+                        break;
+                    case 'getPlayers':{
+                        console.log(mensaje.gamePlayers);
+                        alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),mensaje.gamePlayers);
+                    }
+                        break;
+                    case 'playerLeft-party':{
+                        if (localStorage.getItem('nombreJugador')===mensaje.name)
+                        eliminarTablas(mensaje.name,mensaje.gamePlayers);
+                    }
+                        break;
+                    case 'playerLeft-lobby':{
+                        console.log('el jugador '+mensaje.name+' ha salido de la lobby');
+                        alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'),mensaje.gamePlayers);
+                    }
+                        break;
+                    case 'game-ended':
+                        console.log(mensaje.message);
+                        break;
+                    default:{
+                        alert('no se ha podido procesar el mensaje');
+                        event.preventDefault();
+                    }
+                }
+            }
+            catch(error)
+            {
+                console.log(error);
+                alert('error al parsear el mensaje');
+            }
+        })
+
+        document.getElementById('creacion-game').addEventListener('click',()=>{
+
+            ws.send(JSON.stringify({type:'create', playerName: localStorage.getItem('nombreJugador')}))
+        })
+
+        document.getElementById('union-game').addEventListener('click',()=>{
+
+            ws.send(JSON.stringify({type:'join', playerName: localStorage.getItem('nombreJugador'), gameID:'124', cantidadJugadores: localStorage.getItem('cantidadJugadores')}))
+        })
+        document.getElementById('listo').addEventListener('click',()=>{
+
+        ws.send(JSON.stringify({type:'start', gameId: localStorage.getItem('partidaActiva')}))
+        
+        })
+        document.getElementById('boton-volver').addEventListener('click',function (event){
+            cargarNuevaSeccion('container-inicio','container-tablero-barcos');
+        })
+
+        document.getElementById('boton-salir').addEventListener('click',function(event){
+            ws.send(JSON.stringify ({type:'leave-party', gameId: localStorage.getItem('partidaActiva'), playerName:localStorage.getItem('nombreJugador')}));
+            cargarNuevaSeccion('container-inicio','container-juego');
+        })
+        document.getElementById('boton-salir-lobby').addEventListener('click',function(event){
+            ws.send(JSON.stringify ({type:'leave-lobby', gameId: localStorage.getItem('partidaActiva'), playerName:localStorage.getItem('nombreJugador')}));
+            cargarNuevaSeccion('container-inicio','container-lobby');
+        })
+        
     </script>
 </body>
 </html>
