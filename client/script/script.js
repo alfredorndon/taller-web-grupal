@@ -463,7 +463,11 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     if (idNuevo==='container-juego')
         crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
     if (idViejo==='container-tablero-barcos')
-        document.querySelector('.tablero-juego').remove();
+    {
+        const tablero= document.querySelector('.tablero-juego');
+        if (tableroJuego)
+            tableroJuego.remove();
+    }
     if (idViejo==='container-juego')
         document.getElementById('tableros').innerHTML='';
 }
