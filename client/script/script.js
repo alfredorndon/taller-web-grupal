@@ -228,9 +228,6 @@ function crearTablero (jugadores, tableros)
 function crearTableroPartida (jugadores, tableros,listaJugadores)
 {
     const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
-    console.log(jugadorActual);
-    console.log(listaJugadores);
-    console.log(listaJugadores[jugadorActual]);
 
     for (let j=1; j<=jugadores; j++)
     {
@@ -491,6 +488,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
 
 function eliminarTablas(playerOut){
 
+    console.log (playerOut);
     const tablaPlayerOut= document.getElementById(playerOut);
     tablaPlayerOut.remove();
 }
