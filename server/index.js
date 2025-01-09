@@ -68,7 +68,7 @@ function handleMessage(ws, message) {
         case 'start':
             // Para manejar el inicio de un juego, se necesita la conexión WebSocket del jugador y el ID del juego a
             // iniciar.
-            handleStartGame(ws, message.gameId,mensaje.cantidadJugadores);
+            handleStartGame(ws, message.gameId,message.cantidadJugadores);
             break;
         case 'move':
             // Para manejar los movimientos de los jugadores, se necesita la conexión WebSocket del jugador, el ID del
