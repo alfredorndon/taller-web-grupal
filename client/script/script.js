@@ -445,11 +445,17 @@ function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
         titulo.innerHTML='Modo de Juego: Partida de '+cantidadJugadores+' Jugadores </br>ID: '+gameId;
     else
         titulo.innerHTML='Modo de Juego: Torneo </br>ID: '+gameId;
+    console.log(nombresJugadores.length)
     for (let i=1;i<=nombresJugadores.length;i++)
     {
         let jugador = document.getElementById('jugador'+i);
         jugador.innerText=nombresJugadores[i-1];
     }
+        for (let j=nombresJugadores.length+1; j<=cantidadJugadores;j++)
+        {
+            let jugadorEliminado = document.getElementById('jugador'+j);
+            jugadorEliminado.innerText="";
+        }
     let restantes=document.getElementById('restantes');
     let faltantes=cantidadJugadores-nombresJugadores.length;
     restantes.innerText='('+faltantes+') restantes';
@@ -470,6 +476,14 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
         const tablero= document.querySelector('.tablero-juego');
         if (tablero)
             tablero.remove();
+    }
+    if (idViejo==='container-lobby' || idViejo==='container-juego')
+    {
+        for (let i=1;i<=cantidadJugadores;i++)
+            {
+                let jugador = document.getElementById('jugador'+i);
+                jugador.innerText="";
+            }
     }
     if (idViejo==='container-juego')
         document.getElementById('tableros').innerHTML='';
