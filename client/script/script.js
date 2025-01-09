@@ -474,7 +474,15 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     if (idNuevo==='container-tablero-barcos')  
         crearTablero(1,'tableros-barcos');
     if (idNuevo==='container-juego')
+    {
         crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
+        let enemigos='';
+        for (let j=0;j<listaJugadores.length;j++)
+        {
+            enemigos+=listaJugadores[j]+',';
+        }
+        document.getElementById('encabezado-enemigo').innerText='Tus enemigos seran:'+ enemigos;
+    }
     if (idViejo==='container-tablero-barcos')
     {
         const tablero= document.querySelector('.tablero-juego');
