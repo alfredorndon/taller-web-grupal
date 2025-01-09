@@ -227,7 +227,7 @@ function crearTablero (jugadores, tableros)
 
 function crearTableroPartida (jugadores, tableros,listaJugadores)
 {
-    const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugadores'))+1;
+    const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
     console.log(jugadorActual);
     console.log(listaJugadores);
     console.log(listaJugadores[jugadorActual]);
