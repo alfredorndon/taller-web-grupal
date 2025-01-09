@@ -9,7 +9,6 @@ function crearTablero (jugadores, tableros)
     {
         let tableroJuego= document.createElement('div');
         tableroJuego.setAttribute('class','tablero-juego');
-        // tableroJuego.setAttribute('id',''); aca hay que colocar el nombre de los jugadores
         let tablero = document.createElement('div');
         tablero.setAttribute('class', 'tablero');
         tablero.setAttribute('id', 'tabla-p'+j)
@@ -442,7 +441,6 @@ function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
         titulo.innerHTML='Modo de Juego: Partida de '+cantidadJugadores+' Jugadores </br>ID: '+gameId;
     else
         titulo.innerHTML='Modo de Juego: Torneo </br>ID: '+gameId;
-    console.log(nombresJugadores.length)
     for (let i=1;i<=nombresJugadores.length;i++)
     {
         let jugador = document.getElementById('jugador'+i);
@@ -481,8 +479,6 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
         {
             if (listaJugadores[j]!=localStorage.getItem('nombreJugador'))
             {
-                console.log(localStorage.getItem('nombreJugador'));
-                console.log(listaJugadores[j]);
                 enemigos+=listaJugadores[j];
                 if (j!=listaJugadores.length-1)
                     enemigos+=',';
