@@ -479,7 +479,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
         let enemigos='';
         for (let j=0;j<listaJugadores.length;j++)
         {
-            if (listaJugadores[j]!=localStorage.getItem('nombreJugador'));
+            if (listaJugadores[j]!=localStorage.getItem('nombreJugador'))
             {
                 console.log(localStorage.getItem('nombreJugador'));
                 console.log(listaJugadores[j]);
