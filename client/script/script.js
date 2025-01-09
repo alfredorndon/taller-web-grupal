@@ -472,7 +472,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
         document.getElementById('tableros').innerHTML='';
 }
 
-function eliminarTablas(playerOut,gamePlayers){
+function eliminarTablas(playerOut){
 
     const tablaPlayerOut= document.getElementById(playerOut);
     tablaPlayerOut.remove();
