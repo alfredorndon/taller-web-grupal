@@ -228,9 +228,6 @@ function crearTablero (jugadores, tableros)
 function crearTableroPartida (jugadores, tableros,listaJugadores)
 {
     const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
-    console.log(jugadorActual);
-    console.log(listaJugadores);
-    console.log(listaJugadores[jugadorActual]);
 
     for (let j=1; j<=jugadores; j++)
     {
@@ -458,7 +455,14 @@ function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
         }
     let restantes=document.getElementById('restantes');
     let faltantes=cantidadJugadores-nombresJugadores.length;
+    if (cantidadJugadores!=nombresJugadores)
     restantes.innerText='('+faltantes+') restantes';
+    else
+    restantes.innerText='Lobby completa, el primer jugador de la lista puede iniciar la partida';
+    if (localStorage.getItem('nombreJugador')!=nombresJugadores[0])
+        document.getElementById('listo').style.display= 'none';
+    else
+        document.getElementById('listo').style.display= 'block';
 }
 
 function ocultarSeccion(id) {
@@ -491,6 +495,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
 
 function eliminarTablas(playerOut){
 
+    console.log (playerOut);
     const tablaPlayerOut= document.getElementById(playerOut);
     tablaPlayerOut.remove();
 }
