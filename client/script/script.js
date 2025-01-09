@@ -227,7 +227,7 @@ function crearTablero (jugadores, tableros)
 
 function crearTableroPartida (jugadores, tableros,listaJugadores)
 {
-    const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugadores'))+1
+    const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugadores'))+1;
 
     for (let j=1; j<=jugadores; j++)
     {
@@ -461,7 +461,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     if (idNuevo==='container-tablero-barcos')  
         crearTablero(1,'tableros-barcos');
     if (idNuevo==='container-juego')
-        crearTablero(cantidadJugadores,'tableros',listaJugadores);
+        crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
     if (idViejo==='container-tablero-barcos')
         document.querySelector('.tablero-juego').remove();
     if (idViejo==='container-juego')
