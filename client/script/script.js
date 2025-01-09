@@ -484,11 +484,11 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
                 console.log(localStorage.getItem('nombreJugador'));
                 console.log(listaJugadores[j]);
                 enemigos+=listaJugadores[j];
+                if (j!=listaJugadores.length-1)
+                    enemigos+=',';
+                else
+                    enemigos+='.';
             }
-            if (j!=listaJugadores.length-1)
-                enemigos+=',';
-            else
-                enemigos+='.';
         }
         document.getElementById('encabezado-enemigo').innerText='Tus enemigos seran:'+ enemigos;
     }
