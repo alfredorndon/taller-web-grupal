@@ -479,7 +479,14 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
         let enemigos='';
         for (let j=0;j<listaJugadores.length;j++)
         {
-            enemigos+=listaJugadores[j]+',';
+            if (listaJugadores[j]!=localStorage.getItem('nombreJugador'));
+            {
+                enemigos+=listaJugadores[j];
+            }
+            if (j!=listaJugadores.length-1)
+                enemigos+=',';
+            else
+                enemigos+='.';
         }
         document.getElementById('encabezado-enemigo').innerText='Tus enemigos seran:'+ enemigos;
     }
