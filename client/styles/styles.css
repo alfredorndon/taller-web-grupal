@@ -189,6 +189,7 @@ main {
     width: auto;
     box-shadow: none;
     border-radius: 0px;
+    background-color: #FFFFFF;
 }
 
 #datos-del-jugador-frm-nombre {
@@ -225,12 +226,11 @@ main {
 
 #tableros {
     display: flex;
-    justify-content: space-around;
-    align-items: baseline;
-    gap: 3rem;
+    align-items: center;
+    gap: 2rem;
     flex-wrap: wrap;
-    align-content: flex-start;
-    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 #tableros-barcos {
