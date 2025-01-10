@@ -159,13 +159,7 @@
 
     <div class="main-container" id="container-juego">
         <header>
-<<<<<<< HEAD
             <div id="modo-juego"><h1>Partida de </h1></div>
-=======
-            <div id="modo-juego">
-                <h1>Modo</h1>
-            </div>
->>>>>>> c7dbf67a86384473536153600a0c07504a79098d
             <h2 id="encabezado-enemigo"> Tus enemigos son:</h2>
             <div id="anuncio">
                 <h3>anuncio</h3>
@@ -926,6 +920,7 @@
                     }
                         break;
                     case 'playerLeft-party': {
+                        alert('el jugador ' + mensaje.name + ' ha abandonado la partida');
                         eliminarTablas(mensaje.name, mensaje.gamePlayers);
                     }
                         break;
