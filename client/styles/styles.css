@@ -188,8 +188,7 @@ main {
 #preparacion {
     width: auto;
     box-shadow: none;
-    border-radius: 0px; 
-    background-color: #FFFFFF;
+    border-radius: 0px;
 }
 
 #datos-del-jugador-frm-nombre {
