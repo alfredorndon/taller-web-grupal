@@ -38,7 +38,7 @@
 
 #titulo-principal {
     font-family: 'Rye', sans-serif;
-    font-size: 35px;
+    font-size: 40px;
     background-color: #FFFFFF;
     width: 100%;
     text-align: center;
@@ -111,9 +111,13 @@ header div{
     margin-bottom: 0px;
 }
 
+h1 {
+    font-size: 40px;
+}
+
 h2, h3{
     font-family: 'Rye', sans-serif;
-    font-size: 35px;
+    font-size: 30px;
     color: #0C2C85;
 }
 
@@ -193,7 +197,7 @@ main {
 #datos-del-jugador-frm-nombre {
     width: 500px;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 18px;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -250,7 +254,7 @@ main {
 #piezas p, #volver-inicio p{
     color:#0C2C85;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     border: 1px solid;
     border-radius: 10px;
     padding: 10px;
@@ -570,8 +574,8 @@ main {
 .salir-del-juego a{
     color:#0C2C85;
     text-decoration: none;
-    font-size: 20px;
-    margin:20px;
+    font-size: 18px;
+    margin: 20px;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 10px ;
@@ -624,9 +628,10 @@ main {
 
 #modo-juego {
     font-family: 'Rye', sans-serif;
-    font-size: 50px;
+    font-size: 40px;
+    font-weight: bold;
     width: 100%;
-    margin:0;
+    padding: 30px;
     text-align: center;
     color: #1449DB;
     background-color: white;
@@ -639,7 +644,7 @@ main {
     padding: 20px;
     border-radius: 15px;
     margin:0;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     color:white !important; 
 }
@@ -661,14 +666,13 @@ main {
 }
 
 #boosters ul{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: normal;
     list-style: none;
     display:flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
     gap: 1rem;
 }
 
