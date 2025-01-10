@@ -474,6 +474,10 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     if (idNuevo==='container-juego')
     {
         crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
+        if (cantidadJugadores!=8)
+            titulo.innerHTML='Partida de '+cantidadJugadores+' Jugadores';
+        else
+            titulo.innerHTML='Modo de Juego: Torneo </br>ID: '+gameId;
         let enemigos='';
         for (let j=0;j<listaJugadores.length;j++)
         {
