@@ -668,18 +668,9 @@ main {
     color:white !important; 
 }
 
-#tableros {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    align-items: center;
-    justify-content: space-evenly;
-
-}
-
-#tableros > :nth-last-child(2) {
+/* #tableros > :nth-last-child(2) {
     flex-basis: 100%;
-}
+} */
 
 #boosters{
     display:flex;
@@ -697,7 +688,6 @@ main {
     font-size: 16px;
     font-weight: normal;
     list-style: none;
-    padding:0;
     display:flex;
     flex-wrap: wrap;
     align-items: center;
@@ -708,8 +698,7 @@ main {
 
 #boosters ul li{
     border: 1px solid;
-    padding: 20px;
-    margin:10px;
+    padding: 15px;
     border-radius: 15px;
     transition: background-color 0.5s ease, color 0.5s ease;
     cursor: pointer;
@@ -718,23 +707,23 @@ main {
 #boosters ul li:hover{
     color:white;
     background-color: #68BAFA;
-    /* border: 1px solid; */
+    border: 1px solid;
 }
 
 #puntaje {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #compra-potenciador {
     border: 1px solid;
     color: white; 
-    height: 40px; 
+    height: 45px; 
     width: 150px; 
     background-color:#0C2C85; 
     transition: background-color 0.5s ease, color 0.5s ease; 
     text-decoration: none; 
     font-family: 'Roboto Condensed', sans-serif; 
-    font-size: 16px; 
+    font-size: 18px; 
     font-weight: normal; 
     border-radius: 10px; 
     cursor: pointer;
