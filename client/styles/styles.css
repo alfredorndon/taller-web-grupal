@@ -95,9 +95,7 @@ header{
 
 header div{
     font-family: 'Rye', sans-serif;
-    font-size: 50px;
     width: 100%;
-    margin:0;
     text-align: center;
     color: #1449DB;
     background-color: white;
@@ -205,7 +203,6 @@ main {
 
 #crea-tu-tablero {
     font-family: 'Rye', sans-serif;
-    font-size: 50px;
     width: 100%;
     margin:0;
     text-align: center;
