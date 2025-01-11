@@ -205,7 +205,6 @@ function handleAttack(ws, gameId, casilla) {
         sendMessage(ws, { type: 'error', message: 'No es su turno, espere a los demas jugadores por favor' });
         return;
     }
-    if (game.players[game.turn])
     game.turn = (game.turn + 1) % game.players.length;
     game.players.forEach((player) => {
             sendMessage(player.ws, { type: 'attack', gameId, casilla: casilla, turno: game.turn });

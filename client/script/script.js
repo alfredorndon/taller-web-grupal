@@ -481,11 +481,16 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     if (idViejo==='container-juego') document.getElementById('tableros').innerHTML='';
 }
 
-function eliminarTablas(playerOut){
+function alterarTablero(casilla){
 
-    console.log (playerOut);
-    const tablaPlayerOut= document.getElementById(playerOut);
-    if (tablaPlayerOut) tablaPlayerOut.remove();
+    const casillaAtacada= document.getElementById(casilla);
+    if (casillaAtacada)
+    {
+        if (casillaAtacada.classList.contains('barco'))
+                casillaAtacada.classList.add('hit');
+        else 
+                casilla.classList.add('miss');
+    }
 }
 
 

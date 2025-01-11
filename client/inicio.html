@@ -664,6 +664,10 @@
                         alert('El jugador ' + mensaje.name + ' ha abandonado la partida.');
                         break;
                     }
+                    case 'attack': {
+                        alterarTablero(casilla)
+                    }
+                        break;
                     default: {
                         alert('no se ha podido procesar el mensaje');
                         event.preventDefault();
