@@ -495,17 +495,38 @@ function alterarTablero(casilla){
 }
 
 function recopilarEnemigos(){
-
-    const tableros = document.getElementsByClassName('.tablero-juego');
+    enemigos=[];
+    const tableros = document.querySelectorAll('.tablero-juego');
     tableros.forEach(tablero=>{
         if (tablero.id!=localStorage.getItem('nombreJugador'))
         {
-            const extraerCeldas= tablero.querySelectorAll('.position table-cell');
+            const extraerCeldas= tablero.querySelectorAll('.position.table-cell');
             extraerCeldas.forEach(celda=> {
                 enemigos.push(celda);
             })
         }
     })
+}
+
+function manejarAtaque(event){
+    const casillaAtacada = event.target.id;
+    ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada}));
+}
+
+function asignarClicks(gamePlayers, turno)
+{
+    if (gamePlayers[turno]===localStorage.getItem('nombreJugador'))
+    {
+        enemigos.forEach(casillaEnemiga => {
+            casillaEnemiga.addEventListener('click', manejarAtaque);
+        })
+    }
+    else 
+    {
+        enemigos.forEach(casillaEnemiga => {
+            casillaEnemiga.removeEventListener('click', manejarAtaque);
+        })
+    }
 }
 
 

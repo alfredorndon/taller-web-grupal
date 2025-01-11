@@ -180,7 +180,7 @@ function handleStartGame(ws, gameId,cantidadJugadores) {
     game.started = true;
     const gamePlayers = game.players.map(player => player.name);
     game.players.forEach((player) => {
-            sendMessage(player.ws, { type: 'gameStarted', gameId, gamePlayers: gamePlayers, gameTurn: game.turn });
+            sendMessage(player.ws, { type: 'gameStarted', gameId, gamePlayers: gamePlayers, turno: game.turn });
     });
 }
 
@@ -205,9 +205,11 @@ function handleAttack(ws, gameId, casilla) {
         sendMessage(ws, { type: 'error', message: 'No es su turno, espere a los demas jugadores por favor' });
         return;
     }
+
     game.turn = (game.turn + 1) % game.players.length;
+    const gamePlayers = game.players.map(player => player.name);
     game.players.forEach((player) => {
-            sendMessage(player.ws, { type: 'attack', gameId, casilla: casilla, turno: game.turn });
+        sendMessage(player.ws, { type: 'attack', gameId, casilla: casilla, gamePlayers:gamePlayers, turno: game.turn });
     });
 }
 

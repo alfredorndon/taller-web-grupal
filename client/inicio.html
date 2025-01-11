@@ -633,6 +633,8 @@
                     case 'gameStarted': {
                         console.log('se ha iniciado el juego');
                         cargarNuevaSeccion('container-juego', 'container-lobby', localStorage.getItem('cantidadJugadores'), mensaje.gamePlayers);
+                        recopilarEnemigos();
+                        asignarClicks(mensaje.gamePlayers, mensaje.turno);
                     }
                         break;
                     case 'error': {
@@ -648,6 +650,7 @@
                     case 'playerLeft-party': {
                         eliminarTablas(mensaje.name, mensaje.gamePlayers);
                         alert('El jugador ' + mensaje.name + ' ha abandonado la partida.');
+                        recopilarEnemigos();
                     }
                         break;
                     case 'playerLeft-lobby': {
@@ -665,7 +668,8 @@
                         break;
                     }
                     case 'attack': {
-                        alterarTablero(casilla)
+                        alterarTablero(mensaje.casilla);
+                        asignarClicks(mensaje.gamePlayers, mensaje.turno);
                     }
                         break;
                     default: {
