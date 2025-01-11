@@ -443,8 +443,7 @@ function ocultarSeccion(id) {
 function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
-    if (idNuevo==='container-tablero-barcos')  
-        crearTablero(1,'tableros-barcos');
+    if (idNuevo==='container-tablero-barcos') crearTablero(1,'tableros-barcos');
     if (idNuevo==='container-juego')
     {
         crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
@@ -469,8 +468,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     if (idViejo==='container-tablero-barcos')
     {
         const tablero= document.querySelector('.tablero-juego');
-        if (tablero)
-            tablero.remove();
+        if (tablero) tablero.remove();
     }
     if (idViejo==='container-lobby' || idViejo==='container-juego')
     {
@@ -480,16 +478,12 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
                 jugador.innerText="";
             }
     }
-    if (idViejo==='container-juego')
-        document.getElementById('tableros').innerHTML='';
+    if (idViejo==='container-juego') document.getElementById('tableros').innerHTML='';
 }
 
 function eliminarTablas(playerOut){
 
     console.log (playerOut);
     const tablaPlayerOut= document.getElementById(playerOut);
-    if (tablaPlayerOut)
-    tablaPlayerOut.remove();
+    if (tablaPlayerOut) tablaPlayerOut.remove();
 }
-
-
