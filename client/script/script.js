@@ -32,7 +32,7 @@ function crearTablero (tableros)
                 if (celda.id==='p'+j+'-C1')
                 {
                         let celdaBarco= document.createElement('div');
-                        celdaBarco.setAttribute('class', 'position barco barco-destructor tile-1 horizontal');
+                        celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-1 horizontal');
                         celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                         tablero.appendChild(celdaBarco);
                         if (j!=1)
@@ -41,7 +41,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-D1')
                 {
                         let celdaBarco= document.createElement('div');
-                        celdaBarco.setAttribute('class', 'position barco barco-destructor tile-2 horizontal');
+                        celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-2 horizontal');
                         celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                         tablero.appendChild(celdaBarco);
                         if (j!=1)
@@ -50,7 +50,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-C3')
                 {
                         let celdaBarco= document.createElement('div');
-                        celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-1 horizontal');
+                        celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-1 horizontal');
                         celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                         tablero.appendChild(celdaBarco);
                         if (j!=1)
@@ -59,7 +59,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-D3')
                 {
                         let celdaBarco= document.createElement('div');
-                        celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-2 horizontal');
+                        celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-2 horizontal');
                         celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                         tablero.appendChild(celdaBarco);
                         if (j!=1)
@@ -68,7 +68,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-E3')
                 {
                         let celdaBarco= document.createElement('div');
-                        celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-3 horizontal');
+                        celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-3 horizontal');
                         celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                         tablero.appendChild(celdaBarco);
                         if (j!=1)
@@ -77,7 +77,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-F3')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-4 horizontal');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-4 horizontal');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -86,7 +86,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-G3')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-5 horizontal');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-5 horizontal');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -95,7 +95,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-B5')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-submarino tile-1 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-1 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -104,7 +104,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-B6')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-submarino tile-2 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-2 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -113,7 +113,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-B7')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-submarino tile-3 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-3 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -122,7 +122,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-I5')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-crucero tile-1 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-1 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -131,7 +131,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-I6')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-crucero tile-2 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-2 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -140,7 +140,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-I7')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-crucero tile-3 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-3 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -149,7 +149,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-F6')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-acorazado tile-1 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-1 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -158,7 +158,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-F7')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-acorazado tile-2 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-2 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -168,7 +168,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-F8')
                 {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-acorazado tile-3 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-3 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -177,7 +177,7 @@ function crearTablero (tableros)
                 else if (celda.id==='p'+j+'-F9')
                     {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-acorazado tile-4 vertical');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-4 vertical');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=1)
@@ -252,7 +252,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     if (celda.id==='p'+j+'-C1')
                     {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-destructor tile-1 horizontal');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-1 horizontal');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -260,7 +260,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-D1')
                     {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-destructor tile-2 horizontal');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-2 horizontal');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -268,7 +268,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-C3')
                     {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-1 horizontal');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-1 horizontal');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -276,7 +276,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-D3')
                     {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-2 horizontal');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-2 horizontal');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -284,7 +284,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-E3')
                     {
                             let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-3 horizontal');
+                            celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-3 horizontal');
                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                             tablero.appendChild(celdaBarco);
                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -292,7 +292,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-F3')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-4 horizontal');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-4 horizontal');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -300,7 +300,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-G3')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-portaaviones tile-5 horizontal');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-5 horizontal');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -308,7 +308,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-B5')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-submarino tile-1 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-1 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -316,7 +316,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-B6')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-submarino tile-2 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-2 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -324,7 +324,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-B7')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-submarino tile-3 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-3 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -332,7 +332,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-I5')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-crucero tile-1 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-1 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -340,7 +340,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-I6')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-crucero tile-2 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-2 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -348,7 +348,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-I7')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-crucero tile-3 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-3 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -356,7 +356,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-F6')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-acorazado tile-1 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-1 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -364,7 +364,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-F7')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-acorazado tile-2 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-2 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -373,7 +373,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-F8')
                     {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-acorazado tile-3 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-3 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
@@ -381,7 +381,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                     else if (celda.id==='p'+j+'-F9')
                         {
                                 let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position barco barco-acorazado tile-4 vertical');
+                                celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-4 vertical');
                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
                                 tablero.appendChild(celdaBarco);
                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
