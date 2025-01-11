@@ -201,7 +201,7 @@ function handleMove(ws, gameId, move) {
         sendMessage(ws, { type: 'error', message: 'Game not started' });
         return;
     }
-    if (game.players[game.turn] !== ws) {
+    if (game.players[game.turn].ws !== ws) {
         sendMessage(ws, { type: 'error', message: 'Not your turn' });
         return;
     }
