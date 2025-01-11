@@ -2,6 +2,7 @@ const abecedario = [' ','A','B','C','D','E','F','G','H','I','J'];
 const filas = 10;
 const columnas = 10;
 const jugadores = 1;
+let enemigos=[];
 
 function crearTablero (tableros)
 {
@@ -491,6 +492,20 @@ function alterarTablero(casilla){
         else 
                 casilla.classList.add('miss');
     }
+}
+
+function recopilarEnemigos(){
+
+    const tableros = document.getElementsByClassName('.tablero-juego');
+    tableros.forEach(tablero=>{
+        if (tablero.id!=localStorage.getItem('nombreJugador'))
+        {
+            const extraerCeldas= tablero.querySelectorAll('.position table-cell');
+            extraerCeldas.forEach(celda=> {
+                enemigos.push(celda);
+            })
+        }
+    })
 }
 
 
