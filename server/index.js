@@ -72,7 +72,12 @@ function handleMessage(ws, message) {
         case 'attack':
             // Para manejar los movimientos de los jugadores, se necesita la conexión WebSocket del jugador, el ID del
             // juego y el movimiento del jugador. El movimiento se reenvía a todos los jugadores en el juego.
-            handleAttack(ws, message.gameId, message.casilla);
+            handleAttack(ws, message.gameId, message.casilla,message.jugadorAtacado);
+            break;
+        case 'player-attacked':
+            // Para manejar los movimientos de los jugadores, se necesita la conexión WebSocket del jugador, el ID del
+            // juego y el movimiento del jugador. El movimiento se reenvía a todos los jugadores en el juego.
+            handleAttacked(ws, message.gameId, message.casilla,message.resultadoAtaque);
             break;
         case 'leave-party':
             // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
@@ -191,7 +196,7 @@ function handleStartGame(ws, gameId,cantidadJugadores) {
  * @param {string} gameId - El ID del juego.
  * @param {string} move - El movimiento del jugador.
  */
-function handleAttack(ws, gameId, casilla) {
+function handleAttack(ws, gameId, casilla, jugadorAtacado) {
     const game = games[gameId];
     if (!game) {
         sendMessage(ws, { type: 'error', message: 'Game not found' });
@@ -209,8 +214,18 @@ function handleAttack(ws, gameId, casilla) {
     game.turn = (game.turn + 1) % game.players.length;
     const gamePlayers = game.players.map(player => player.name);
     game.players.forEach((player) => {
+        if (player.name===jugadorAtacado)
         sendMessage(player.ws, { type: 'attack', gameId, casilla: casilla, gamePlayers:gamePlayers, turno: game.turn });
     });
+}
+
+function handleAttacked(ws, gameId, casilla, resultadoAtaque)
+{
+    const game = games[gameId];
+    const gamePlayers = game.players.map(player => player.name);
+        game.players.forEach((player) => {
+            sendMessage(player.ws, { type: 'attack-done', gameId, gamePlayers: gamePlayers, casilla:casilla, turno: game.turn, resultadoAtaque:resultadoAtaque });
+        });
 }
 
 /**

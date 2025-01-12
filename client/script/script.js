@@ -496,18 +496,29 @@ function verificarPrevioAtaque(casilla)
     return true;
 }
 
-function alterarTablero(casilla){
+function alterarTablero(casilla, resultadoAtaque){
 
     let casillaAtacada= document.getElementById(casilla);
     if (casillaAtacada)
     {
-        if (casillaAtacada.classList.contains('barco'))
+        if (resultadoAtaque)
             casillaAtacada.classList.add('hit');
         else 
         {
             casillaAtacada.classList.add('miss');
             casillaAtacada.innerHTML = "❌";
         }
+    }
+}
+
+function verificarAtaque(casilla){
+    let casillaAtacada= document.getElementById(casilla);
+    if (casillaAtacada)
+    {
+        if (casillaAtacada.classList.contains('barco'))
+            ws.send (JSON.stringify({ type: 'player-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, hit: true}));
+        else 
+            ws.send (JSON.stringify({ type: 'player-attacked', gameId:localStorage.getItem('partidaActiva'),casilla: casilla, hit: false}));
     }
 }
 
@@ -525,10 +536,11 @@ function recopilarEnemigos(){
     })
 }
 
-function manejarAtaque(){
+function manejarAtaque(event){
     const casillaAtacada = event.target.id;
+    const jugadorAtacado= event.target.closest('.tablero-juego').id;
     if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, has perdido tu turno");
-    ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada}));
+    ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada, jugadorAtacado:jugadorAtacado}));
 }
 
 function asignarClicks(gamePlayers, turno)
@@ -536,13 +548,13 @@ function asignarClicks(gamePlayers, turno)
     if (gamePlayers[turno]===localStorage.getItem('nombreJugador'))
     {
         enemigos.forEach(casillaEnemiga => {
-            casillaEnemiga.addEventListener('click', manejarAtaque());
+            casillaEnemiga.addEventListener('click', manejarAtaque);
         });
     }
     else 
     {
         enemigos.forEach(casillaEnemiga => {
-            casillaEnemiga.removeEventListener('click', manejarAtaque());
+            casillaEnemiga.removeEventListener('click', manejarAtaque);
         });
     }
 }
