@@ -370,7 +370,7 @@
                         <tr>
                             <td id="jugador10"></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td id="jugador11"></td>
                         </tr>
                         <tr>
@@ -387,7 +387,7 @@
                         </tr>
                         <tr>
                             <td id="jugador16"></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
                 <div id="espacio-vacio"></div>
@@ -532,10 +532,14 @@
                         break;
                     }
                     case 'attack': {
-                        if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla);
-                        modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
-                        asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                        if (verificarPrevioAtaque(mensaje.casilla)) verificarAtaque(mensaje.casilla);
                     }
+                    case 'attack-done':
+                        {
+                            alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
+                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                            asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                        }
                         break;
                     default: {
                         alert('no se ha podido procesar el mensaje');
