@@ -6,6 +6,7 @@ let enemigos=[];
 
 function crearTablero (tableros)
 {
+    let j=1;
     let tableroJuego= document.createElement('div');
     tableroJuego.setAttribute('class','tablero-juego');
     let tablero = document.createElement('div');
@@ -444,7 +445,7 @@ function ocultarSeccion(id) {
 function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
-    if (idNuevo==='container-tablero-barcos') crearTablero(1,'tableros-barcos');
+    if (idNuevo==='container-tablero-barcos') crearTablero('tableros-barcos');
     if (idNuevo==='container-juego')
     {
         crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
