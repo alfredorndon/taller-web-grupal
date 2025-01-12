@@ -442,6 +442,7 @@ function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
 function ocultarSeccion(id) {
     document.getElementById(id).style.display = "none";
 }
+
 function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
