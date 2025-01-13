@@ -497,7 +497,7 @@ function verificarPrevioAtaque(casillaId)
 {
     let casilla = document.getElementById(casillaId);
     let golpe = casilla.querySelector("div");
-    if (golpe == null || casilla.classList.contains("miss")) return false;
+    if (!golpe || casilla.classList.contains("miss")) return false;
     return true;
 }
 
@@ -556,8 +556,6 @@ function recopilarEnemigos(){
 function manejarAtaque(event){
     const casillaAtacada = event.target.id;
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
-    console.log(jugadorAtacado);
-    console.log(casillaAtacada)
     if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, has perdido tu turno");
     ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada, jugadorAtacado:jugadorAtacado}));
 }
