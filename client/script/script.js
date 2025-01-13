@@ -585,12 +585,6 @@ function eliminarTablas(playerOut){
 
 
 
-
-
-
-
-
-
 // function crearTableroPartida(jugadores, tableros, listaJugadores) {
 //     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
 //     let barcos = []; // Array para guardar los barcos del jugador
@@ -626,8 +620,8 @@ function eliminarTablas(playerOut){
 //                         let idCelda = celdaClicada.id;
 
 //                         // Obtener tipo de barco y orientación (debes tener selectores en tu HTML)
-//                         let tipoBarco = document.getElementById('selectorBarco').value;
-//                         let orientacion = document.getElementById('selectorOrientacion').value;
+//                         let tipoBarco = document.getElementById('selector-barco').value;
+//                         let orientacion = document.getElementById('selector-orientacion').value;
 
 //                         if (colocarBarco(idCelda, tipoBarco, orientacion, barcos)) { // Pasamos barcos como argumento
 //                             actualizarTablero(barcos, tablero); // Pasamos barcos y tablero

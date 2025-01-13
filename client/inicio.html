@@ -123,29 +123,34 @@
         </header>
         <main>
             <section id="tableros-barcos">
-                <div id="piezas">
-                    <h2>Tus piezas</h2>
-                    <div>
-                        <div class="pieza-portaavion"></div>
-                        <div class="pieza-acorazado"></div>
-                        <div class="pieza-crucero"></div>
-                        <div class="pieza-submarino"></div>
-                        <div class="pieza-destructor"></div>
-                    </div>
-                    <section id="preparacion">
-                        <h2>Sus barcos disponibles</h2>
-                        </br>
-                        <ul id="lista-barcos">
-                            <li id="portaavion">1 Portaaviones (5 casillas)</li>
-                            <li id="acorazado">1 Acorazado (4 casillas)</li>
-                            <li id="crucero">1 Crucero (3 casillas)</li>
-                            <li id="submarino">1 Submarino (3 casillas)</li>
-                            <li id="destructor">1 Destructor (2 casillas)</li>
-                        </ul>
-                        <p id="union-game">Unirme a un juego</p>
-                        <p id="creacion-game">Crear un juego</p>
-                    </section>
-                </div>
+                <section id="preparacion">
+                    <h2>Sus barcos disponibles</h2>
+
+                    <select id="selector-barco">
+                        <option value="portaaviones">Portaaviones</option>
+                        <option value="acorazado">Acorazado</option>
+                        <option value="crucero">Crucero</option>
+                        <option value="submarino">Submarino</option>
+                        <option value="destructor">Destructor</option>
+                    </select>
+                    
+                    <select id="selector-orientacion">
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                    </select>
+
+                    <ul id="lista-barcos">
+                        <li>1 Portaaviones (5 casillas)</li>
+                        <li>1 Acorazado (4 casillas)</li>
+                        <li>1 Crucero (3 casillas)</li>
+                        <li>1 Submarino (3 casillas)</li>
+                        <li>1 Destructor (2 casillas)</li>
+                    </ul>
+
+                    <button id="confirmar-posicion-barco">Confirmar</button>
+                    <p id="union-game">Unirme a un juego</p>
+                    <p id="creacion-game">Crear un juego</p>
+                </section>
             </section>
             <section id="volver-inicio">
                 <h2>Volver al Inicio</h2>
