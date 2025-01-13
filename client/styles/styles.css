@@ -520,6 +520,7 @@ main {
     background: transparent url('../images/fire-20x20.png') 0 0 no-repeat;
     background-size: auto;
     animation: sprite-animation 1.7s steps(1) infinite;
+    pointer-events: none;
 }
 
 #interfaz {
