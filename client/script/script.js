@@ -226,7 +226,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
 
     for (let j=1; j<=jugadores; j++)
     {
-        let tableroJuego= document.createElement('div');
+        let tableroJuego = document.createElement('div');
         tableroJuego.setAttribute('class','tablero-juego');
         tableroJuego.setAttribute('id', listaJugadores[j-1]); 
         let tablero = document.createElement('div');
