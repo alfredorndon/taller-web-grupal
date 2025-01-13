@@ -480,7 +480,11 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
                 jugador.innerText="";
             }
     }
-    if (idViejo==='container-juego') document.getElementById('tableros').innerHTML='';
+    if (idViejo==='container-juego') 
+    {
+        document.getElementById('tableros').innerHTML='';
+        document.getElementById('anuncio').innerHTML='';
+    }
 }
 
 function modificarAnuncio (anuncio)

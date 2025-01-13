@@ -496,6 +496,7 @@
                     case 'gameStarted': {
                         console.log('se ha iniciado el juego');
                         cargarNuevaSeccion('container-juego', 'container-lobby', localStorage.getItem('cantidadJugadores'), mensaje.gamePlayers);
+                        modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                         recopilarEnemigos();
                         asignarClicks(mensaje.gamePlayers, mensaje.turno);
                     }
