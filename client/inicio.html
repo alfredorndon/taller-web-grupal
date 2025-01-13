@@ -478,7 +478,7 @@
         ws.addEventListener('message', (event) => {
             try {
                 const mensaje = JSON.parse(event.data);
-                console.log(mensaje);
+                console.log(mensaje).type;
                 switch (mensaje.type) {
                     case 'gameCreated': {
                         localStorage.setItem('partidaActiva', mensaje.gameId);
