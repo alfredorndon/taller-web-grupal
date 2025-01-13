@@ -496,9 +496,15 @@ function modificarAnuncio (anuncio)
 function verificarPrevioAtaque(casillaId)
 {
     let casilla = document.getElementById(casillaId);
-    let golpe = casilla.querySelector("div");
-    if (golpe || casilla.classList.contains("miss")) return false;
-    return true;
+    if (casilla)
+    {
+        let golpe = casilla.querySelector("div");
+        if (golpe || casilla.classList.contains("miss")) return false;
+        else
+        return true;
+    }
+    else
+    return false;
 }
 
 function alterarTablero(casilla, resultadoAtaque){
