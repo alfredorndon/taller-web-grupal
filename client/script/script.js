@@ -540,12 +540,12 @@ function recopilarEnemigos(){
 }
 
 function manejarAtaque(event){
-    const casillaAtacada = event.target;
-    const casillaAtacadaId= event.target.id;
+    const casillaAtacada = event.target.id;
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
     console.log(jugadorAtacado);
+    console.log(casillaAtacada)
     if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, has perdido tu turno");
-    ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacadaId, jugadorAtacado:jugadorAtacado}));
+    ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada, jugadorAtacado:jugadorAtacado}));
 }
 
 function asignarClicks(gamePlayers, turno)
