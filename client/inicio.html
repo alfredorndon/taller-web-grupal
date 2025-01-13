@@ -529,8 +529,8 @@
                         eliminarTablas(mensaje.name, mensaje.gamePlayers);
                         alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'), mensaje.gamePlayers);
                         alert('El jugador ' + mensaje.name + ' ha abandonado la partida.');
-                        break;
                     }
+                        break;
                     case 'attack': {
                         if (verificarPrevioAtaque(mensaje.casilla)) verificarAtaque(mensaje.casilla);
                     }
