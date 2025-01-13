@@ -533,7 +533,6 @@
                     }
                     case 'attack': {
                         if (verificarPrevioAtaque(mensaje.casilla)) verificarAtaque(mensaje.casilla);
-                        break;
                     }
                     break;
                     case 'attack-done':
@@ -547,6 +546,7 @@
                         alert('no se ha podido procesar el mensaje');
                         event.preventDefault();
                     }
+                    break;
                 }
             }
             catch (error) {
