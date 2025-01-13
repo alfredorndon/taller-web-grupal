@@ -57,10 +57,11 @@ form {
     width: 150px;
 }
 
-button {
+#nombre-jugador {
+    border: 1px solid;
     color: #FFFFFF;
-    height: auto; 
-    width: auto;
+    height: 45px; 
+    width: 150px;
     background-color:#0C2C85; 
     transition: background-color 0.5s ease, color 0.5s ease; 
     text-decoration: none; 
@@ -69,25 +70,6 @@ button {
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    white-space: nowrap;
-    display: inline-flex; 
-}
-
-#selector-orientacion, #selector-barco {
-    height: 35px; 
-    width: 150px;
-    font-size: 18px;
-    font-family: 'Roboto Condensed', sans-serif; 
-    border-radius: 10px; 
-    align-items: center;
-    justify-content: center;
-    margin-right: 5px;
-    margin-left: 5px;
-    padding-left: 10px;
 }
 
 #nombre-jugador:hover {
@@ -205,6 +187,13 @@ main {
     margin:2rem;
 }
 
+#preparacion {
+    width: auto;
+    box-shadow: none;
+    border-radius: 0px;
+    background-color: #FFFFFF;
+}
+
 #datos-del-jugador-frm-nombre {
     width: 500px;
     font-weight: normal;
@@ -294,6 +283,7 @@ main {
     gap: 2rem;
     height: auto;
     padding-bottom: 0px;
+    box-shadow: none;
 }
 
 #piezas > :nth-child(2){
@@ -374,7 +364,7 @@ main {
     max-width: var(--tablero-width);
     height: var(--tablero-height);
     background: var(--position-bg-color);
-    box-shadow: 0px 0px 50px #000;
+    box-shadow: 0px 0px 50px #0009;
     background:#FFFFFF url('../images/sea.jpg') 0 0 no-repeat;
     overflow: visible;
 }
@@ -384,8 +374,6 @@ main {
     padding-top: 5px;
     background-color: #FFFFFF;
     border-radius: 10px;
-    box-shadow: 0px 0px 50px #000;
-
 }
 
 .tablero-juego h2 {
@@ -510,6 +498,15 @@ main {
     transform: rotate(-90deg);
 }
 
+.hit {
+    z-index:20;
+    width: var(--position-width);
+    height: calc(var(--position-height) + 5px);
+    background: transparent url('../images/fire-20x20.png') 0 0 no-repeat;
+    background-size: auto;
+    animation: sprite-animation 1.7s steps(1) infinite;
+}
+
 #interfaz {
     display: flex;
     flex-direction: column;
@@ -525,7 +522,7 @@ main {
     border-collapse: collapse;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
-    box-shadow: 0px 0px 50px #000;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 #tabla-torneo thead tr{
@@ -568,7 +565,7 @@ main {
     width: auto;
     text-align: center;
     border-radius: 10px;
-    box-shadow: 0px 0px 50px #000;
+    box-shadow: 0px 0px 50px #0009;
     background-color: #F7F7F7;
     padding-bottom: 60px !important;
 }
@@ -591,6 +588,41 @@ main {
     text-decoration: none;
     background-color: #68BAFA;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@keyframes sprite-animation {
+    0% { background-position: 0 0; }
+    3.33% { background-position: -20px 0; }
+    6.67% { background-position: -40px 0; }
+    10% { background-position: -60px 0; }
+    13.33% { background-position: -80px 0; }
+    16.67% { background-position: 0 -20px; }
+    20% { background-position: -20px -20px; }
+    23.33% { background-position: -40px -20px; }
+    26.67% { background-position: -60px -20px; }
+    30% { background-position: -80px -20px; }
+    33.33% { background-position: 0 -40px; }
+    36.67% { background-position: -20px -40px; }
+    40% { background-position: -40px -40px; }
+    43.33% { background-position: -60px -40px; }
+    46.67% { background-position: -80px -40px; }
+    50% { background-position: 0 -60px; }
+    53.33% { background-position: -20px -60px; }
+    56.67% { background-position: -40px -60px; }
+    60% { background-position: -60px -60px; }
+    63.33% { background-position: -80px -60px; }
+    66.67% { background-position: 0 -80px; }
+    70% { background-position: -20px -80px; }
+    73.33% { background-position: -40px -80px; }
+    76.67% { background-position: -60px -80px; }
+    80% { background-position: -80px -80px; }
+    83.33% { background-position: 0 -100px; }
+    86.67% { background-position: -20px -100px; }
+    90% { background-position: -40px -100px; }
+    93.33% { background-position: -60px -100px; }
+    96.67% { background-position: -80px -100px; }
+    100% { background-position: 0 0; }
+
 }
 
 #modo-juego {
@@ -626,7 +658,7 @@ main {
     align-items: center;
     justify-content: space-evenly;
     border-radius: 15px;
-    box-shadow: 0px 0px 50px #000;
+    box-shadow: 0px 0px 50px #0009;
     background-color: #F7F7F7;
     width: auto;
     padding: 30px;
