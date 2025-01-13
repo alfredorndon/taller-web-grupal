@@ -499,7 +499,6 @@ main {
 }
 
 .hit {
-    position: absolute;
     z-index:20;
     width: var(--position-width);
     height: calc(var(--position-height) + 5px);
