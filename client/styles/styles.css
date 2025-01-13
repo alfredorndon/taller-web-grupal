@@ -66,6 +66,7 @@ button {
     text-decoration: none; 
     font-family: 'Roboto Condensed', sans-serif; 
     border-radius: 10px; 
+    border: none;
     cursor: pointer;
     align-items: center;
     justify-content: center;
@@ -75,6 +76,8 @@ button {
     padding-bottom: 10px;
     white-space: nowrap;
     display: inline-flex; 
+    font-weight: normal;
+    font-size: 18px;
 }
 
 #selector-orientacion, #selector-barco {
@@ -90,7 +93,7 @@ button {
     padding-left: 10px;
 }
 
-#nombre-jugador:hover {
+button:hover {
     background-color:#1449DB;
 }
 
@@ -165,13 +168,6 @@ a {
 a:hover {
     text-decoration: none;
     color: #68BAFA;
-}
-
-button {
-    font-size: 18px; 
-    font-weight: normal;
-    height: 45px;
-    width: 150px;
 }
 
 body {
