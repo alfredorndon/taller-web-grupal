@@ -516,9 +516,15 @@ function verificarAtaque(casilla){
     if (casillaAtacada)
     {
         if (casillaAtacada.classList.contains('barco'))
+        {
+            console.log ("Barco encontrado");
             ws.send (JSON.stringify({ type: 'player-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, hit: true}));
+        }
         else 
+        {
+            console.log ("Barco no encontrado");
             ws.send (JSON.stringify({ type: 'player-attacked', gameId:localStorage.getItem('partidaActiva'),casilla: casilla, hit: false}));
+        }
     }
     else
     console.error('la casilla atacada no existe');
