@@ -486,7 +486,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
 function modificarAnuncio (anuncio)
 {
     let anuncioActual = document.getElementById('anuncio');
-    anuncioActual.innerText = `<h3>${anuncio}</h3>`;
+    anuncioActual.innerText = anuncio;
 }
 
 function verificarPrevioAtaque(casillaId)
@@ -502,7 +502,11 @@ function alterarTablero(casilla, resultadoAtaque){
     if (casillaAtacada)
     {
         if (resultadoAtaque)
-            casillaAtacada.classList.add('hit');
+        {   
+            let golpe = document.createElement('div');
+            golpe.classList.add("hit");
+            casillaAtacada.appendChild(golpe);
+        }
         else 
         {
             casillaAtacada.classList.add('miss');
