@@ -508,9 +508,8 @@ function alterarTablero(casilla, resultadoAtaque){
     {
         if (resultadoAtaque)
         {   
-            let golpe = document.createElement('div');
-            golpe.classList.add("hit");
-            casillaAtacada.appendChild(golpe);
+            casillaAtacada.classList.add("hit");
+            casillaAtacada.innerHTML = "💥";
         }
         else 
         {
