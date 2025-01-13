@@ -501,6 +501,7 @@
                     case 'gameStarted': {
                         console.log('se ha iniciado el juego');
                         cargarNuevaSeccion('container-juego', 'container-lobby', localStorage.getItem('cantidadJugadores'), mensaje.gamePlayers);
+                        modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                         recopilarEnemigos();
                         asignarClicks(mensaje.gamePlayers, mensaje.turno);
                     }
@@ -536,12 +537,12 @@
                     }
                         break;
                     case 'attack': {
-                        if (verificarPrevioAtaque(mensaje.casilla)) verificarAtaque(mensaje.casilla);
+                        verificarAtaque(mensaje.casilla);
                     }
                     break;
                     case 'attack-done':
                         {
-                            alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
+                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
                             modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                             asignarClicks(mensaje.gamePlayers, mensaje.turno);
                         }

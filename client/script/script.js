@@ -480,19 +480,24 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
                 jugador.innerText="";
             }
     }
-    if (idViejo==='container-juego') document.getElementById('tableros').innerHTML='';
+    if (idViejo==='container-juego') 
+    {
+        document.getElementById('tableros').innerHTML='';
+        document.getElementById('anuncio').innerHTML='';
+    }
 }
 
 function modificarAnuncio (anuncio)
 {
     let anuncioActual = document.getElementById('anuncio');
-    anuncioActual.innerText = `<h3>${anuncio}</h3>`;
+    anuncioActual.innerText = anuncio;
 }
 
 function verificarPrevioAtaque(casillaId)
 {
     let casilla = document.getElementById(casillaId);
-    if (casilla.classList.contains("hit") || casilla.classList.contains("miss")) return false; 
+    let golpe = casilla.querySelector("div");
+    if (golpe || casilla.classList.contains("miss")) return false;
     return true;
 }
 
@@ -502,7 +507,11 @@ function alterarTablero(casilla, resultadoAtaque){
     if (casillaAtacada)
     {
         if (resultadoAtaque)
-            casillaAtacada.classList.add('hit');
+        {   
+            let golpe = document.createElement('div');
+            golpe.classList.add("hit");
+            casillaAtacada.appendChild(golpe);
+        }
         else 
         {
             casillaAtacada.classList.add('miss');
@@ -547,8 +556,6 @@ function recopilarEnemigos(){
 function manejarAtaque(event){
     const casillaAtacada = event.target.id;
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
-    console.log(jugadorAtacado);
-    console.log(casillaAtacada)
     if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, has perdido tu turno");
     ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada, jugadorAtacado:jugadorAtacado}));
 }
