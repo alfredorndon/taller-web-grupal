@@ -504,7 +504,7 @@ function verificarPrevioAtaque(casillaId)
         return true;
     }
     else
-    return false;
+    return true;
 }
 
 function alterarTablero(casilla, resultadoAtaque){
