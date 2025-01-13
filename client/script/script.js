@@ -490,8 +490,9 @@ function modificarAnuncio (anuncio)
     anuncioActual.innerText = `<h3>${anuncio}</h3>`;
 }
 
-function verificarPrevioAtaque(casilla)
+function verificarPrevioAtaque(casillaId)
 {
+    let casilla = document.getElementById(casillaId);
     if (casilla.classList.contains("hit") || casilla.classList.contains("miss")) return false; 
     return true;
 }
