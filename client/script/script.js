@@ -544,7 +544,7 @@ function manejarAtaque(event){
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
     console.log(jugadorAtacado);
     if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, has perdido tu turno");
-    ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada, jugadorAtacado:jugadorAtacado}));
+    ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacadaId, jugadorAtacado:jugadorAtacado}));
 }
 
 function asignarClicks(gamePlayers, turno)
