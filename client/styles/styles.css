@@ -67,12 +67,34 @@ form {
     text-decoration: none; 
     font-family: 'Roboto Condensed', sans-serif; 
     border-radius: 10px; 
+    border: none;
     cursor: pointer;
     align-items: center;
     justify-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+    display: inline-flex; 
+    font-weight: normal;
+    font-size: 18px;
 }
 
-#nombre-jugador:hover {
+#selector-orientacion, #selector-barco {
+    height: 35px; 
+    width: 150px;
+    font-size: 18px;
+    font-family: 'Roboto Condensed', sans-serif; 
+    border-radius: 10px; 
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding-left: 10px;
+}
+
+button:hover {
     background-color:#1449DB;
 }
 
@@ -147,13 +169,6 @@ a {
 a:hover {
     text-decoration: none;
     color: #68BAFA;
-}
-
-button {
-    font-size: 18px; 
-    font-weight: normal;
-    height: 45px;
-    width: 150px;
 }
 
 body {
