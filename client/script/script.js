@@ -577,3 +577,248 @@ function habilitarBotonConfirmar(botonConfirmar) {
         botonConfirmar.disabled = false; // Habilitar el botón
     }
 }
+
+
+
+
+
+
+
+
+//logica anterior
+
+// function crearTableroPartida (jugadores, tableros, listaJugadores)
+// {
+//     const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
+//     for (let j=1; j<=jugadores; j++)
+//     {
+//         let tableroJuego = document.createElement('div');
+//         tableroJuego.setAttribute('class','tablero-juego');
+//         tableroJuego.setAttribute('id', listaJugadores[j-1]); 
+//         let tablero = document.createElement('div');
+//         tablero.setAttribute('class', 'tablero');
+//         tablero.setAttribute('id', 'tabla-p'+j)
+//         for (let i=0; i<=filas; i++)
+//         {
+//             let header = document.createElement('div');
+//             header.setAttribute('class', 'position table-head '+i);
+//             if (i != 0) header.innerText = i;
+//             tablero.appendChild(header);
+//             for (let k=1; k<=columnas; k++)
+//             {
+//                 if (i == 0)
+//                 {
+//                     let celda = document.createElement('div');
+//                     celda.setAttribute('class', 'position table-head '+abecedario[k]+i);
+//                     celda.innerText = abecedario[k];
+//                     tablero.appendChild(celda);
+//                 }
+//                 else
+//                 {
+//                     let celda = document.createElement('div');
+//                     celda.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                     if (celda.id==='p'+j+'-C1')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-1 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-D1')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-2 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-C3')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-1 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-D3')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-2 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-E3')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-3 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-F3')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-4 horizontal');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-G3')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-5 horizontal');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-B5')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-1 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-B6')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-2 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-B7')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-3 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-I5')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-1 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-I6')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-2 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-I7')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-3 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-F6')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-1 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-F7')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-2 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+
+//                     }
+//                     else if (celda.id==='p'+j+'-F8')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-3 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-F9')
+//                         {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-4 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                         }
+//                     else
+//                     {
+//                         celda.setAttribute('class', 'position table-cell');
+//                         tablero.appendChild(celda);
+//                     }
+//                 }
+//             }
+//         }
+        
+//         let section = document.getElementById(tableros);
+//         let titulo= document.createElement('h2');
+//         if (j==jugadorActual)
+//             titulo.innerText = 'Tu tablero ('+localStorage.getItem('nombreJugador')+')';
+//         else
+//             titulo.innerText = listaJugadores[j-1];
+//         titulo.setAttribute('class','jugador');
+//         titulo.setAttribute('id','p'+j);
+//         section.prepend(tableroJuego);
+//         tableroJuego.appendChild(titulo);
+//         tableroJuego.appendChild(tablero);
+//     }
+// }
+
+
+// function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
+//     document.getElementById(idNuevo).style.display = "block";
+//     ocultarSeccion(idViejo);
+//     if (idNuevo==='container-tablero-barcos') crearTablero('tableros-barcos');
+//     if (idNuevo==='container-juego')
+//     {
+//         crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
+//         if (cantidadJugadores!=8)
+//             document.getElementById('modo-juego').innerText='Partida de '+cantidadJugadores+' Jugadores';
+//         else
+//             document.getElementById('modo-juego').innerText='Modo Torneo';
+//         let enemigos='';
+//         for (let j=0;j<listaJugadores.length;j++)
+//         {
+//             if (listaJugadores[j]!=localStorage.getItem('nombreJugador'))
+//             {
+//                 enemigos+=listaJugadores[j];
+//                 if (j!=listaJugadores.length-1)
+//                     enemigos+=',';
+//                 else
+//                     enemigos+='.';
+//             }
+//         }
+//         document.getElementById('encabezado-enemigo').innerText='Tus enemigos seran:'+ enemigos;
+//     }
+//     if (idViejo==='container-tablero-barcos')
+//     {
+//         const tablero= document.querySelector('.tablero-juego');
+//         if (tablero) tablero.remove();
+//     }
+//     if (idViejo==='container-lobby' || idViejo==='container-juego')
+//     {
+//         for (let i=1;i<=cantidadJugadores;i++)
+//             {
+//                 let jugador = document.getElementById('jugador'+i);
+//                 jugador.innerText="";
+//             }
+//     }
+//     if (idViejo==='container-juego') 
+//     {
+//         document.getElementById('tableros').innerHTML='';
+//         document.getElementById('anuncio').innerHTML='';
+//     }
+// }
