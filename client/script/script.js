@@ -603,8 +603,8 @@ function eliminarTablas(playerOut){
 
 function crearTableroPartida(jugadores, tableros, listaJugadores) {
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
-    barcos = []; // Reiniciar el array de barcos al crear un nuevo tablero
-    cantidadBarcos = { // Reiniciar el contador de barcos al crear un nuevo tablero
+    barcos = []; 
+    cantidadBarcos = { 
         portaaviones: 1,
         acorazado: 1,
         crucero: 1,
