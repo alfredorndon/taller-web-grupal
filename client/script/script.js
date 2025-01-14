@@ -454,24 +454,29 @@ function ocultarSeccion(id) {
 function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
-    if (idNuevo==='container-tablero-barcos') crearTablero('tableros-barcos');
-    if (idNuevo==='container-juego')
-    {
-        crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
-        if (cantidadJugadores!=8)
+    let tablerosElement = document.getElementById('tableros'); // Obtener el elemento 'tableros'
+
+    if (idNuevo==='container-tablero-barcos') {
+        // Valores predeterminados para la fase de colocación
+        crearTableroPartida(1, tablerosElement, [localStorage.getItem('nombreJugador')]); // Un solo jugador y su nombre
+    }
+
+    if (idNuevo==='container-juego') {
+        crearTableroPartida(cantidadJugadores, tablerosElement, listaJugadores); // Usar los valores correctos
+        if (cantidadJugadores!=8) {
             document.getElementById('modo-juego').innerText='Partida de '+cantidadJugadores+' Jugadores';
-        else
+        } else {
             document.getElementById('modo-juego').innerText='Modo Torneo';
+        }
         let enemigos='';
-        for (let j=0;j<listaJugadores.length;j++)
-        {
-            if (listaJugadores[j]!=localStorage.getItem('nombreJugador'))
-            {
+        for (let j=0;j<listaJugadores.length;j++) {
+            if (listaJugadores[j]!=localStorage.getItem('nombreJugador')) {
                 enemigos+=listaJugadores[j];
-                if (j!=listaJugadores.length-1)
+                if (j!=listaJugadores.length-1) {
                     enemigos+=',';
-                else
+                } else {
                     enemigos+='.';
+                }
             }
         }
         document.getElementById('encabezado-enemigo').innerText='Tus enemigos seran:'+ enemigos;
