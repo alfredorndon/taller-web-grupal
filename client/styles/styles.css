@@ -343,7 +343,7 @@ main {
 }
 
 .barco-portaaviones {
-    background: transparent url('../images/ship0.png') 0 0 no-repeat;
+    background: transparent url('../images/portaaviones.png') 0 0 no-repeat;
     background-size: cover;
     text-indent: 150%;
     white-space: nowrap;
@@ -365,7 +365,7 @@ main {
     background-position: 0 calc(var(--position-height) * -1.4);
 }
 .barco-crucero{
-    background: transparent url('../images/ship3.png') 0 0 no-repeat;
+    background: transparent url('../images/crucero.png') 0 0 no-repeat;
     background-size: cover;
     text-indent: 150%;
     white-space: nowrap;
@@ -381,7 +381,7 @@ main {
 }
 
 .barco-acorazado {
-    background: transparent url('../images/ship1.png') 0 0 no-repeat;
+    background: transparent url('../images/acorazado.png') 0 0 no-repeat;
     background-size: cover;
     text-indent: 150%;
     white-space: nowrap;
@@ -401,7 +401,7 @@ main {
 }
 
 .barco-submarino{
-    background: transparent url('../images/ship4.png') 0 0 no-repeat;
+    background: transparent url('../images/submarino.png') 0 0 no-repeat;
     background-size: cover;
     text-indent: 150%;
     white-space: nowrap;
@@ -417,7 +417,7 @@ main {
 }
 
 .barco-destructor {
-    background: transparent url('../images/ship5.png') 0 0 no-repeat;
+    background: transparent url('../images/destructor.png') 0 0 no-repeat;
     background-size: cover;
     text-indent: 150%;
     white-space: nowrap;
