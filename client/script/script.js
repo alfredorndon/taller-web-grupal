@@ -598,8 +598,7 @@ function eliminarTablas(playerOut){
     tablaPlayerOut.remove();
 }
 
-// NUEVO CODIGO DE COLOCACION DE BARCOSS
-
+// NUEVO CODIGO DE COLOCACION DE BARCOS
 
 function crearTableroPartida(jugadores, tableros, listaJugadores) {
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;

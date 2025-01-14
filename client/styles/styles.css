@@ -94,6 +94,29 @@ form {
     padding-left: 10px;
 }
 
+button {
+    color: #FFFFFF;
+    height: auto; 
+    width: auto;
+    background-color:#0C2C85; 
+    transition: background-color 0.5s ease, color 0.5s ease; 
+    text-decoration: none; 
+    font-family: 'Roboto Condensed', sans-serif; 
+    border-radius: 10px; 
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+    display: inline-flex; 
+    font-weight: normal;
+    font-size: 18px;
+}
+
 button:hover {
     background-color:#1449DB;
 }
