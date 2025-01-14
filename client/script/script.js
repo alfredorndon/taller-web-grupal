@@ -4,6 +4,15 @@ const columnas = 10;
 const jugadores = 1;
 let enemigos=[];
 
+let barcos = []; // Array para guardar los barcos del jugador
+let cantidadBarcos = { // Cantidad de barcos permitidos por tipo
+    portaaviones: 1,
+    acorazado: 1,
+    crucero: 1,
+    submarino: 1,
+    destructor: 1
+};
+
 function crearTablero (tableros)
 {
     let j=1;
@@ -220,195 +229,195 @@ function crearTablero (tableros)
     tableroJuego.appendChild(tablero);
 }
 
-function crearTableroPartida (jugadores, tableros, listaJugadores)
-{
-    const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
-    for (let j=1; j<=jugadores; j++)
-    {
-        let tableroJuego = document.createElement('div');
-        tableroJuego.setAttribute('class','tablero-juego');
-        tableroJuego.setAttribute('id', listaJugadores[j-1]); 
-        let tablero = document.createElement('div');
-        tablero.setAttribute('class', 'tablero');
-        tablero.setAttribute('id', 'tabla-p'+j)
-        for (let i=0; i<=filas; i++)
-        {
-            let header = document.createElement('div');
-            header.setAttribute('class', 'position table-head '+i);
-            if (i != 0) header.innerText = i;
-            tablero.appendChild(header);
-            for (let k=1; k<=columnas; k++)
-            {
-                if (i == 0)
-                {
-                    let celda = document.createElement('div');
-                    celda.setAttribute('class', 'position table-head '+abecedario[k]+i);
-                    celda.innerText = abecedario[k];
-                    tablero.appendChild(celda);
-                }
-                else
-                {
-                    let celda = document.createElement('div');
-                    celda.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                    if (celda.id==='p'+j+'-C1')
-                    {
-                            let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-1 horizontal');
-                            celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                            tablero.appendChild(celdaBarco);
-                            if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-D1')
-                    {
-                            let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-2 horizontal');
-                            celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                            tablero.appendChild(celdaBarco);
-                            if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-C3')
-                    {
-                            let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-1 horizontal');
-                            celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                            tablero.appendChild(celdaBarco);
-                            if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-D3')
-                    {
-                            let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-2 horizontal');
-                            celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                            tablero.appendChild(celdaBarco);
-                            if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-E3')
-                    {
-                            let celdaBarco= document.createElement('div');
-                            celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-3 horizontal');
-                            celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                            tablero.appendChild(celdaBarco);
-                            if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-F3')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-4 horizontal');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-G3')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-5 horizontal');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-B5')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-1 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-B6')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-2 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-B7')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-3 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-I5')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-1 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-I6')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-2 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-I7')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-3 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-F6')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-1 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-F7')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-2 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+// function crearTableroPartida (jugadores, tableros, listaJugadores)
+// {
+//     const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
+//     for (let j=1; j<=jugadores; j++)
+//     {
+//         let tableroJuego = document.createElement('div');
+//         tableroJuego.setAttribute('class','tablero-juego');
+//         tableroJuego.setAttribute('id', listaJugadores[j-1]); 
+//         let tablero = document.createElement('div');
+//         tablero.setAttribute('class', 'tablero');
+//         tablero.setAttribute('id', 'tabla-p'+j)
+//         for (let i=0; i<=filas; i++)
+//         {
+//             let header = document.createElement('div');
+//             header.setAttribute('class', 'position table-head '+i);
+//             if (i != 0) header.innerText = i;
+//             tablero.appendChild(header);
+//             for (let k=1; k<=columnas; k++)
+//             {
+//                 if (i == 0)
+//                 {
+//                     let celda = document.createElement('div');
+//                     celda.setAttribute('class', 'position table-head '+abecedario[k]+i);
+//                     celda.innerText = abecedario[k];
+//                     tablero.appendChild(celda);
+//                 }
+//                 else
+//                 {
+//                     let celda = document.createElement('div');
+//                     celda.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                     if (celda.id==='p'+j+'-C1')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-1 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-D1')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-destructor tile-2 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-C3')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-1 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-D3')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-2 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-E3')
+//                     {
+//                             let celdaBarco= document.createElement('div');
+//                             celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-3 horizontal');
+//                             celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                             tablero.appendChild(celdaBarco);
+//                             if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-F3')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-4 horizontal');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-G3')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-portaaviones tile-5 horizontal');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-B5')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-1 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-B6')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-2 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-B7')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-submarino tile-3 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-I5')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-1 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-I6')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-2 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-I7')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-crucero tile-3 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-F6')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-1 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-F7')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-2 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
 
-                    }
-                    else if (celda.id==='p'+j+'-F8')
-                    {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-3 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                    }
-                    else if (celda.id==='p'+j+'-F9')
-                        {
-                                let celdaBarco= document.createElement('div');
-                                celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-4 vertical');
-                                celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                                tablero.appendChild(celdaBarco);
-                                if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
-                        }
-                    else
-                    {
-                        celda.setAttribute('class', 'position table-cell');
-                        tablero.appendChild(celda);
-                    }
-                }
-            }
-        }
+//                     }
+//                     else if (celda.id==='p'+j+'-F8')
+//                     {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-3 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                     }
+//                     else if (celda.id==='p'+j+'-F9')
+//                         {
+//                                 let celdaBarco= document.createElement('div');
+//                                 celdaBarco.setAttribute('class', 'position table-cell barco barco-acorazado tile-4 vertical');
+//                                 celdaBarco.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                                 tablero.appendChild(celdaBarco);
+//                                 if (j!=jugadorActual) celdaBarco.style.backgroundImage='none';
+//                         }
+//                     else
+//                     {
+//                         celda.setAttribute('class', 'position table-cell');
+//                         tablero.appendChild(celda);
+//                     }
+//                 }
+//             }
+//         }
         
-        let section = document.getElementById(tableros);
-        let titulo= document.createElement('h2');
-        if (j==jugadorActual)
-            titulo.innerText = 'Tu tablero ('+localStorage.getItem('nombreJugador')+')';
-        else
-            titulo.innerText = listaJugadores[j-1];
-        titulo.setAttribute('class','jugador');
-        titulo.setAttribute('id','p'+j);
-        section.prepend(tableroJuego);
-        tableroJuego.appendChild(titulo);
-        tableroJuego.appendChild(tablero);
-    }
-}
+//         let section = document.getElementById(tableros);
+//         let titulo= document.createElement('h2');
+//         if (j==jugadorActual)
+//             titulo.innerText = 'Tu tablero ('+localStorage.getItem('nombreJugador')+')';
+//         else
+//             titulo.innerText = listaJugadores[j-1];
+//         titulo.setAttribute('class','jugador');
+//         titulo.setAttribute('id','p'+j);
+//         section.prepend(tableroJuego);
+//         tableroJuego.appendChild(titulo);
+//         tableroJuego.appendChild(tablero);
+//     }
+// }
 
 function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
     let titulo= document.getElementById('etapa');
@@ -585,135 +594,165 @@ function eliminarTablas(playerOut){
 
 
 
-// function crearTableroPartida(jugadores, tableros, listaJugadores) {
-//     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
-//     let barcos = []; // Array para guardar los barcos del jugador
+function crearTableroPartida(jugadores, tableros, listaJugadores) {
+    const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
+    barcos = []; // Reiniciar el array de barcos al crear un nuevo tablero
+    cantidadBarcos = { // Reiniciar el contador de barcos al crear un nuevo tablero
+        portaaviones: 1,
+        acorazado: 1,
+        crucero: 1,
+        submarino: 1,
+        destructor: 1
+    };
 
-//     for (let j = 1; j <= jugadores; j++) {
-//         let tableroJuego = document.createElement('div');
-//         tableroJuego.setAttribute('class', 'tablero-juego');
-//         tableroJuego.setAttribute('id', listaJugadores[j - 1]);
-//         let tablero = document.createElement('div');
-//         tablero.setAttribute('class', 'tablero');
-//         tablero.setAttribute('id', 'tabla-p' + j);
+    for (let j = 1; j <= jugadores; j++) {
+        let tableroJuego = document.createElement('div');
+        tableroJuego.setAttribute('class', 'tablero-juego');
+        tableroJuego.setAttribute('id', listaJugadores[j - 1]);
+        let tablero = document.createElement('div');
+        tablero.setAttribute('class', 'tablero');
+        tablero.setAttribute('id', 'tabla-p' + j);
 
-//         for (let i = 0; i <= filas; i++) {
-//             let header = document.createElement('div');
-//             header.setAttribute('class', 'position table-head ' + i);
-//             if (i != 0) header.innerText = i;
-//             tablero.appendChild(header);
+        for (let i = 0; i <= filas; i++) {
+            let header = document.createElement('div');
+            header.setAttribute('class', 'position table-head ' + i);
+            if (i != 0) header.innerText = i;
+            tablero.appendChild(header);
 
-//             for (let k = 1; k <= columnas; k++) {
-//                 if (i == 0) {
-//                     let celda = document.createElement('div');
-//                     celda.setAttribute('class', 'position table-head ' + abecedario[k] + i);
-//                     celda.innerText = abecedario[k];
-//                     tablero.appendChild(celda);
-//                 } else {
-//                     let celda = document.createElement('div');
-//                     celda.setAttribute('class', 'position table-cell');
-//                     celda.setAttribute('id', 'p' + j + '-' + abecedario[k] + i);
+            for (let k = 1; k <= columnas; k++) {
+                if (i == 0) {
+                    let celda = document.createElement('div');
+                    celda.setAttribute('class', 'position table-head ' + abecedario[k] + i);
+                    celda.innerText = abecedario[k];
+                    tablero.appendChild(celda);
+                } else {
+                    let celda = document.createElement('div');
+                    celda.setAttribute('class', 'position table-cell');
+                    celda.setAttribute('id', 'p' + j + '-' + abecedario[k] + i);
 
-//                     // Evento de clic para colocar barcos
-//                     celda.addEventListener('click', (event) => {
-//                         let celdaClicada = event.target;
-//                         let idCelda = celdaClicada.id;
+                    let botonConfirmar = document.getElementById('confirmar-posiciones-barco');
+                    botonConfirmar.disabled = true;
 
-//                         // Obtener tipo de barco y orientación (debes tener selectores en tu HTML)
-//                         let tipoBarco = document.getElementById('selector-barco').value;
-//                         let orientacion = document.getElementById('selector-orientacion').value;
+                    celda.addEventListener('click', (event) => {
+                        let celdaClicada = event.target;
+                        let idCelda = celdaClicada.id;
 
-//                         if (colocarBarco(idCelda, tipoBarco, orientacion, barcos)) { // Pasamos barcos como argumento
-//                             actualizarTablero(barcos, tablero); // Pasamos barcos y tablero
-//                         } else {
-//                             alert("No se puede colocar el barco aquí.");
-//                         }
-//                     });
+                        let tipoBarco = document.getElementById('selector-barco').value;
+                        let orientacion = document.getElementById('selector-orientacion').value;
 
-//                     tablero.appendChild(celda);
-//                 }
-//             }
-//         }
-//         tableroJuego.appendChild(tablero);
-//         tableros.appendChild(tableroJuego);
-//     }
-//     actualizarTablero(barcos, tableros); // Actualiza el tablero inicialmente
-// }
+                        if (tipoBarco === "" || orientacion === "") {
+                            alert("Debes seleccionar un tipo de barco y su orientación.");
+                            return;
+                        }
 
-// function colocarBarco(idCelda, tipoBarco, orientacion, barcos) {
-//   let longitudBarco;
-//   switch (tipoBarco) {
-//     case "portaaviones": longitudBarco = 5; break;
-//     case "acorazado": longitudBarco = 4; break;
-//     case "crucero":
-//     case "submarino": longitudBarco = 3; break;
-//     case "destructor": longitudBarco = 2; break;
-//     default: return false; // Tipo de barco inválido
-//   }
+                        if (cantidadBarcos[tipoBarco] <= 0) {
+                            alert("Ya has colocado todos los barcos de tipo " + tipoBarco);
+                            return;
+                        }
 
-//   let posiciones = calcularPosiciones(idCelda, longitudBarco, orientacion);
+                        if (colocarBarco(idCelda, tipoBarco, orientacion, barcos)) {
+                            cantidadBarcos[tipoBarco]--;
+                            actualizarTablero(barcos, tableros);
+                            habilitarBotonConfirmar(botonConfirmar);
+                        } else {
+                            alert("No se puede colocar el barco aquí.");
+                        }
+                    });
 
-//   // Validar si las posiciones son válidas (dentro del tablero y sin superposiciones)
-//   if (!validarPosiciones(posiciones, barcos)) { // Pasamos barcos como argumento
-//     return false;
-//   }
+                    tablero.appendChild(celda);
+                }
+            }
+        }
+        tableroJuego.appendChild(tablero);
+        tableros.appendChild(tableroJuego);
+    }
+    actualizarTablero(barcos, tableros);
+}
 
-//   // Si todo está bien, agregar el barco al array
-//   barcos.push({
-//     tipo: tipoBarco,
-//     orientacion: orientacion,
-//     posiciones: posiciones,
-//     hundido: false
-//   });
-//   return true;
-// }
+function colocarBarco(idCelda, tipoBarco, orientacion, barcos) {
+    let longitudBarco;
+    switch (tipoBarco) {
+        case "portaaviones": longitudBarco = 5; break;
+        case "acorazado": longitudBarco = 4; break;
+        case "crucero": longitudBarco = 3; break;
+        case "submarino": longitudBarco = 3; break;
+        case "destructor": longitudBarco = 2; break;
+        default: return false;
+    }
 
-// function calcularPosiciones(idCelda, longitud, orientacion) {
-//   let posiciones = [];
-//   let letra = idCelda.charAt(3);
-//   let numero = parseInt(idCelda.charAt(4));
+    let posiciones = calcularPosiciones(idCelda, longitudBarco, orientacion);
 
-//   for (let i = 0; i < longitud; i++) {
-//     let nuevaLetra = letra;
-//     let nuevoNumero = numero;
-//     if (orientacion === "horizontal") {
-//       nuevaLetra = String.fromCharCode(letra.charCodeAt(0) + i);
-//     } else {
-//       nuevoNumero += i;
-//     }
-//     posiciones.push('p1-' + nuevaLetra + nuevoNumero); // Asumiendo que siempre es el jugador 1
-//   }
-//   return posiciones;
-// }
+    if (!validarPosiciones(posiciones, barcos)) {
+        return false;
+    }
 
-// function validarPosiciones(posiciones, barcos) {
-//   for (const posicion of posiciones) {
-//       let letra = posicion.charAt(3);
-//       let numero = parseInt(posicion.charAt(4));
-//     if (numero < 1 || numero > filas || letra.charCodeAt(0) < 'A'.charCodeAt(0) || letra.charCodeAt(0) > 'J'.charCodeAt(0)) {
-//         return false;
-//     }
-//     if (barcos.some(barco => barco.posiciones.includes(posicion))) {
-//       return false; // Superposición con otro barco
-//     }
-//   }
-//   return true;
-// }
+    barcos.push({
+        tipo: tipoBarco,
+        orientacion: orientacion,
+        posiciones: posiciones,
+        hundido: false
+    });
+    return true;
+}
 
-// function actualizarTablero(barcos, tableros) {
-//     let tablerosArray = tableros.children;
-//     for (const tablero of tablerosArray) {
-//         let celdas = tablero.querySelectorAll('.tablero .table-cell');
-//         celdas.forEach(celda => {
-//             celda.classList.remove('barco-portaaviones', 'barco-acorazado', 'barco-crucero', 'barco-submarino', 'barco-destructor','horizontal','vertical');
-//         });
-//         for (const barco of barcos) {
-//             for (const posicion of barco.posiciones) {
-//                 let celda = tablero.querySelector('#'+posicion);
-//                 if (celda) {
-//                     celda.classList.add('barco-' + barco.tipo, barco.orientacion);
-//                 }
-//             }
-//         }
-//     }
-// }
+function calcularPosiciones(idCelda, longitud, orientacion) {
+    let posiciones = [];
+    let letra = idCelda.charAt(3);
+    let numero = parseInt(idCelda.charAt(4));
+
+    for (let i = 0; i < longitud; i++) {
+        let nuevaLetra = letra;
+        let nuevoNumero = numero;
+        if (orientacion === "horizontal") {
+            nuevaLetra = String.fromCharCode(letra.charCodeAt(0) + i);
+        } else {
+            nuevoNumero += i;
+        }
+        posiciones.push('p1-' + nuevaLetra + nuevoNumero);
+    }
+    return posiciones;
+}
+
+function validarPosiciones(posiciones, barcos) {
+    for (const posicion of posiciones) {
+        let letra = posicion.charAt(3);
+        let numero = parseInt(posicion.charAt(4));
+        if (numero < 1 || numero > filas || letra.charCodeAt(0) < 'A'.charCodeAt(0) || letra.charCodeAt(0) > 'J'.charCodeAt(0)) {
+            return false;
+        }
+        if (barcos.some(barco => barco.posiciones.some(p => p === posicion))) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function actualizarTablero(barcos, tableros) {
+    let tablerosArray = tableros.children;
+    for (const tablero of tablerosArray) {
+        let celdas = tablero.querySelectorAll('.tablero .table-cell');
+        celdas.forEach(celda => {
+            celda.classList.remove('barco-portaaviones', 'barco-acorazado', 'barco-crucero', 'barco-submarino', 'barco-destructor', 'horizontal', 'vertical');
+        });
+
+        for (const barco of barcos) {
+            for (const posicion of barco.posiciones) {
+                let celda = tablero.querySelector('#' + posicion);
+                if (celda) {
+                    celda.classList.add('barco-' + barco.tipo, barco.orientacion);
+                }
+            }
+        }
+    }
+}
+
+function habilitarBotonConfirmar(botonConfirmar) {
+    let barcosColocados = 0;
+    for (const tipo in cantidadBarcos) {
+        barcosColocados += (1-cantidadBarcos[tipo]);
+    }
+
+    if (barcosColocados === 5) {
+        botonConfirmar.disabled = false; // Habilitar el botón
+    }
+}

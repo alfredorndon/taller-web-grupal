@@ -492,8 +492,6 @@ main {
     background-position: 0 calc(var(--position-height) * -1);
 }
 
-.barco
-
 .horizontal { 
     transform: rotate(90deg);
 }
@@ -503,6 +501,18 @@ main {
 }
 
 .barco-portaaviones.horizontal{
+    transform: rotate(-90deg);
+}
+
+.barco-acorazado.horizontal{
+    transform: rotate(-90deg);
+}
+
+.barco-submarino.horizontal{
+    transform: rotate(-90deg);
+}
+
+.barco-crucero.horizontal{
     transform: rotate(-90deg);
 }
 
