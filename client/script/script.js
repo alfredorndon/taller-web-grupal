@@ -598,13 +598,7 @@ function eliminarTablas(playerOut){
     tablaPlayerOut.remove();
 }
 
-
-
-
-
-
-
-
+// NUEVO CODIGO DE COLOCACION DE BARCOSS
 
 
 function crearTableroPartida(jugadores, tableros, listaJugadores) {
