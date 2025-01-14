@@ -505,8 +505,14 @@ function modificarAnuncio (anuncio)
 function verificarPrevioAtaque(casillaId)
 {
     let casilla = document.getElementById(casillaId);
-    let golpe = casilla.querySelector("div");
-    if (golpe || casilla.classList.contains("miss")) return false;
+    if (casilla)
+    {
+        let golpe = casilla.querySelector("div");
+        if (golpe || casilla.classList.contains("miss")) return false;
+        else
+        return true;
+    }
+    else
     return true;
 }
 
@@ -517,8 +523,9 @@ function alterarTablero(casilla, resultadoAtaque){
     {
         if (resultadoAtaque)
         {   
-            casillaAtacada.classList.add("hit");
-            casillaAtacada.innerHTML = "💥";
+            let golpe = document.createElement('div');
+            golpe.classList.add("hit");
+            casillaAtacada.appendChild(golpe);
         }
         else 
         {
@@ -590,6 +597,12 @@ function eliminarTablas(playerOut){
     if (tablaPlayerOut)
     tablaPlayerOut.remove();
 }
+
+
+
+
+
+
 
 
 
