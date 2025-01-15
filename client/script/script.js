@@ -139,7 +139,7 @@ function crearTableroPartida (jugadores, tableros, listaJugadores)
                             celda.classList.add("barco-"+barco.tipoBarco);
                             celda.classList.add("title-"+aumentado);
                             if (barco.orientacion === "horizontal")
-                                celda.classList.add("horizontal");
+                                celda.classList.add("horizontal")
                         }
                     });
                 });
@@ -421,7 +421,7 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
                             alert("No se puede colocar el barco aquí.");
                         }
                     });
-                    console.log('se imprime una celda');
+
                     tablero.appendChild(celda);
                 }
             }
@@ -449,13 +449,12 @@ function colocarBarco(idCelda, tipoBarco, orientacion, barcos) {
         return false;
     }
 
-    let barquito = {
+    barcos.push({
         tipo: tipoBarco,
         orientacion: orientacion,
         posiciones: posiciones,
-    };
-
-    barcos = barcos.concat([barquito]);
+        hundido: false
+    });
     return true;
 }
 
@@ -473,7 +472,7 @@ function calcularPosiciones(idCelda, longitud, orientacion) {
         } else {
             nuevoNumero = numero + i;
         }
-        posiciones.push(nuevaLetra + nuevoNumero);
+        posiciones.push('p1-' + nuevaLetra + nuevoNumero);
     }
     return posiciones;
 }
