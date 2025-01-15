@@ -72,85 +72,85 @@ function crearTablero (tableros)
     tableroJuego.appendChild(tablero);
 }
 
-function crearTableroPartida (jugadores, tableros, listaJugadores)
-{
-    const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
-    for (let j=1; j<=jugadores; j++)
-    {
-        let tableroJuego = document.createElement('div');
-        tableroJuego.setAttribute('class','tablero-juego');
-        tableroJuego.setAttribute('id', listaJugadores[j-1]); 
-        let tablero = document.createElement('div');
-        tablero.setAttribute('class', 'tablero');
-        tablero.setAttribute('id', 'tabla-p'+j)
-        for (let i=0; i<=filas; i++)
-        {
-            let header = document.createElement('div');
-            header.setAttribute('class', 'position table-head '+i);
-            if (i != 0) header.innerText = i;
-            tablero.appendChild(header);
-            for (let k=1; k<=columnas; k++)
-            {
-                if (i == 0)
-                {
-                    let celda = document.createElement('div');
-                    celda.setAttribute('class', 'position table-head '+abecedario[k]+i);
-                    celda.innerText = abecedario[k];
-                    tablero.appendChild(celda);
-                }
-                else
-                {
-                    let celda = document.createElement('div');
-                    celda.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-                    celda.setAttribute('class', 'position table-cell');
-                    tablero.appendChild(celda);
-                }
-            }
-        }
+// function crearTableroPartida (jugadores, tableros, listaJugadores)
+// {
+//     const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
+//     for (let j=1; j<=jugadores; j++)
+//     {
+//         let tableroJuego = document.createElement('div');
+//         tableroJuego.setAttribute('class','tablero-juego');
+//         tableroJuego.setAttribute('id', listaJugadores[j-1]); 
+//         let tablero = document.createElement('div');
+//         tablero.setAttribute('class', 'tablero');
+//         tablero.setAttribute('id', 'tabla-p'+j)
+//         for (let i=0; i<=filas; i++)
+//         {
+//             let header = document.createElement('div');
+//             header.setAttribute('class', 'position table-head '+i);
+//             if (i != 0) header.innerText = i;
+//             tablero.appendChild(header);
+//             for (let k=1; k<=columnas; k++)
+//             {
+//                 if (i == 0)
+//                 {
+//                     let celda = document.createElement('div');
+//                     celda.setAttribute('class', 'position table-head '+abecedario[k]+i);
+//                     celda.innerText = abecedario[k];
+//                     tablero.appendChild(celda);
+//                 }
+//                 else
+//                 {
+//                     let celda = document.createElement('div');
+//                     celda.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
+//                     celda.setAttribute('class', 'position table-cell');
+//                     tablero.appendChild(celda);
+//                 }
+//             }
+//         }
         
-        let section = document.getElementById(tableros);
-        let titulo= document.createElement('h2');
-        j==jugadorActual ? titulo.innerText = 'Tu tablero ('+localStorage.getItem('nombreJugador')+')': titulo.innerText = listaJugadores[j-1];
-        titulo.setAttribute('class','jugador');
-        titulo.setAttribute('id','p'+j);
-        let todasLasCeldas = tablero.querySelectorAll("table-cells");
-        if (barcos.length != 0 && j == jugadorActual)
-        {
-            barcos.forEach(barco =>
-            {
-                let posiciones = barco.posiciones;
-                let longitudBarco;
-                switch (barco.tipoBarco) {
-                    case "portaaviones": longitudBarco = 5; break;
-                    case "acorazado": longitudBarco = 4; break;
-                    case "crucero": longitudBarco = 3; break;
-                    case "submarino": longitudBarco = 3; break;
-                    case "destructor": longitudBarco = 2; break;
-                }
-                let aumentado = 1;
-                posiciones.forEach(posicion =>
-                {
-                    todasLasCeldas.forEach(celda =>
-                    {
-                        let pos = celda.id.split("-")[1];
-                        if (posicion === pos)
-                        {
-                            celda.classList.add("barco");
-                            celda.classList.add("barco-"+barco.tipoBarco);
-                            celda.classList.add("title-"+aumentado);
-                            if (barco.orientacion === "horizontal")
-                                celda.classList.add("horizontal")
-                        }
-                    });
-                });
-                aumentado++;
-            });
-        }
-        tableroJuego.appendChild(titulo);
-        tableroJuego.appendChild(tablero);
-        section.prepend(tableroJuego);
-    }
-}
+//         let section = document.getElementById(tableros);
+//         let titulo= document.createElement('h2');
+//         j==jugadorActual ? titulo.innerText = 'Tu tablero ('+localStorage.getItem('nombreJugador')+')': titulo.innerText = listaJugadores[j-1];
+//         titulo.setAttribute('class','jugador');
+//         titulo.setAttribute('id','p'+j);
+//         let todasLasCeldas = tablero.querySelectorAll("table-cells");
+//         if (barcos.length != 0 && j == jugadorActual)
+//         {
+//             barcos.forEach(barco =>
+//             {
+//                 let posiciones = barco.posiciones;
+//                 let longitudBarco;
+//                 switch (barco.tipoBarco) {
+//                     case "portaaviones": longitudBarco = 5; break;
+//                     case "acorazado": longitudBarco = 4; break;
+//                     case "crucero": longitudBarco = 3; break;
+//                     case "submarino": longitudBarco = 3; break;
+//                     case "destructor": longitudBarco = 2; break;
+//                 }
+//                 let aumentado = 1;
+//                 posiciones.forEach(posicion =>
+//                 {
+//                     todasLasCeldas.forEach(celda =>
+//                     {
+//                         let pos = celda.id.split("-")[1];
+//                         if (posicion === pos)
+//                         {
+//                             celda.classList.add("barco");
+//                             celda.classList.add("barco-"+barco.tipoBarco);
+//                             celda.classList.add("title-"+aumentado);
+//                             if (barco.orientacion === "horizontal")
+//                                 celda.classList.add("horizontal")
+//                         }
+//                     });
+//                 });
+//                 aumentado++;
+//             });
+//         }
+//         tableroJuego.appendChild(titulo);
+//         tableroJuego.appendChild(tablero);
+//         section.prepend(tableroJuego);
+//     }
+// }
 
 function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
     let titulo= document.getElementById('etapa');
@@ -187,8 +187,7 @@ function ocultarSeccion(id) {
 function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
-    let tablerosElement = document.getElementById('tableros-creacion');
-    let tablerosJuego= document.getElementById('tableros') // Obtener el elemento 'tableros'
+    let tablerosElement = document.getElementById('tableros-creacion'); // Obtener el elemento 'tableros'
 
     if (idNuevo==='container-tablero-barcos') {
         // Valores predeterminados para la fase de colocación
@@ -196,7 +195,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     }
 
     if (idNuevo==='container-juego') {
-        crearTableroPartida(cantidadJugadores, tablerosJuego, listaJugadores); // Usar los valores correctos
+        crearTableroPartida(cantidadJugadores, 'tableros', listaJugadores); // Usar los valores correctos
         if (cantidadJugadores!=8) {
             document.getElementById('modo-juego').innerText='Partida de '+cantidadJugadores+' Jugadores';
         } else {
