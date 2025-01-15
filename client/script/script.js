@@ -264,7 +264,7 @@ function ocultarSeccion(id) {
 function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
-    let tablerosElement = document.getElementById('tableros'); // Obtener el elemento 'tableros'
+    let tablerosElement = document.getElementById('tableros-creacion'); // Obtener el elemento 'tableros'
 
     if (idNuevo==='container-tablero-barcos') {
         // Valores predeterminados para la fase de colocación
@@ -425,6 +425,12 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
         submarino: 1,
         destructor: 1
     };
+    const botonUnion = document.getElementById('union-game');
+    const botonCreacion = document.getElementById('creacion-game');
+
+    // Deshabilitar botones al inicio
+    botonUnion.disabled = true;
+    botonCreacion.disabled = true;
 
     for (let j = 1; j <= jugadores; j++) {
         let tableroJuego = document.createElement('div');
@@ -451,9 +457,6 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
                     celda.setAttribute('class', 'position table-cell');
                     celda.setAttribute('id', 'p' + j + '-' + abecedario[k] + i);
 
-                    let botonConfirmar = document.getElementById('confirmar-posiciones-barco');
-                    botonConfirmar.disabled = true;
-
                     celda.addEventListener('click', (event) => {
                         let celdaClicada = event.target;
                         let idCelda = celdaClicada.id;
@@ -474,7 +477,7 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
                         if (colocarBarco(idCelda, tipoBarco, orientacion, barcos)) {
                             cantidadBarcos[tipoBarco]--;
                             actualizarTablero(barcos, tableros);
-                            habilitarBotonConfirmar(botonConfirmar);
+                            habilitarBotonesInicio(botonUnion, botonCreacion);
                         } else {
                             alert("No se puede colocar el barco aquí.");
                         }
@@ -567,14 +570,15 @@ function actualizarTablero(barcos, tableros) {
     }
 }
 
-function habilitarBotonConfirmar(botonConfirmar) {
+function habilitarBotonesInicio(botonUnion, botonCreacion) {
     let barcosColocados = 0;
     for (const tipo in cantidadBarcos) {
-        barcosColocados += (1-cantidadBarcos[tipo]);
+        barcosColocados += (1 - cantidadBarcos[tipo]);
     }
 
     if (barcosColocados === 5) {
-        botonConfirmar.disabled = false; // Habilitar el botón
+        botonUnion.disabled = false;
+        botonCreacion.disabled = false;
     }
 }
 
