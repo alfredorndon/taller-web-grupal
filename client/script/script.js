@@ -188,7 +188,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
     let tablerosElement = document.getElementById('tableros-creacion');
-    let tablerosJuego= document.getElementById('tableros') // Obtener el elemento 'tableros'
+    let tablerosJugar= document.getElementById('tableros') // Obtener el elemento 'tableros'
 
     if (idNuevo==='container-tablero-barcos') {
         // Valores predeterminados para la fase de colocación
@@ -196,7 +196,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     }
 
     if (idNuevo==='container-juego') {
-        crearTableroPartida(cantidadJugadores, tablerosJuego, listaJugadores); // Usar los valores correctos
+        crearTableroPartida(cantidadJugadores, tablerosJugar, listaJugadores); // Usar los valores correctos
         if (cantidadJugadores!=8) {
             document.getElementById('modo-juego').innerText='Partida de '+cantidadJugadores+' Jugadores';
         } else {
