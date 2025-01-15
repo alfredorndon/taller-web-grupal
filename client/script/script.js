@@ -195,7 +195,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
     }
 
     if (idNuevo==='container-juego') {
-        crearTableroPartida(cantidadJugadores, tablerosElement, listaJugadores); // Usar los valores correctos
+        crearTableroPartida(cantidadJugadores, 'tableros', listaJugadores); // Usar los valores correctos
         if (cantidadJugadores!=8) {
             document.getElementById('modo-juego').innerText='Partida de '+cantidadJugadores+' Jugadores';
         } else {
