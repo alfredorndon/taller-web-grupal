@@ -417,7 +417,7 @@ function eliminarTablas(playerOut){
 
 function crearTableroPartida(jugadores, tableros, listaJugadores) {
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
-    barcos = []; 
+    barcos = [];
     cantidadBarcos = {
         portaaviones: 1,
         acorazado: 1,
@@ -425,10 +425,11 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
         submarino: 1,
         destructor: 1
     };
+
+    const selectorBarco = document.getElementById('selector-barco');
     const botonUnion = document.getElementById('union-game');
     const botonCreacion = document.getElementById('creacion-game');
 
-    // Deshabilitar botones al inicio
     botonUnion.disabled = true;
     botonCreacion.disabled = true;
 
@@ -478,6 +479,12 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
                             cantidadBarcos[tipoBarco]--;
                             actualizarTablero(barcos, tableros);
                             habilitarBotonesInicio(botonUnion, botonCreacion);
+
+                            eliminarOpcionSelector(selectorBarco, tipoBarco);
+
+                            if (selectorBarco.options.length === 0) {
+                                selectorBarco.disabled = true;
+                            }
                         } else {
                             alert("No se puede colocar el barco aquí.");
                         }
@@ -491,6 +498,15 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
         tableros.appendChild(tableroJuego);
     }
     actualizarTablero(barcos, tableros);
+}
+
+function eliminarOpcionSelector(selector, tipoBarco) {
+    for (let i = 0; i < selector.options.length; i++) {
+        if (selector.options[i].value === tipoBarco) {
+            selector.remove(i);
+            break;
+        }
+    }
 }
 
 function colocarBarco(idCelda, tipoBarco, orientacion, barcos) {

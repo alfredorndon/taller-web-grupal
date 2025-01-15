@@ -115,6 +115,8 @@ button {
     display: inline-flex; 
     font-weight: normal;
     font-size: 18px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 button:hover {
