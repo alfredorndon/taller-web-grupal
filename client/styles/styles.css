@@ -300,6 +300,13 @@ main {
     flex-direction: row;
 }
 
+.barco {
+    image-rendering: -webkit-optimize-contrast; /* Para navegadores basados en WebKit (Chrome, Safari) */
+    image-rendering: optimize-contrast; /* Estándar */
+    image-rendering: crisp-edges; /* Para bordes nítidos */
+    image-rendering: pixelated; /* Si quieres un efecto pixelado */
+}
+
 .tablero {
     font-family: var(--font-family);
     position: relative;
