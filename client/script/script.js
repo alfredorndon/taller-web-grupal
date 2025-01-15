@@ -479,7 +479,7 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
                             alert("No se puede colocar el barco aquí.");
                         }
                     });
-
+                    console.log('se imprime una celda');
                     tablero.appendChild(celda);
                 }
             }
