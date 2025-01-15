@@ -264,7 +264,7 @@ function ocultarSeccion(id) {
 function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
-    let tablerosElement = document.getElementById('tableros'); // Obtener el elemento 'tableros'
+    let tablerosElement = document.getElementById('tableros-creacion'); // Obtener el elemento 'tableros'
 
     if (idNuevo==='container-tablero-barcos') {
         // Valores predeterminados para la fase de colocación
@@ -415,9 +415,11 @@ function eliminarTablas(playerOut){
 
 // NUEVO CODIGO DE COLOCACION DE BARCOS
 
+let estadoInicialSelector = []; // Variable global para guardar el estado inicial
+
 function crearTableroPartida(jugadores, tableros, listaJugadores) {
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
-    barcos = []; 
+    barcos = [];
     cantidadBarcos = {
         portaaviones: 1,
         acorazado: 1,
@@ -425,6 +427,28 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
         submarino: 1,
         destructor: 1
     };
+
+    const selectorBarco = document.getElementById('selector-barco');
+    const botonUnion = document.getElementById('union-game');
+    const botonCreacion = document.getElementById('creacion-game');
+
+    botonUnion.disabled = true;
+    botonCreacion.disabled = true;
+
+    if (estadoInicialSelector.length === 0) {
+        for (let i = 0; i < selectorBarco.options.length; i++) {
+            estadoInicialSelector.push(selectorBarco.options[i].value);
+        }
+    }
+
+    selectorBarco.innerHTML = '';
+    estadoInicialSelector.forEach(opcion => {
+        const optionElement = document.createElement('option');
+        optionElement.value = opcion;
+        optionElement.text = opcion.charAt(0).toUpperCase() + opcion.slice(1);
+        selectorBarco.appendChild(optionElement);
+    });
+    selectorBarco.disabled = false;
 
     for (let j = 1; j <= jugadores; j++) {
         let tableroJuego = document.createElement('div');
@@ -451,9 +475,6 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
                     celda.setAttribute('class', 'position table-cell');
                     celda.setAttribute('id', 'p' + j + '-' + abecedario[k] + i);
 
-                    let botonConfirmar = document.getElementById('confirmar-posiciones-barco');
-                    botonConfirmar.disabled = true;
-
                     celda.addEventListener('click', (event) => {
                         let celdaClicada = event.target;
                         let idCelda = celdaClicada.id;
@@ -474,7 +495,13 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
                         if (colocarBarco(idCelda, tipoBarco, orientacion, barcos)) {
                             cantidadBarcos[tipoBarco]--;
                             actualizarTablero(barcos, tableros);
-                            habilitarBotonConfirmar(botonConfirmar);
+                            habilitarBotonesInicio(botonUnion, botonCreacion);
+
+                            eliminarOpcionSelector(selectorBarco, tipoBarco);
+
+                            if (selectorBarco.options.length === 0) {
+                                selectorBarco.disabled = true;
+                            }
                         } else {
                             alert("No se puede colocar el barco aquí.");
                         }
@@ -524,10 +551,11 @@ function calcularPosiciones(idCelda, longitud, orientacion) {
     for (let i = 0; i < longitud; i++) {
         let nuevaLetra = letra;
         let nuevoNumero = numero;
+
         if (orientacion === "horizontal") {
             nuevaLetra = String.fromCharCode(letra.charCodeAt(0) + i);
         } else {
-            nuevoNumero += i;
+            nuevoNumero = numero + i;
         }
         posiciones.push('p1-' + nuevaLetra + nuevoNumero);
     }
@@ -538,9 +566,11 @@ function validarPosiciones(posiciones, barcos) {
     for (const posicion of posiciones) {
         let letra = posicion.charAt(3);
         let numero = parseInt(posicion.charAt(4));
-        if (numero < 1 || numero > filas || letra.charCodeAt(0) < 'A'.charCodeAt(0) || letra.charCodeAt(0) > 'J'.charCodeAt(0)) {
+
+        if (numero < 1 || numero > filas || letra.charCodeAt(0) < 'A'.charCodeAt(0) || letra.charCodeAt(0) > 'A'.charCodeAt(0) + columnas - 1) {
             return false;
         }
+
         if (barcos.some(barco => barco.posiciones.some(p => p === posicion))) {
             return false;
         }
@@ -554,27 +584,44 @@ function actualizarTablero(barcos, tableros) {
         let celdas = tablero.querySelectorAll('.tablero .table-cell');
         celdas.forEach(celda => {
             celda.classList.remove('barco-portaaviones', 'barco-acorazado', 'barco-crucero', 'barco-submarino', 'barco-destructor', 'horizontal', 'vertical');
+            while (celda.firstChild) {
+                celda.removeChild(celda.firstChild);
+            }
         });
 
         for (const barco of barcos) {
-            for (const posicion of barco.posiciones) {
+            for (let i = 0; i < barco.posiciones.length; i++) {
+                const posicion = barco.posiciones[i];
                 let celda = tablero.querySelector('#' + posicion);
                 if (celda) {
-                    celda.classList.add('barco-' + barco.tipo, barco.orientacion);
+                    let celdaBarco = document.createElement('div');
+                    celdaBarco.setAttribute('class', 'position table-cell barco barco-' + barco.tipo + ' tile-' + (i + 1) + ' ' + barco.orientacion);
+                    celdaBarco.setAttribute('id', posicion);
+                    celda.appendChild(celdaBarco);
                 }
             }
         }
     }
 }
 
-function habilitarBotonConfirmar(botonConfirmar) {
+function eliminarOpcionSelector(selector, tipoBarco) {
+    for (let i = 0; i < selector.options.length; i++) {
+        if (selector.options[i].value === tipoBarco) {
+            selector.remove(i);
+            break;
+        }
+    }
+}
+
+function habilitarBotonesInicio(botonUnion, botonCreacion) {
     let barcosColocados = 0;
     for (const tipo in cantidadBarcos) {
-        barcosColocados += (1-cantidadBarcos[tipo]);
+        barcosColocados += (1 - cantidadBarcos[tipo]);
     }
 
     if (barcosColocados === 5) {
-        botonConfirmar.disabled = false; // Habilitar el botón
+        botonUnion.disabled = false;
+        botonCreacion.disabled = false;
     }
 }
 
