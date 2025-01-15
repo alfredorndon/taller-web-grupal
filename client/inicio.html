@@ -572,16 +572,16 @@
             }))
         })
         document.getElementById('boton-volver').addEventListener('click', function (event) {
-            cargarNuevaSeccion('container-inicio', 'container-tablero-barcos');
+            location.reload();
         })
 
         document.getElementById('boton-salir').addEventListener('click', function (event) {
             ws.send(JSON.stringify({ type: 'leave-party', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador') }));
-            cargarNuevaSeccion('container-inicio', 'container-juego');
+            location.reload();
         })
         document.getElementById('boton-salir-lobby').addEventListener('click', function (event) {
             ws.send(JSON.stringify({ type: 'leave-lobby', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador') }));
-            cargarNuevaSeccion('container-inicio', 'container-lobby');
+            location.reload();
         })
 
         document.getElementById('union-game').addEventListener('click', function () {
