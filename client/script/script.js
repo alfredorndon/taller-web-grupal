@@ -316,7 +316,7 @@ function verificarGameOver ()
     let todosLosHits = tabla.querySelectorAll('.hit');
     if (todosLosHits.length == 17)
     {
-        ws.send(JSON.stringify({ type: "player-defeated", gameId: localStorage.getItem("partidaActiva"), playerName: localStorage.getItem("nombreJugador")}));
+        ws.send(JSON.stringify({ type: "player-defeat", gameId: localStorage.getItem("partidaActiva"), playerName: localStorage.getItem("nombreJugador")}));
         return true;
     }
     return false;
