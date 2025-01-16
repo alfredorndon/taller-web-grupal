@@ -258,8 +258,7 @@ function verificarPrevioAtaque(casillaId)
 function alterarTablero(casilla, resultadoAtaque)
 {
     let casillaAtacada= document.getElementById(casilla);
-    let barcoAtacado = casillaAtacada.querySelectorAll(".barco");
-    let atacado = barcoAtacado.length > 0 ? true : false;
+    let barcoAtacado = casillaAtacada.querySelector(".barco");
     if (casillaAtacada)
     {
         if (resultadoAtaque)
@@ -267,7 +266,7 @@ function alterarTablero(casilla, resultadoAtaque)
             console.log('estoy marcando como atacada la casilla:'+casilla);
             let golpe = document.createElement("div");
             golpe.classList.add("hit");
-            atacado === true ? barcoAtacado[0].appendChild("golpe") : casillaAtacada.appendChild(golpe);
+            barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
         }
         else 
         {
