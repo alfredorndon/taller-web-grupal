@@ -266,7 +266,7 @@ function alterarTablero(casilla, resultadoAtaque)
             console.log('estoy marcando como atacada la casilla:'+casilla);
             let golpe = document.createElement("div");
             golpe.classList.add("hit");
-            barcoAtacado ? barcoAtacado.appendChild("golpe") : casillaAtacada.appendChild(golpe);
+            barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
         }
         else 
         {
