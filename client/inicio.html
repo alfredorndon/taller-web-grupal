@@ -543,8 +543,8 @@
                     case 'attack-done':
                         {
                             console.log(mensaje);
-                            verificarGamerOver();
                             if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
+                            verificarGamerOver();
                             modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                             asignarClicks(mensaje.gamePlayers, mensaje.turno);
                         }
