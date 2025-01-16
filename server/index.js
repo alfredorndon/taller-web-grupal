@@ -283,8 +283,15 @@ function handlePlayerDefeat(ws, gameId, playerName) {
     const game= games[gameId];
     game.players = game.players.filter((player) => player.ws !== ws);
     const gamePlayers = game.players.map(player => player.name);
+    if (game.players.length==1)
+    {
+        game.players.forEach((player) =>
+            sendMessage(player.ws, { type: 'victory', gameId, name:game.players[0].name, gamePlayers: gamePlayers}),
+        );
+    }
+    else
     game.players.forEach((player) =>
-        sendMessage(player.ws, { type: 'player-defeated', gameId, name:playerName, gamePlayers: gamePlayers}),
+        sendMessage(player.ws, { type: 'player-defeat', gameId, name:playerName, gamePlayers: gamePlayers}),
     );
 }
 /**

@@ -561,6 +561,12 @@
                             asignarClicks(mensaje.gamePlayers, mensaje.turno);
                         }
                         break;
+                    case 'victory':
+                        {
+                            alert ('felicidades, has ganado la partida');
+                            location.reload();
+                        }
+                        break
                     default: {
                         alert('Ha ocurrido un error en el servidor.');
                         event.preventDefault();
