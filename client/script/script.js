@@ -255,24 +255,29 @@ function verificarPrevioAtaque(casillaId)
     return true;
 }
 
-function alterarTablero(casilla, resultadoAtaque){
-
+function alterarTablero(casilla, resultadoAtaque)
+{
     let casillaAtacada= document.getElementById(casilla);
-    if (casillaAtacada)
+    let atacado = casillaAtacada.querySelectorAll("barco") ? true : false;
+    if (atacado)
     {
-        if (resultadoAtaque)
-        {   
-            console.log('estoy marcando como atacada la casilla:'+casilla);
-            let golpe = document.createElement('div');
-            golpe.classList.add("hit");
-            casillaAtacada.appendChild(golpe);
-        }
-        else 
+        if (casillaAtacada)
         {
-            casillaAtacada.classList.add('miss');
-            casillaAtacada.innerHTML = "❌";
+            if (resultadoAtaque)
+            {   
+                let barcoAtacado = casillaAtacada.querySelectorAll("barco");
+                console.log('estoy marcando como atacada la casilla:'+casilla);
+                let golpe = document.createElement("div");
+                golpe.classList.add("hit");
+                barcoAtacado.appendChild(golpe);
+            }
+            else 
+            {
+                casillaAtacada.classList.add('miss');
+                casillaAtacada.innerHTML = "❌";
+            }
         }
-    }
+    }   
 }
 
 function verificarAtaque(casilla){
