@@ -192,7 +192,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores 
 
     if (idNuevo==='container-tablero-barcos') {
         // Valores predeterminados para la fase de colocación
-        crearTableroPartida(1, tablerosElement, [localStorage.getItem('nombreJugador')]); // Un solo jugador y su nombre
+        crearTableroCreacion(1, tablerosElement, [localStorage.getItem('nombreJugador')]); // Un solo jugador y su nombre
     }
 
     if (idNuevo==='container-juego') {
@@ -341,7 +341,7 @@ function eliminarTablas(playerOut){
 
 let estadoInicialSelector = []; // Variable global para guardar el estado inicial
 
-function crearTableroPartida(jugadores, tableros, listaJugadores) {
+function crearTableroCreacion(jugadores, tableros, listaJugadores) {
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
 
     const selectorBarco = document.getElementById('selector-barco');
@@ -410,7 +410,7 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
 
                         if (colocarBarco(idCelda, tipoBarco, orientacion, barcos)) {
                             cantidadBarcos[tipoBarco]--;
-                            actualizarTablero(barcos, tableros);
+                            actualizarTablero(barcos, tableros, 1);
                             habilitarBotonesInicio(botonUnion, botonCreacion);
 
                             eliminarOpcionSelector(selectorBarco, tipoBarco);
@@ -430,8 +430,69 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
         tableroJuego.appendChild(tablero);
         tableros.appendChild(tableroJuego);
     }
-    actualizarTablero(barcos, tableros);
+    actualizarTablero(barcos, tableros, jugadorActual);
 }
+
+
+function crearTableroPartida(jugadores, tableros, listaJugadores) {
+    const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
+
+    const selectorBarco = document.getElementById('selector-barco');
+    const botonUnion = document.getElementById('union-game');
+    const botonCreacion = document.getElementById('creacion-game');
+
+    botonUnion.disabled = true;
+    botonCreacion.disabled = true;
+
+    if (estadoInicialSelector.length === 0) {
+        for (let i = 0; i < selectorBarco.options.length; i++) {
+            estadoInicialSelector.push(selectorBarco.options[i].value);
+        }
+    }
+
+    selectorBarco.innerHTML = '';
+    estadoInicialSelector.forEach(opcion => {
+        const optionElement = document.createElement('option');
+        optionElement.value = opcion;
+        optionElement.text = opcion.charAt(0).toUpperCase() + opcion.slice(1);
+        selectorBarco.appendChild(optionElement);
+    });
+    selectorBarco.disabled = false;
+
+    for (let j = 1; j <= jugadores; j++) {
+        let tableroJuego = document.createElement('div');
+        tableroJuego.setAttribute('class', 'tablero-juego');
+        tableroJuego.setAttribute('id', listaJugadores[j - 1]);
+        let tablero = document.createElement('div');
+        tablero.setAttribute('class', 'tablero');
+        tablero.setAttribute('id', 'tabla-p' + j);
+
+        for (let i = 0; i <= filas; i++) {
+            let header = document.createElement('div');
+            header.setAttribute('class', 'position table-head ' + i);
+            if (i != 0) header.innerText = i;
+            tablero.appendChild(header);
+
+            for (let k = 1; k <= columnas; k++) {
+                if (i == 0) {
+                    let celda = document.createElement('div');
+                    celda.setAttribute('class', 'position table-head ' + abecedario[k] + i);
+                    celda.innerText = abecedario[k];
+                    tablero.appendChild(celda);
+                } else {
+                    let celda = document.createElement('div');
+                    celda.setAttribute('class', 'position table-cell');
+                    celda.setAttribute('id', 'p' + j + '-' + abecedario[k] + i);
+                    tablero.appendChild(celda);
+                }
+            }
+        }
+        tableroJuego.appendChild(tablero);
+        tableros.appendChild(tableroJuego);
+    }
+    actualizarTablero(barcos, tableros, jugadorActual);
+}
+
 
 function colocarBarco(idCelda, tipoBarco, orientacion, barcos) {
     let longitudBarco;
@@ -473,7 +534,7 @@ function calcularPosiciones(idCelda, longitud, orientacion) {
         } else {
             nuevoNumero = numero + i;
         }
-        posiciones.push('p1-' + nuevaLetra + nuevoNumero);
+        posiciones.push(nuevaLetra + nuevoNumero);
     }
     return posiciones;
 }
@@ -494,7 +555,7 @@ function validarPosiciones(posiciones, barcos) {
     return true;
 }
 
-function actualizarTablero(barcos, tableros) {
+function actualizarTablero(barcos, tableros, jugadorActual) {
     let tablerosArray = tableros.children;
     for (const tablero of tablerosArray) {
         let celdas = tablero.querySelectorAll('.tablero .table-cell');
@@ -508,7 +569,7 @@ function actualizarTablero(barcos, tableros) {
         for (const barco of barcos) {
             for (let i = 0; i < barco.posiciones.length; i++) {
                 const posicion = barco.posiciones[i];
-                let celda = tablero.querySelector('#' + posicion);
+                let celda = tablero.querySelector('#p'+jugadorActual+'-' + posicion);
                 if (celda) {
                     let celdaBarco = document.createElement('div');
                     celdaBarco.setAttribute('class', 'position table-cell barco barco-' + barco.tipo + ' tile-' + (i + 1) + ' ' + barco.orientacion);
