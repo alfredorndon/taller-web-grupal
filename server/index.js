@@ -291,7 +291,7 @@ function handlePlayerDefeat(ws, gameId, playerName) {
     }
     else
     game.players.forEach((player) =>
-        sendMessage(player.ws, { type: 'player-defeat', gameId, name:playerName, gamePlayers: gamePlayers}),
+        sendMessage(player.ws, { type: 'player-defeat', gameId, name:playerName, gamePlayers: gamePlayers, turno: game.turn}),
     );
 }
 /**
