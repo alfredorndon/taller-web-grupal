@@ -504,6 +504,11 @@ function crearTableroPartida(jugadores, tableros, listaJugadores) {
                 }
             }
         }
+        let titulo= document.createElement('h2');
+        titulo.setAttribute('class','jugador');
+        titulo.setAttribute('id','p'+j);
+        j==jugadorActual ? titulo.innerText = 'Tu tablero ('+localStorage.getItem('nombreJugador')+')': titulo.innerText = listaJugadores[j-1];
+        tableroJuego.appendChild(titulo)
         tableroJuego.appendChild(tablero);
         tableros.appendChild(tableroJuego);
     }
