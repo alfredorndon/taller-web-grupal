@@ -259,25 +259,22 @@ function alterarTablero(casilla, resultadoAtaque)
 {
     let casillaAtacada= document.getElementById(casilla);
     let atacado = casillaAtacada.querySelectorAll(".barco") !==  null ? true : false;
-    if (atacado)
+    if (casillaAtacada)
     {
-        if (casillaAtacada)
-        {
-            if (resultadoAtaque)
-            {   
-                let barcoAtacado = casillaAtacada.querySelectorAll(".barco");
-                console.log('estoy marcando como atacada la casilla:'+casilla);
-                let golpe = document.createElement("div");
-                golpe.classList.add("hit");
-                barcoAtacado[0].appendChild(golpe);
-            }
-            else 
-            {
-                casillaAtacada.classList.add('miss');
-                casillaAtacada.innerHTML = "❌";
-            }
+        if (resultadoAtaque)
+        {   
+            let barcoAtacado = casillaAtacada.querySelectorAll(".barco");
+            console.log('estoy marcando como atacada la casilla:'+casilla);
+            let golpe = document.createElement("div");
+            golpe.classList.add("hit");
+            atacado ? barcoAtacado[0].appendChild("golpe") : casillaAtacada.appendChild(golpe);
         }
-    }   
+        else 
+        {
+            casillaAtacada.classList.add('miss');
+            casillaAtacada.innerHTML = "❌";
+        }
+    } 
 }
 
 function verificarAtaque(casilla){
