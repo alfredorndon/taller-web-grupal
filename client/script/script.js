@@ -246,7 +246,7 @@ function verificarPrevioAtaque(casillaId)
     let casilla = document.getElementById(casillaId);
     if (casilla)
     {
-        let golpe = casilla.querySelector("div");
+        let golpe = casilla.querySelector(".hit");
         if (golpe || casilla.classList.contains("miss")) return false;
         else
         return true;
