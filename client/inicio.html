@@ -549,6 +549,8 @@
                                 modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                                 asignarClicks(mensaje.gamePlayers, mensaje.turno);
                             }
+                            else
+                                location.reload();
                         }
                         break;
                     case 'player-defeated':
@@ -562,7 +564,6 @@
                         break;
                     case 'victory':
                         {
-                            eliminarTablas(mensaje.name);
                             alert ('felicidades, has ganado la partida');
                             location.reload();
                         }
