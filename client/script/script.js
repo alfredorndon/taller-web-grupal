@@ -541,8 +541,8 @@ function calcularPosiciones(idCelda, longitud, orientacion) {
 
 function validarPosiciones(posiciones, barcos) {
     for (const posicion of posiciones) {
-        let letra = posicion.charAt(3);
-        let numero = parseInt(posicion.charAt(4));
+        let letra = posicion.charAt(0);
+        let numero = parseInt(posicion.charAt(1));
 
         if (numero < 1 || numero > filas || letra.charCodeAt(0) < 'A'.charCodeAt(0) || letra.charCodeAt(0) > 'A'.charCodeAt(0) + columnas - 1) {
             return false;
