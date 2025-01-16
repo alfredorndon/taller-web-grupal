@@ -543,8 +543,8 @@
                     case 'attack-done':
                         {
                             console.log(mensaje);
-                            verificarGamerOver();
                             if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
+                            verificarGamerOver();
                             modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                             asignarClicks(mensaje.gamePlayers, mensaje.turno);
                         }
@@ -556,6 +556,12 @@
                             recopilarEnemigos();
                         }
                         break;
+                    case 'victory':
+                        {
+                            alert ('felicidades, has ganado la partida');
+                            location.reload();
+                        }
+                        break
                     default: {
                         alert('Ha ocurrido un error en el servidor.');
                         event.preventDefault();
