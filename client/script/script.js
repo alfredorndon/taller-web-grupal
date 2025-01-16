@@ -314,7 +314,12 @@ function verificarGameOver ()
     let tablaJugador = document.getElementById(localStorage.getItem('nombreJugador'));
     let tabla = tablaJugador.querySelector(".tablero");
     let todosLosHits = tabla.querySelectorAll('.hit');
-    if (todosLosHits.length == 17) ws.send(JSON.stringify({ type: "player-defeat", gameId: localStorage.getItem("partidaActiva"), playerName: localStorage.getItem("nombreJugador")}));
+    if (todosLosHits.length == 17)
+    {
+        ws.send(JSON.stringify({ type: "player-defeated", gameId: localStorage.getItem("partidaActiva"), playerName: localStorage.getItem("nombreJugador")}));
+        return true;
+    }
+    return false;
 }
 
 function manejarAtaque(event){
