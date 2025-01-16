@@ -258,12 +258,12 @@ function verificarPrevioAtaque(casillaId)
 function alterarTablero(casilla, resultadoAtaque)
 {
     let casillaAtacada= document.getElementById(casilla);
-    let atacado = casillaAtacada.querySelectorAll(".barco") !==  null ? true : false;
+    let barcoAtacado = casillaAtacada.querySelectorAll(".barco");
+    let atacado = barcoAtacado.length > 0 ? true : false;
     if (casillaAtacada)
     {
         if (resultadoAtaque)
         {   
-            let barcoAtacado = casillaAtacada.querySelectorAll(".barco");
             console.log('estoy marcando como atacada la casilla:'+casilla);
             let golpe = document.createElement("div");
             golpe.classList.add("hit");
