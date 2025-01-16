@@ -517,7 +517,7 @@
                     }
                         break;
                     case 'playerLeft-party': {
-                        eliminarTablas(mensaje.name, mensaje.gamePlayers);
+                        eliminarTablas(mensaje.name);
                         alert('El jugador ' + mensaje.name + ' ha abandonado la partida.');
                         recopilarEnemigos();
                     }
@@ -531,7 +531,7 @@
                         console.log(mensaje.message);
                         break;
                     case 'playerLeft': {
-                        eliminarTablas(mensaje.name, mensaje.gamePlayers);
+                        eliminarTablas(mensaje.name);
                         alterarLobby(localStorage.getItem('cantidadJugadores'), localStorage.getItem('partidaActiva'), mensaje.gamePlayers);
                         alert('El jugador ' + mensaje.name + ' ha abandonado la partida.');
                     }
@@ -546,6 +546,13 @@
                             if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
                             modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                             asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                        }
+                        break;
+                    case 'player-defeated':
+                        {
+                            eliminarTablas(mensaje.name);
+                            alert('El jugador ' + mensaje.name + ' ha sido derrotado.');
+                            recopilarEnemigos();
                         }
                         break;
                     default: {
