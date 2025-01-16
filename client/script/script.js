@@ -258,7 +258,7 @@ function verificarPrevioAtaque(casillaId)
 function alterarTablero(casilla, resultadoAtaque)
 {
     let casillaAtacada= document.getElementById(casilla);
-    let atacado = casillaAtacada.querySelectorAll("barco") ? true : false;
+    let atacado = casillaAtacada.querySelectorAll("barco") !==  null ? true : false;
     if (atacado)
     {
         if (casillaAtacada)
