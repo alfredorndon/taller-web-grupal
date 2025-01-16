@@ -309,6 +309,14 @@ function recopilarEnemigos(){
     })
 }
 
+function verificarGameOver ()
+{
+    let tablaJugador = document.getElementById(localStorage.getItem('nombreJugador'));
+    let tabla = tablaJugador.querySelector(".tablero");
+    let todosLosHits = tabla.querySelectorAll('.hit');
+    if (todosLosHits.length == 17) ws.send(JSON.stringify({ type: "player-defeat", gameId: localStorage.getItem("partidaActiva"), playerName: localStorage.getItem("nombreJugador")}));
+}
+
 function manejarAtaque(event){
     const casillaAtacada = event.target.id;
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
