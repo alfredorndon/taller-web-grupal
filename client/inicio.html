@@ -544,9 +544,12 @@
                         {
                             console.log(mensaje);
                             if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
-                            verificarGamerOver();
-                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
-                            asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                            if (!verificarGamerOver())
+                            {
+                                modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                                asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                            }
+                            
                         }
                         break;
                     case 'player-defeated':
@@ -554,6 +557,8 @@
                             eliminarTablas(mensaje.name);
                             alert('El jugador ' + mensaje.name + ' ha sido derrotado.');
                             recopilarEnemigos();
+                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                            asignarClicks(mensaje.gamePlayers, mensaje.turno);
                         }
                         break;
                     default: {
