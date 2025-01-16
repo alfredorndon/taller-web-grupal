@@ -278,7 +278,7 @@ function verificarAtaque(casilla){
     let casillaAtacada= document.getElementById(casilla);
     if (casillaAtacada)
     {
-        if (casillaAtacada.classList.contains('barco'))
+        if (casillaAtacada.querySelector('.barco'))
         {
             console.log ("Barco encontrado");
             ws.send (JSON.stringify({ type: 'player-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, hit: true}));
