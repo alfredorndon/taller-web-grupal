@@ -292,6 +292,8 @@ function handleLeaveGame(ws, gameId,playerName, puntoDeSalida) {
             }
         } else if (puntoDeSalida==='party') 
         {
+            if (game.players[game.turn].name===playerName)
+                game.turn--;
             game.players.forEach((player) =>
                 sendMessage(player.ws, { type: 'playerLeft-party', gameId, name:playerName, gamePlayers: gamePlayers, turno: game.turn}),
             );
