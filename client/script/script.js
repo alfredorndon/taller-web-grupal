@@ -391,7 +391,10 @@ function verificarGameOver ()
             return true;
         }
         else
+        {
             ws.send(JSON.stringify({ type: "player-defeat-tournament", gameId: localStorage.getItem("partidaActiva"), playerName: localStorage.getItem("nombreJugador")}));
+            return false;
+        }
     }
     return false;
 }
