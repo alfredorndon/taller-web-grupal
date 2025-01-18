@@ -598,6 +598,27 @@
             ws.send(JSON.stringify({ type: 'create', playerName: localStorage.getItem('nombreJugador') }))
         })
 
+        let contenedorBoosters = document.getElementById("boosters");
+        let boosters = contenedorBoosters.querySelectorAll("li");
+        let seleccionado = null;
+        boosters.forEach((booster) => 
+        {
+            booster.addEventListener('click', () => 
+            {
+                if (seleccionado != booster && seleccionado != null) seleccionado.classList.remove("seleccionado");
+                if (seleccionado === booster && seleccionado != null)
+                {
+                    seleccionado.classList.remove("seleccionado");
+                    seleccionado = null;
+                }
+                else
+                {
+                    booster.classList.add("seleccionado");
+                    seleccionado = booster;
+                }
+            });
+        });
+
         document.getElementById('listo').addEventListener('click', () => {
             ws.send(JSON.stringify({
                 type: 'start',
