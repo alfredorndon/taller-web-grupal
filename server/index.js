@@ -89,6 +89,10 @@ function handleMessage(ws, message) {
                 // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
             handleLeaveGame(ws, message.gameId,message.playerName,'lobby');
             break;
+        case 'leave-tournament':
+                // Para manejar el abandono de un juego, se necesita la conexión WebSocket del jugador y el ID del juego.
+            handleLeaveGame(ws, message.gameId,message.playerName,'tournament');
+            break;
         case 'getPlayers':
             getPlayers(ws,message.gameId);
             break;
@@ -311,6 +315,18 @@ function handleLeaveGame(ws, gameId,playerName, puntoDeSalida) {
             game.players.forEach((player) =>
                 sendMessage(player.ws, { type: 'playerLeft-lobby', gameId, name:playerName, gamePlayers: gamePlayers }),
             );
+        }
+        else if (puntoDeSalida==='tournament')
+        {
+            game.players.forEach((player) =>
+                sendMessage(player.ws, { type: 'playerLeft-party', gameId, name:playerName, gamePlayers: gamePlayers }),
+            );
+            if (torneo)
+            {
+                torneo.players.forEach((player) =>
+                    sendMessage(player.ws, { type: 'playerLeft-party', gameId, name:playerName, gamePlayers: gamePlayers, turno: game.turn}),
+                );
+            }
         }
         else{
             const gamePlayers = game.players.map(player => player.name);

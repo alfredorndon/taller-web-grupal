@@ -631,7 +631,11 @@
         })
 
         document.getElementById('boton-salir').addEventListener('click', function (event) {
+            const tablero= document.getElementById(localStorage.getItem('nombreJugador'));
+            if (tablero)
             ws.send(JSON.stringify({ type: 'leave-party', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador') }));
+            else
+            ws.send(JSON.stringify({ type: 'leave-tournament', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador') }));
             location.reload();
         })
         document.getElementById('boton-salir-lobby').addEventListener('click', function (event) {
