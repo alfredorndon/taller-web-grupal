@@ -95,6 +95,9 @@ function handleMessage(ws, message) {
         case 'player-defeat':
             handlePlayerDefeat(ws, message.gameId, message.playerName)
             break;
+        case 'player-defeat-tournament':
+            handlePlayerDefeatTournament(ws, message.gameId, message.playerName)
+            break;
         default:
             // Si el tipo de mensaje no es reconocido, se envía un mensaje de error al jugador.
             sendMessage(ws, { type: "error" , message: 'Mensaje desconocido'});
