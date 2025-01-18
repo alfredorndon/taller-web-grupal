@@ -316,12 +316,17 @@ function verificarGameOver ()
     let todosLosHits = tabla.querySelectorAll('.hit');
     if (todosLosHits.length == 17)
     {
-        if (localStorage.getItem('cantidadJugadores')!=5)
+        if (localStorage.getItem('cantidadJugadores')<5)
         {
             eliminarTablas (localStorage.getItem("nombreJugador"));
             alert("Has perdido :c");
             ws.send(JSON.stringify({ type: "player-defeat", gameId: localStorage.getItem("partidaActiva"), playerName: localStorage.getItem("nombreJugador")}));
             return true;
+        }
+        else
+        {
+            ws.send(JSON.stringify({ type: "player-defeat-tournament", gameId: localStorage.getItem("partidaActiva"), playerName: localStorage.getItem("nombreJugador")}));
+            return false;
         }
     }
     return false;
