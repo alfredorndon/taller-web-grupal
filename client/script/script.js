@@ -317,6 +317,7 @@ function verificarGameOver ()
     let todosLosHits = tabla.querySelectorAll('.hit');
     if (todosLosHits.length == 17)
     {
+        detenerTemporizador();
         if (localStorage.getItem('cantidadJugadores')<5)
         {
             eliminarTablas (localStorage.getItem("nombreJugador"));
@@ -337,19 +338,25 @@ function manejarAtaque(event){
     const casillaAtacada = event.target.id;
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
     if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, has perdido tu turno");
-    verificarPowerUp(casillaAtacada,jugadorAtacado);
+    else{
+        detenerTemporizador();
+        verificarPowerUp(casillaAtacada,jugadorAtacado);
+    }
 }
 
-function asignarClicks(gamePlayers, turno)
-{
-    if (gamePlayers[turno]===localStorage.getItem('nombreJugador'))
-    {
+function asignarClicks(gamePlayers, turno) {
+    if (gamePlayers[turno] === localStorage.getItem('nombreJugador')) {
+        if (localStorage.getItem('cantidadJugadores') > 4) { // Modo Torneo
+            iniciarTemporizador(() => {
+                console.log("Tiempo agotado para " + localStorage.getItem('nombreJugador'));
+                ws.send(JSON.stringify({ type: 'time-out', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem("nombreJugador") }));
+            });
+        }
         enemigos.forEach(casillaEnemiga => {
             casillaEnemiga.addEventListener('click', manejarAtaque);
         });
-    }
-    else 
-    {
+    } else {
+        detenerTemporizador();
         enemigos.forEach(casillaEnemiga => {
             casillaEnemiga.removeEventListener('click', manejarAtaque);
         });
@@ -632,4 +639,29 @@ function habilitarBotonesInicio(botonUnion, botonCreacion) {
         botonUnion.disabled = false;
         botonCreacion.disabled = false;
     }
+}
+
+// Variable global para el temporizador
+let temporizador;
+
+// Función para iniciar el temporizador
+function iniciarTemporizador(callback) {
+    let tiempoRestante = 30;
+    modificarAnuncio("Te quedan " + tiempoRestante + " segundos");
+
+    temporizador = setInterval(() => {
+        tiempoRestante--;
+        modificarAnuncio("Te quedan " + tiempoRestante + " segundos");
+
+        if (tiempoRestante < 0) {
+            clearInterval(temporizador);
+            modificarAnuncio("¡Tiempo agotado!");
+            callback();
+        }
+    }, 1000);
+}
+
+// Función para detener el temporizador
+function detenerTemporizador() {
+    clearInterval(temporizador);
 }
