@@ -252,15 +252,17 @@ function verificarPrevioAtaque(casillaId)
 
 function alterarTablero(casilla, resultadoAtaque) {
     let casillaAtacada = document.getElementById(casilla);
-    let barcoAtacado = casillaAtacada.querySelector(".barco");
     if (casillaAtacada) {
         if (resultadoAtaque) {
             puntaje += 5;
             console.log('estoy marcando como atacada la casilla:' + casilla);
             let golpe = document.createElement("div");
             golpe.classList.add("hit");
+            let barcoAtacado = casillaAtacada.querySelector(".barco");
             barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
-            verificarHundimiento(casillaAtacada.closest('.tablero').id); // Verifica si el barco se ha hundido después de un impacto
+
+            const tableroId = casillaAtacada.closest('.tablero').id;
+            verificarHundimiento(tableroId);
         } else {
             casillaAtacada.classList.add('miss');
             casillaAtacada.innerHTML = "❌";
@@ -669,21 +671,31 @@ function verificarHundimiento(tableroId) {
         return;
     }
 
+    const tableroJuego = tablero.closest('.tablero-juego'); // Obtiene el tablero-juego contenedor
+    if (!tableroJuego) {
+        console.error("Tablero juego no encontrado para el tablero:", tableroId);
+        return;
+    }
+    const nombreJugador = tableroJuego.id;
+
+
+    const tiposDeBarco = new Set();
     const barcosEnTablero = tablero.querySelectorAll('.barco'); // Selecciona todos los elementos con la clase "barco" dentro del tablero
-    const tiposDeBarco = new Set(); //Usamos un set para guardar los tipos de barco y evitar duplicados
 
     barcosEnTablero.forEach(barco => {
-        const tipoBarco = barco.classList[barco.classList.length - 2].split('-')[1]; // Extrae el tipo del barco
-        tiposDeBarco.add(tipoBarco);
+        // Obtiene el tipo de barco de forma más robusta usando una expresión regular
+        const tipoMatch = barco.className.match(/barco-(portaaviones|acorazado|crucero|submarino|destructor)/);
+        if (tipoMatch) {
+            tiposDeBarco.add(tipoMatch[1]);
+        }
     });
 
     tiposDeBarco.forEach(tipoBarco => {
         const partesBarco = tablero.querySelectorAll(`.barco-${tipoBarco}`);
         const partesHundidas = tablero.querySelectorAll(`.barco-${tipoBarco} .hit`);
-        const nombreJugador = tablero.closest('.tablero-juego').id;
-        if (partesBarco.length === partesHundidas.length && partesBarco.length > 0) {
+
+        if (partesBarco.length > 0 && partesBarco.length === partesHundidas.length) {
             alert(`¡El barco de tipo ${tipoBarco} ha sido hundido en el tablero de ${nombreJugador}!`);
         }
     });
-
 }
