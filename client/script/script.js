@@ -297,11 +297,12 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
 }
 
 function mostrarLeaderboard(listaJugadores, puntajes) {
-    for (let i = 0; i < listaJugadores.length; i++) {
-        let jugador = document.getElementById('jugador' + (i + 1));
+    for (let i = 1; i <= listaJugadores.length; i++) {
+        let jugador = document.getElementById('jugador'+ i);
         console.log(' asie me estoy sobreescribiendo');
-            jugador.innerText = listaJugadores[i] + " - " + puntajes[i];
-        console.log (listaJugadores[i] + " - " + puntajes[i]);
+            jugador.innerText = listaJugadores[i-1] + " - " + puntajes[i-1];
+            console.log (jugador.innerText);
+        console.log (listaJugadores[i-1] + " - " + puntajes[i-1]);
     }
 }
 
