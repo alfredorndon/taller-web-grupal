@@ -344,13 +344,10 @@ function manejarAtaque(event){
 
 function asignarClicks(gamePlayers, turno) {
     if (gamePlayers[turno] === localStorage.getItem('nombreJugador')) {
-        // El temporizador se inicia SIEMPRE que sea el turno del jugador
-        iniciarTemporizador(() => {
-            console.log("Tiempo agotado para " + localStorage.getItem('nombreJugador'));
-            // Ya no se envía mensaje al servidor. Simplemente se pasa el turno.
-            pasarTurno(gamePlayers); //Esta funcion se encarga de cambiar el turno.
-        });
-
+            iniciarTemporizador(() => {
+                console.log("Tiempo agotado para " + localStorage.getItem('nombreJugador'));
+                ws.send(JSON.stringify({ type: 'time-out', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem("nombreJugador") }));
+            });
         enemigos.forEach(casillaEnemiga => {
             casillaEnemiga.addEventListener('click', manejarAtaque);
         });
@@ -655,7 +652,7 @@ function iniciarTemporizador(callback) {
         if (tiempoRestante < 0) {
             clearInterval(temporizador);
             modificarAnuncio("¡Tiempo agotado!");
-            callback(); // Llamar al callback para pasar al siguiente turno
+            callback();
         }
     }, 1000);
 }
@@ -663,13 +660,6 @@ function iniciarTemporizador(callback) {
 // Función para detener el temporizador
 function detenerTemporizador() {
     clearInterval(temporizador);
-}
-
-function pasarTurno(gamePlayers){
-    let turno = gamePlayers.indexOf(localStorage.getItem('nombreJugador'));
-    turno++;
-    if (turno >= gamePlayers.length) turno = 0;
-    asignarClicks(gamePlayers, turno);
 }
 
 function verificarHundimiento(casilla) {
