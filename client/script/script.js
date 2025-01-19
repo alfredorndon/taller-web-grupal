@@ -695,7 +695,7 @@ function verificarHundimiento(casilla) {
     console.log("--- FIN verificarHundimiento ---");
 }
 
-// PRIMERA SOLUCION
+// PRIMERA SOLUCIONn
 // function verificarHundimiento(tableroId) {
 //     const tablero = document.getElementById(tableroId);
 //     if (!tablero) {
