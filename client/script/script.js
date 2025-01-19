@@ -671,31 +671,36 @@ function verificarHundimiento(tableroId) {
         return;
     }
 
-    const tableroJuego = tablero.closest('.tablero-juego'); // Obtiene el tablero-juego contenedor
+    const tableroJuego = tablero.closest('.tablero-juego');
     if (!tableroJuego) {
         console.error("Tablero juego no encontrado para el tablero:", tableroId);
         return;
     }
     const nombreJugador = tableroJuego.id;
 
-
-    const tiposDeBarco = new Set();
-    const barcosEnTablero = tablero.querySelectorAll('.barco'); // Selecciona todos los elementos con la clase "barco" dentro del tablero
-
-    barcosEnTablero.forEach(barco => {
-        // Obtiene el tipo de barco de forma más robusta usando una expresión regular
-        const tipoMatch = barco.className.match(/barco-(portaaviones|acorazado|crucero|submarino|destructor)/);
+    // Obtener todos los barcos en el tablero, agrupados por tipo
+    const barcos = {};
+    const elementosBarco = tablero.querySelectorAll('.barco');
+    elementosBarco.forEach(elementoBarco => {
+        const tipoMatch = elementoBarco.className.match(/barco-(portaaviones|acorazado|crucero|submarino|destructor)/);
         if (tipoMatch) {
-            tiposDeBarco.add(tipoMatch[1]);
+            const tipo = tipoMatch[1];
+            if (!barcos[tipo]) {
+                barcos[tipo] = [];
+            }
+            barcos[tipo].push(elementoBarco);
         }
     });
 
-    tiposDeBarco.forEach(tipoBarco => {
-        const partesBarco = tablero.querySelectorAll(`.barco-${tipoBarco}`);
-        const partesHundidas = tablero.querySelectorAll(`.barco-${tipoBarco} .hit`);
-
-        if (partesBarco.length > 0 && partesBarco.length === partesHundidas.length) {
-            alert(`¡El barco de tipo ${tipoBarco} ha sido hundido en el tablero de ${nombreJugador}!`);
-        }
-    });
+    // Verificar el estado de hundimiento para cada barco individual
+    for (const tipo in barcos) {
+        barcos[tipo].forEach(barco => {
+            const partesHundidas = barco.querySelectorAll('.hit');
+            //Subimos en el dom hasta encontrar la celda con la clase barco-tipo
+            const partesTotales = barco.closest(`.barco-${tipo}`).querySelectorAll(`.barco-${tipo}`).length;
+            if (partesTotales > 0 && partesHundidas.length === partesTotales) {
+                alert(`¡El barco de tipo ${tipo} ha sido hundido en el tablero de ${nombreJugador}!`);
+            }
+        });
+    }
 }
