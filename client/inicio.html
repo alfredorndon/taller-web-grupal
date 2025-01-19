@@ -521,6 +521,7 @@
                         eliminarTablas(mensaje.name);
                         alert('El jugador ' + mensaje.name + ' ha abandonado la partida.');
                         recopilarEnemigos();
+                        modificarEnemigos(mensaje.gamePlayers);
                         modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                         asignarClicks(mensaje.gamePlayers, mensaje.turno);
                     }

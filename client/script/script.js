@@ -276,8 +276,8 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
         document.getElementById('etapa').innerText='Leaderboard';
         ocultarSeccion('listo');
         document.getElementById('restantes').innerText='El torneo ha terminado! Felicidades al ganador: '+listaJugadores[0];
+        return;
     }
-
     if (idViejo === 'container-tablero-barcos') {
         const tablero = document.querySelector('.tablero-juego');
         if (tablero) tablero.remove();
@@ -299,11 +299,22 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
 function mostrarLeaderboard(listaJugadores, puntajes) {
     for (let i = 1; i <= listaJugadores.length; i++) {
         let jugador = document.getElementById('jugador'+ i);
-        console.log(' asie me estoy sobreescribiendo');
             jugador.innerText = listaJugadores[i-1] + " - " + puntajes[i-1];
-            console.log (jugador.innerText);
-        console.log (listaJugadores[i-1] + " - " + puntajes[i-1]);
     }
+}
+
+function modificarEnemigos(listaJugadores){
+    let enemigos = '';
+        for (let j = 0; j < listaJugadores.length; j++) {
+            if (listaJugadores[j] != localStorage.getItem('nombreJugador')) {
+                enemigos += listaJugadores[j];
+                if (j != listaJugadores.length - 1) {
+                    enemigos += ',';
+                } else {
+                    enemigos += '.';
+                }
+            }
+        }
 }
 
 function verificarPowerUp (casillaAtacada,jugadorAtacado) //Es para quien compre un powerUp para revisar cual tiene para después "prepararlo" y posteriormente enviar la solicitud al servidor
