@@ -665,44 +665,62 @@ function detenerTemporizador() {
 }
 
 function verificarHundimiento(casilla) {
+    console.log("--- INICIO verificarHundimiento ---");
+    console.log("Casilla recibida:", casilla);
+
     const casillaAtacada = document.getElementById(casilla);
     if (!casillaAtacada) {
         console.error("Casilla no encontrada:", casilla);
+        console.log("--- FIN verificarHundimiento (Casilla no encontrada) ---");
         return;
     }
 
     const tablero = casillaAtacada.closest('.tablero');
     if (!tablero) {
         console.error("Tablero no encontrado para la casilla:", casilla);
+                console.log("--- FIN verificarHundimiento (Tablero no encontrada) ---");
         return;
     }
+    console.log("Tablero verificado:", tablero.id);
 
-        const tableroJuego = tablero.closest('.tablero-juego');
+    const tableroJuego = tablero.closest('.tablero-juego');
     if (!tableroJuego) {
         console.error("Tablero juego no encontrado para el tablero:", tablero);
+        console.log("--- FIN verificarHundimiento (Tablero juego no encontrada) ---");
         return;
     }
     const nombreJugador = tableroJuego.id;
 
     for (const barco of barcos) {
-        //Verificamos que el barco pertenezca al tablero actual
-        if(barco.posiciones.some(posicion => tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`))){
+        console.log("Barco actual:", barco);
+        console.log("Pertenece al tablero:", barco.posiciones.some(posicion => tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`)));
+
+        if (barco.posiciones.some(posicion => tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`))) {
             let hits = 0;
             for (const posicion of barco.posiciones) {
                 const celda = tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`);
+                console.log("Celda verificada:", celda ? celda.id : "No encontrada", "con hit:", celda?.querySelector('.hit')? true: false);
                 if (celda && celda.querySelector('.hit')) {
                     hits++;
                 }
             }
+            console.log("Hits para el barco:", hits);
+            console.log("Longitud posiciones del barco:", barco.posiciones.length);
+            console.log("Barco hundido?:", hits === barco.posiciones.length && !barco.hundido);
+
             if (hits === barco.posiciones.length && !barco.hundido) {
                 alert(`¡El barco de tipo ${barco.tipo} ha sido hundido en el tablero de ${nombreJugador}!`);
                 barco.hundido = true;
             }
         }
     }
+    console.log("--- FIN verificarHundimiento ---");
 }
 
 function alterarTablero(casilla, resultadoAtaque) {
+    console.log("--- INICIO alterarTablero ---");
+    console.log("Casilla atacada:", casilla);
+    console.log("Resultado del ataque:", resultadoAtaque);
     let casillaAtacada = document.getElementById(casilla);
     if (casillaAtacada) {
         if (resultadoAtaque) {
@@ -712,10 +730,11 @@ function alterarTablero(casilla, resultadoAtaque) {
             golpe.classList.add("hit");
             let barcoAtacado = casillaAtacada.querySelector(".barco");
             barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
-            verificarHundimiento(casilla); //Pasamos la casilla a verificarHundimiento
+            verificarHundimiento(casilla);
         } else {
             casillaAtacada.classList.add('miss');
             casillaAtacada.innerHTML = "❌";
         }
     }
+    console.log("--- FIN alterarTablero ---");
 }
