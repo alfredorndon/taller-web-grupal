@@ -348,7 +348,7 @@ function asignarClicks(gamePlayers, turno) {
         iniciarTemporizador(() => {
             console.log("Tiempo agotado para " + localStorage.getItem('nombreJugador'));
             // Ya no se envía mensaje al servidor. Simplemente se pasa el turno.
-            pasarTurno(gamePlayers); //Esta funcion se encarga de cambiar el turno.
+            ws.send(JSON.stringify({ type: 'time-out', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem("nombreJugador") }));
         });
 
         enemigos.forEach(casillaEnemiga => {
