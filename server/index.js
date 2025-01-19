@@ -409,6 +409,7 @@ function handleTimeOut(ws, gameId,playerName)
 {
     const game=games[gameId];
     const torneo=torneos[gameId];
+    const gamePlayers = game.players.map(player => player.name);
     if (game.turn==game.players.length-1)
     game.turn=0;
     else
