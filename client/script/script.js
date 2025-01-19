@@ -271,12 +271,11 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
 
     // Código para mostrar el leaderboard al volver al lobby
     if (idNuevo === 'container-lobby' && idViejo ==='container-juego') { // Verifica que 'puntajes' exista
-        mostrarLeaderboard(listaJugadores.length, listaJugadores, puntajes);
+        mostrarLeaderboard(listaJugadores, puntajes);
         document.getElementById('titulo-lobby').innerText='';
-        document.getElementById('etapa').innerText='';
+        document.getElementById('etapa').innerText='Leaderboard';
         ocultarSeccion('listo');
         document.getElementById('restantes').innerText='El torneo ha terminado! Felicidades al ganador: '+listaJugadores[0];
-
     }
 
     if (idViejo === 'container-tablero-barcos') {
@@ -297,15 +296,10 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
         document.getElementById('titulo-leaderboard').innerText="";
 }
 
-function mostrarLeaderboard(cantidadJugadores, listaJugadores, puntajes) {
-    for (let i = 0; i < cantidadJugadores; i++) {
+function mostrarLeaderboard(listaJugadores, puntajes) {
+    for (let i = 0; i < listaJugadores.length; i++) {
         let jugador = document.getElementById('jugador' + (i + 1));
-        if(puntajes[listaJugadores[i]]) {
-            jugador.innerText = listaJugadores[i] + " - " + puntajes[listaJugadores[i]];
-        }
-        else{
-            jugador.innerText = listaJugadores[i] + " - 0";
-        }
+            jugador.innerText = listaJugadores[i] + " - " + puntajes[i];
     }
 }
 
