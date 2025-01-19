@@ -344,7 +344,7 @@ function manejarAtaque(event){
 
 function asignarClicks(gamePlayers, turno) {
     if (gamePlayers[turno] === localStorage.getItem('nombreJugador')) {
-        if (localStorage.getItem('cantidadJugadores') > 4) { // Modo Torneo
+        if (localStorage.getItem('cantidadJugadores') > 1) { // Modo Torneo
             iniciarTemporizador(() => {
                 console.log("Tiempo agotado para " + localStorage.getItem('nombreJugador'));
                 ws.send(JSON.stringify({ type: 'time-out', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem("nombreJugador") }));
