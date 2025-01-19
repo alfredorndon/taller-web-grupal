@@ -335,7 +335,7 @@ function verificarGameOver ()
 function manejarAtaque(event){
     const casillaAtacada = event.target.id;
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
-    if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, has perdido tu turno");
+    if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, ataque otra");
     else{
         detenerTemporizador();
         verificarPowerUp(casillaAtacada,jugadorAtacado);
