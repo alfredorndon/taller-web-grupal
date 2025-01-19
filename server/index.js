@@ -388,6 +388,8 @@ function handlePlayerDefeatTournament(ws, gameId, playerName) {
     }
     else
     {
+        if (game.turn=game.players.length)
+            game.turn=0;
         game.players.forEach((player) =>
             sendMessage(player.ws, { type: 'player-defeat', gameId, name:playerName, gamePlayers: gamePlayers, turno: game.turn}),
         );
