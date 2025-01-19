@@ -665,13 +665,6 @@ function detenerTemporizador() {
     clearInterval(temporizador);
 }
 
-function pasarTurno(gamePlayers){
-    let turno = gamePlayers.indexOf(localStorage.getItem('nombreJugador'));
-    turno++;
-    if (turno >= gamePlayers.length) turno = 0;
-    asignarClicks(gamePlayers, turno);
-}
-
 function verificarHundimiento(casilla) {
     console.log("--- INICIO verificarHundimiento ---");
     console.log("Casilla recibida:", casilla);
