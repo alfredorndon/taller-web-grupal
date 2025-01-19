@@ -270,10 +270,13 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
     }
 
     // Código para mostrar el leaderboard al volver al lobby
-    if (idNuevo === 'container-lobby' && idViejo=='container-juego') { // Verifica que 'puntajes' exista
+    if (idNuevo === 'container-lobby' && idViejo ==='container-juego') { // Verifica que 'puntajes' exista
         mostrarLeaderboard(listaJugadores.length, listaJugadores, puntajes);
-        document.getElementById('titulo-lobby').innerText="";
-        document.getElementById('titulo-leaderboard').innerText='Leaderboard';
+        document.getElementById('titulo-lobby').innerText='';
+        document.getElementById('etapa').innerText='';
+        ocultarSeccion('listo');
+        document.getElementById('restantes').innerText='El torneo ha terminado! Felicidades al ganador: '+listaJugadores[0];
+
     }
 
     if (idViejo === 'container-tablero-barcos') {
