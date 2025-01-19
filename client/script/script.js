@@ -135,7 +135,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
                 }
             }
         }
-        document.getElementById('encabezado-enemigo').innerText = 'Tus enemigos seran:' + enemigos;
+        document.getElementById('encabezado-enemigo').innerText = 'Tus enemigos seran: ' + enemigos;
     }
 
     // Código para mostrar el leaderboard al volver al lobby
