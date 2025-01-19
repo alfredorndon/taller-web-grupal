@@ -332,8 +332,8 @@
     <div class="main-container" id="container-lobby">
         <header>
             <div>
-                <h1 id="titulo-lobby">Lobby</h1>
-                <h1 id="titulo-leaderboard">Leaderboard</h1>
+                <h2 id="titulo-lobby">Lobby</h2>
+                <h2 id="titulo-leaderboard">Leaderboard</h2>
             </div>
             <h2 id="etapa">Octavos</h2>
         </header>
@@ -533,8 +533,10 @@
                     case 'game-ended':
                         console.log(mensaje.message);
                         break;
-                    case 'end-tournament':
+                    case 'end-tournament':{
+                        cargarNuevaSeccion('container-lobby','container-juego',localStorage.getItem('cantidadJugadores'),mensaje.gamePlayers,mensaje.points);
                         console.log(mensaje.message);
+                    }
                         break;
                     case 'playerLeft': {
                         eliminarTablas(mensaje.name);

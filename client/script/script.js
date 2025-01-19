@@ -238,7 +238,7 @@ function ocultarSeccion(id) {
 //     }
 // }
 
-function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores, puntajes = null) {
+function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores, puntajes ) {
     document.getElementById(idNuevo).style.display = "block";
     ocultarSeccion(idViejo);
     let tablerosElement = document.getElementById('tableros-creacion');
@@ -250,7 +250,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
 
     if (idNuevo === 'container-juego') {
         crearTableroPartida(cantidadJugadores, tablerosJugar, listaJugadores);
-        if (cantidadJugadores != 8) {
+        if (cantidadJugadores <=4) {
             document.getElementById('modo-juego').innerText = 'Partida de ' + cantidadJugadores + ' Jugadores';
         } else {
             document.getElementById('modo-juego').innerText = 'Modo Torneo';
@@ -270,8 +270,10 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
     }
 
     // Código para mostrar el leaderboard al volver al lobby
-    if (idNuevo === 'container-lobby' && puntajes) { // Verifica que 'puntajes' exista
-        mostrarLeaderboard(cantidadJugadores, listaJugadores, puntajes);
+    if (idNuevo === 'container-lobby' && idViejo=='container-juego') { // Verifica que 'puntajes' exista
+        mostrarLeaderboard(listaJugadores.length, listaJugadores, puntajes);
+        document.getElementById('titulo-lobby').innerText="";
+        document.getElementById('titulo-leaderboard').innerText='Leaderboard';
     }
 
     if (idViejo === 'container-tablero-barcos') {
@@ -288,6 +290,8 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
         document.getElementById('tableros').innerHTML = '';
         document.getElementById('anuncio').innerHTML = '';
     }
+    if (idNuevo==='container-lobby')
+        document.getElementById('titulo-leaderboard').innerText="";
 }
 
 function mostrarLeaderboard(cantidadJugadores, listaJugadores, puntajes) {
