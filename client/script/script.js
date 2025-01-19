@@ -291,7 +291,13 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
         document.getElementById('anuncio').innerHTML = '';
     }
     if (idNuevo==='container-lobby')
+    {
         document.getElementById('titulo-leaderboard').innerText="";
+        if (cantidadJugadores <=4) 
+            document.getElementById('etapa').innerText = 'Partida de ' + cantidadJugadores + ' Jugadores';
+        else 
+            document.getElementById('etapa').innerText = 'Modo Torneo';
+    }
 }
 
 function mostrarLeaderboard(cantidadJugadores, listaJugadores, puntajes) {
