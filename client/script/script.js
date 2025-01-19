@@ -157,7 +157,7 @@ function crearTablero (tableros)
 
 function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
     let titulo= document.getElementById('etapa');
-    if (cantidadJugadores!=8)
+    if (cantidadJugadores<=4)
         titulo.innerHTML='Modo de Juego: Partida de '+cantidadJugadores+' Jugadores </br>ID: '+gameId;
     else
         titulo.innerHTML='Modo de Juego: Torneo </br>ID: '+gameId;
@@ -291,13 +291,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
         document.getElementById('anuncio').innerHTML = '';
     }
     if (idNuevo==='container-lobby')
-    {
         document.getElementById('titulo-leaderboard').innerText="";
-        if (cantidadJugadores <=4) 
-            document.getElementById('etapa').innerText = 'Partida de ' + cantidadJugadores + ' Jugadores';
-        else 
-            document.getElementById('etapa').innerText = 'Modo Torneo';
-    }
 }
 
 function mostrarLeaderboard(cantidadJugadores, listaJugadores, puntajes) {
