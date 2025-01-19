@@ -717,14 +717,15 @@ function verificarHundimiento(casilla) {
 }
 
 
-function verificarHundimiento(){
+// function verificarHundimiento(){
 
-}
+// }
 
 function alterarTablero(casilla, resultadoAtaque) {
     console.log("--- INICIO alterarTablero ---");
     console.log("Casilla atacada:", casilla);
     console.log("Resultado del ataque:", resultadoAtaque);
+
     let casillaAtacada = document.getElementById(casilla);
     if (casillaAtacada) {
         if (resultadoAtaque) {
@@ -734,7 +735,9 @@ function alterarTablero(casilla, resultadoAtaque) {
             golpe.classList.add("hit");
             let barcoAtacado = casillaAtacada.querySelector(".barco");
             barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
-            verificarHundimiento(casilla);
+
+            verificarHundimiento(casilla); // Se llama DESPUÉS de agregar el .hit
+
         } else {
             casillaAtacada.classList.add('miss');
             casillaAtacada.innerHTML = "❌";
