@@ -717,29 +717,37 @@ function detenerTemporizador() {
 //     console.log("--- FIN verificarHundimiento ---");
 // }
 
-function verificarHundimiento(casillaId){
+function verificarHundimiento(casillaId,gamePlayers){
+    const indice= gamePlayers.indexOf(localStorage.getItem('nombreJugador'))+1;
     for (let i=0;i<barcos.length;i++)
     {
-        if (barcos[i].posiciones.includes(casillaId))
+        console.log (barcos[i].posiciones);
+        console.log(casillaId);
+        for (let j=0;j<barcos[i].posiciones.length;j++)
         {
-            for (let j=0;j<barcos[i].posiciones.length;j++)
+            if ('p'+indice+"-"+barcos[i].posiciones[j]===casillaId)
             {
-                let casilla= document.getElementById(barcos[i].posiciones[j]);
-                if (!casilla.querySelector('.hit'))
-                    return false;
+                    console.log('he entrado a verificar los barcos');
+                    for (let k=0;k<barcos[i].posiciones.length;k++)
+                    {
+                        let casilla= document.getElementById('p'+indice+"-"+barcos[i].posiciones[k]);
+                        if (!casilla.querySelector('.hit'))
+                        {
+                            console.log('he venido a decirte que no te hundieron');
+                            return false;
+                        }
+                    }
+                console.log('he entrado a mostrarte que te hundieron');
+                ws.send(JSON.stringify({ type: 'ship-destroyed', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador'), tipoBarco: barcos[i].tipo}));
+                return true;
             }
-            alert ('te han hundido el barco '+ barcos[i].tipo);
-            return true;
         }
     }
 }
 
 
-function alterarTablero(casilla, resultadoAtaque) {
+function alterarTablero(casilla, resultadoAtaque, gamePlayers) {
     console.log("--- INICIO alterarTablero ---");
-    console.log("Casilla atacada:", casilla);
-    console.log("Resultado del ataque:", resultadoAtaque);
-
     let casillaAtacada = document.getElementById(casilla);
     if (casillaAtacada) {
         if (resultadoAtaque) {
@@ -750,7 +758,7 @@ function alterarTablero(casilla, resultadoAtaque) {
             let barcoAtacado = casillaAtacada.querySelector(".barco");
             barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
 
-            verificarHundimiento(casilla); // Se llama DESPUÉS de agregar el .hit
+            verificarHundimiento(casilla,gamePlayers);
 
         } else {
             casillaAtacada.classList.add('miss');
