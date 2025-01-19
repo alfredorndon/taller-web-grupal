@@ -694,8 +694,8 @@ function verificarHundimiento(casilla) {
     for (const barco of barcos) {
                 console.log("Barco actual:", barco);
         //Verificamos que el barco pertenezca al tablero actual
-        console.log(`#${tablero.id.substring(0,6)}-${posicion}`);
         if(barco.posiciones.some(posicion => tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`))){
+            console.log(`#${tablero.id.substring(0,6)}-${posicion}`);
             let hundido = true; // Asumimos que el barco está hundido al principio
             for (const posicion of barco.posiciones) {
                 const celda = tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`);
