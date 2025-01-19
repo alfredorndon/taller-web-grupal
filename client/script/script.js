@@ -250,25 +250,25 @@ function verificarPrevioAtaque(casillaId)
     return true;
 }
 
-function alterarTablero(casilla, resultadoAtaque) {
-    let casillaAtacada = document.getElementById(casilla);
-    if (casillaAtacada) {
-        if (resultadoAtaque) {
-            puntaje += 5;
-            console.log('estoy marcando como atacada la casilla:' + casilla);
-            let golpe = document.createElement("div");
-            golpe.classList.add("hit");
-            let barcoAtacado = casillaAtacada.querySelector(".barco");
-            barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
+    // function alterarTablero(casilla, resultadoAtaque) {
+    //     let casillaAtacada = document.getElementById(casilla);
+    //     if (casillaAtacada) {
+    //         if (resultadoAtaque) {
+    //             puntaje += 5;
+    //             console.log('estoy marcando como atacada la casilla:' + casilla);
+    //             let golpe = document.createElement("div");
+    //             golpe.classList.add("hit");
+    //             let barcoAtacado = casillaAtacada.querySelector(".barco");
+    //             barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
 
-            const tableroId = casillaAtacada.closest('.tablero').id;
-            verificarHundimiento(tableroId);
-        } else {
-            casillaAtacada.classList.add('miss');
-            casillaAtacada.innerHTML = "❌";
-        }
-    }
-}
+    //             const tableroId = casillaAtacada.closest('.tablero').id;
+    //             verificarHundimiento(tableroId);
+    //         } else {
+    //             casillaAtacada.classList.add('miss');
+    //             casillaAtacada.innerHTML = "❌";
+    //         }
+    //     }
+    // }
 
 function verificarAtaque(casilla){
     let casillaAtacada= document.getElementById(casilla);
@@ -664,23 +664,29 @@ function detenerTemporizador() {
     clearInterval(temporizador);
 }
 
-function verificarHundimiento(tableroId) {
-    const tableroJuego = document.getElementById(tableroId).closest('.tablero-juego');
-    if (!tableroJuego) {
-        console.error("Tablero juego no encontrado para el tablero:", tableroId);
-        return;
-    }
-    const nombreJugador = tableroJuego.id;
-    const tablero = tableroJuego.querySelector('.tablero'); // Obtener el tablero dentro del tablero de juego
-        if (!tablero) {
-        console.error("Tablero no encontrado para el tablero juego:", tableroId);
+function verificarHundimiento(casilla) {
+    const casillaAtacada = document.getElementById(casilla);
+    if (!casillaAtacada) {
+        console.error("Casilla no encontrada:", casilla);
         return;
     }
 
-    // Iterar sobre la información de los barcos almacenada en el array 'barcos'
+    const tablero = casillaAtacada.closest('.tablero');
+    if (!tablero) {
+        console.error("Tablero no encontrado para la casilla:", casilla);
+        return;
+    }
+
+        const tableroJuego = tablero.closest('.tablero-juego');
+    if (!tableroJuego) {
+        console.error("Tablero juego no encontrado para el tablero:", tablero);
+        return;
+    }
+    const nombreJugador = tableroJuego.id;
+
     for (const barco of barcos) {
-        // Verificar si el barco pertenece al tablero actual
-        if (barco.posiciones.some(posicion => tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`))) {
+        //Verificamos que el barco pertenezca al tablero actual
+        if(barco.posiciones.some(posicion => tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`))){
             let hits = 0;
             for (const posicion of barco.posiciones) {
                 const celda = tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`);
@@ -690,8 +696,26 @@ function verificarHundimiento(tableroId) {
             }
             if (hits === barco.posiciones.length && !barco.hundido) {
                 alert(`¡El barco de tipo ${barco.tipo} ha sido hundido en el tablero de ${nombreJugador}!`);
-                barco.hundido = true; // Marcar el barco como hundido para evitar alertas repetidas
+                barco.hundido = true;
             }
+        }
+    }
+}
+
+function alterarTablero(casilla, resultadoAtaque) {
+    let casillaAtacada = document.getElementById(casilla);
+    if (casillaAtacada) {
+        if (resultadoAtaque) {
+            puntaje += 5;
+            console.log('estoy marcando como atacada la casilla:' + casilla);
+            let golpe = document.createElement("div");
+            golpe.classList.add("hit");
+            let barcoAtacado = casillaAtacada.querySelector(".barco");
+            barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
+            verificarHundimiento(casilla); //Pasamos la casilla a verificarHundimiento
+        } else {
+            casillaAtacada.classList.add('miss');
+            casillaAtacada.innerHTML = "❌";
         }
     }
 }
