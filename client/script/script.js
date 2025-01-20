@@ -14,7 +14,7 @@ let cantidadBarcos = { // Cantidad de barcos permitidos por tipo
 };
 
 let powerUpActivo = null;
-let puntaje = 10;
+let puntaje = 100;
 let tuTurno = false;
 let empCooldown=0;
 let empDuration=0;
@@ -227,13 +227,25 @@ function comprarPowerUp (seleccionado)
             {
                 if (puntaje >= 10)
                 {
+                    puntaje -= 10;
                     powerUpActivo = "mina-marina";
-                    alert ('Haz comprado el powerUp Mina Marina 💣, aparecerá una bomba en tu tablero una vez hayas terminado tu turno');
+                    alert ('Haz comprado el powerUp Mina Marina 💣, aparecerá una bomba en tu tablero una vez hayas terminado tu turno. Cuando otro jugador le de click a tu mina recibirá aleatoriamente un ataque en su tablero');
                 }
                 else
                     alert ('No tienes puntos suficientes para comprar este potenciador');
             }
             break;
+            case 'Ataque PEM 🔌 - 25 puntos':
+            {
+                if (puntaje >= 25 && empCooldown<=0)
+                {
+                    puntaje -= 25;
+                    powerUpActivo = 'pem';
+                    alert ('Haz comprado el powerUp Ataque PEM 🔌, clickea en algún rival y no haz que no pueda comprar powerUps por 3 turnos, después ataca cualquier casilla y continúa el juego');
+                }
+                else
+                    alert ('No tienes puntos suficientes para comprar este potenciador o aún está en cooldown');
+            }
             default:{
                 powerUpActivo = null;
             }
@@ -443,9 +455,9 @@ function eliminarTablas(playerOut){
 let estadoInicialSelector = []; // Variable global para guardar el estado inicial
 
 function crearTableroCreacion(jugadores, tableros, listaJugadores) {
-    puntaje = 10;
+    puntaje = 100;
     let puntajeText = document.getElementById('puntaje');
-    puntajeText.textContent = puntaje;
+    puntajeText.textContent = puntaje+' puntos';
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
 
     const selectorBarco = document.getElementById('selector-barco');
@@ -767,7 +779,7 @@ function alterarTablero(casilla, resultadoAtaque, gamePlayers, turno) {
             {
                 puntaje += 5;
                 let puntajeText = document.getElementById('puntaje');
-                puntajeText.textContent = puntaje;
+                puntajeText.textContent = puntaje+' puntos';
             }
             let golpe = document.createElement("div");
             golpe.classList.add("hit");
@@ -794,9 +806,9 @@ function verificarPEM()
     {
         empDuration--;
         if (empDuration<=0)
-        alert('el efecto del PEM ha desaparecido') ;
+            alert('el efecto del PEM ha desaparecido') ;
         else
-        alert('el efecto del PEM seguirá por '+empDuration+' turnos') ;
+            alert('el efecto del PEM seguirá por '+empDuration+' turnos') ;
     }
 }
 
