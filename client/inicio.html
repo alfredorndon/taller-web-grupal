@@ -551,10 +551,13 @@
                         let casillaPropia = mensaje.propia;
                         alterarTablero(casillaAtacada,false);
                         alterarTablero(casillaPropia,true);
-                        if (!verificarGameOver())
+                        if (!verificarGameOver() )
                         {
-                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
-                            asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                            if (mensaje.gamePlayers[mensaje.turno-1] !== localStorage.getItem('nombreJugador'))
+                            {
+                                modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                                asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                            }
                         }
                         else
                             location.reload();
