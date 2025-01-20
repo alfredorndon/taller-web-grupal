@@ -250,6 +250,8 @@ function comprarPowerUp (seleccionado)
                 powerUpActivo = null;
             }
         }
+        let puntajeText = document.getElementById('puntaje');
+        puntajeText.textContent = puntaje+' puntos';
     }
     else
         alert('No puedes comprar potenciadores si no es tu turno');
