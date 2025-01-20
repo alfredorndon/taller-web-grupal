@@ -245,7 +245,9 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
             let tablaJugador = document.getElementById(localStorage.getItem('nombreJugador'));
             let tabla = tablaJugador.querySelector('.tablero');
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
-            let borrables = tabla.querySelectorAll('.hit').concat(tabla.querySelectorAll('.miss').concat(tabla.querySelectorAll('.barco')));
+            let borrables = tabla.querySelectorAll('.hit');
+            borrables = borrables.concat(tabla.querySelectorAll('.miss'));
+            borrables = borrables.concat(tabla.querySelectorAll('.barco'));
             casillasDisponibles = casillasDisponibles.filter(elemento => !borrables.includes(elemento));
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
             let mina = document.createElement('div');
@@ -268,7 +270,8 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             let tablaJugador = document.getElementById(mensaje.gamePlayers[mensaje.turno-1]);
             let tabla = tablaJugador.querySelector('.tablero');
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
-            let borrables = tabla.querySelectorAll('.hit').concat(tabla.querySelectorAll('.miss'));
+            let borrables = tabla.querySelectorAll('.hit');
+            borrables = borrables.concat(tabla.querySelectorAll('.miss'));
             casillasDisponibles = casillasDisponibles.filter(elemento => !borrables.includes(elemento));
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
             casilla = casilla.id;
@@ -423,6 +426,8 @@ let estadoInicialSelector = []; // Variable global para guardar el estado inicia
 
 function crearTableroCreacion(jugadores, tableros, listaJugadores) {
     puntaje = 10;
+    let puntajeText = document.getElementById('puntaje');
+    puntajeText.textContent = puntaje;
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
 
     const selectorBarco = document.getElementById('selector-barco');
