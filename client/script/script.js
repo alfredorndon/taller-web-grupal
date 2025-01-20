@@ -244,7 +244,7 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
         {
             let tablaJugador = document.getElementById(localStorage.getItem('nombreJugador'));
             let tabla = tablaJugador.querySelector('.tablero');
-            let casillasDisponibles = tabla.querySelectorAll('.table-cell');
+            let casillasDisponibles = [...tabla.querySelectorAll('.table-cell')];
             casillasDisponibles.forEach(casilla =>
             {
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss') || casilla.classList.contains('barco'))
@@ -270,7 +270,7 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             casillaMina.removeChild(mina);
             let tablaJugador = mensaje.turno == 0 ? document.getElementById(mensaje.gamePlayers[mensaje.gamePlayers.length-1]):document.getElementById(mensaje.gamePlayers[mensaje.turno-1]);
             let tabla = tablaJugador.querySelector('.tablero');
-            let casillasDisponibles = tabla.querySelectorAll('.table-cell');
+            let casillasDisponibles = [...tabla.querySelectorAll('.table-cell')];
             casillasDisponibles.forEach(casilla =>
             {
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss'))
@@ -744,7 +744,8 @@ function verificarHundimiento(casillaId,gamePlayers){
 
 function alterarTablero(casilla, resultadoAtaque, gamePlayers, turno) {
     let casillaAtacada = document.getElementById(casilla);
-    let jugador = turno == 0 ? gamePlayers[gamePlayers.length-1] : gamePlayers[turno-1];
+    let jugador
+    if (turno != null) jugador = turno == 0 ? gamePlayers[gamePlayers.length-1] : gamePlayers[turno-1];
     if (casillaAtacada) {
         if (resultadoAtaque) {
             if (turno != null && jugador === localStorage.getItem('nombreJugador'))
