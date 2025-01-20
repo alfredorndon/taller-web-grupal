@@ -247,7 +247,7 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
             casillasDisponibles.forEach(casilla =>
             {
-                if (casilla.classList.contains('.hit') || casilla.classList.contains('.miss') || casilla.classList.contains('.barco'))
+                if (casilla.classList.contains('hit') || casilla.classList.contains('miss') || casilla.classList.contains('barco'))
                     casilla.remove();
             });
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
@@ -273,7 +273,7 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
             casillasDisponibles.forEach(casilla =>
             {
-                if (casilla.classList.contains('.hit') || casilla.classList.contains('.miss'))
+                if (casilla.classList.contains('hit') || casilla.classList.contains('miss'))
                     casilla.remove();
             });
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
