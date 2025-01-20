@@ -269,7 +269,7 @@ function comprarPowerUp (seleccionado)
                         });
                     }
                 });
-                if (puntaje >= 15 && hundido)
+                if (puntaje >= 15 && !hundido)
                 {
                     puntaje -= 15;
                     powerUpActivo = "sonar";
