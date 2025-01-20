@@ -508,7 +508,7 @@ function handleSonarRevealed(ws,gameId,playerName,casillaRevelada,jugadorAtacant
     const game=games[gameId];
     game.players.forEach((player) => {
         if (player.name===jugadorAtacante)
-        sendMessage(player.ws, { type: 'sonar-answere', gameId, name:playerName, casilla:casillaRevelada});
+        sendMessage(player.ws, { type: 'sonar-answer', gameId, name:playerName, casilla:casillaRevelada});
     });
 }
 /**
