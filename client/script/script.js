@@ -251,10 +251,10 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss') || casilla.classList.contains('barco'))
                 {   
                     let disponible = casilla.id;
-                    disponibles = disponibles.push(disponible);
+                    disponibles.push(disponible);
                 }
             });
-            let casilla = disponibles.getElementById(disponibles[randomizador(0, disponibles.length-1)]);
+            let casilla = disponibles.getElementById(disponibles[randomizador(0, disponibles.length-1)].id);
             let mina = document.createElement('div');
             mina.classList.add('mina-marina');
             mina.innerHTML = '💣';
@@ -281,7 +281,7 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss'))
                 {   
                     let disponible = casilla.id;
-                    disponibles = disponibles.push(disponible);
+                    disponibles.push(disponible);
                 }
             });
             let casilla = disponibles[randomizador(0, disponibles.length-1)];
