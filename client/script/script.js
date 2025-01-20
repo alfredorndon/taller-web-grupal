@@ -195,6 +195,7 @@ function randomizador (min, max)
 
 function verificarPowerUp (casillaAtacada,jugadorAtacado) //Es para quien compre un powerUp para revisar cual tiene para después 'prepararlo' y posteriormente enviar la solicitud al servidor
 {
+    console.log ('verficcando el powerUp: '+powerUpActivo);
     switch (powerUpActivo) {
         case 'mina-marina':
         {
@@ -211,6 +212,7 @@ function verificarPowerUp (casillaAtacada,jugadorAtacado) //Es para quien compre
 
 function prepararPowerUp (powerUp) //Es para quien compra el powerUp
 {
+    console.log ('Estoy preparando el powerup: '+powerUp);
     switch (powerUp) {
         case 'mina-marina':
         {
@@ -361,7 +363,6 @@ function asignarClicks(gamePlayers, turno) {
     if (gamePlayers[turno] === localStorage.getItem('nombreJugador')) {
         // El temporizador se inicia SIEMPRE que sea el turno del jugador
         iniciarTemporizador(() => {
-            console.log("Tiempo agotado para " + localStorage.getItem('nombreJugador'));
             // Ya no se envía mensaje al servidor. Simplemente se pasa el turno.
             ws.send(JSON.stringify({ type: 'time-out', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem("nombreJugador") }));
         });
@@ -380,7 +381,6 @@ function asignarClicks(gamePlayers, turno) {
 }
 
 function eliminarTablas(playerOut){
-    console.log (playerOut);
     const tablaPlayerOut= document.getElementById(playerOut);
     if (tablaPlayerOut)
     tablaPlayerOut.remove();
@@ -682,79 +682,20 @@ function detenerTemporizador() {
     clearInterval(temporizador);
 }
 
-// function verificarHundimiento(casilla) {
-//     console.log("--- INICIO verificarHundimiento ---");
-//     console.log("Casilla recibida:", casilla);
-
-//     const casillaAtacada = document.getElementById(casilla);
-//     if (!casillaAtacada) {
-//         console.error("Casilla no encontrada:", casilla);
-//         console.log("--- FIN verificarHundimiento (Casilla no encontrada) ---");
-//         return;
-//     }
-
-//     const tablero = casillaAtacada.closest('.tablero');
-//     if (!tablero) {
-//         console.error("Tablero no encontrado para la casilla:", casilla);
-//         console.log("--- FIN verificarHundimiento (Tablero no encontrada) ---");
-//         return;
-//     }
-//         const tableroJuego = tablero.closest('.tablero-juego');
-//     if (!tableroJuego) {
-//         console.error("Tablero juego no encontrado para el tablero:", tablero);
-//         console.log("--- FIN verificarHundimiento (Tablero juego no encontrada) ---");
-//         return;
-//     }
-//     const nombreJugador = tableroJuego.id;
-
-//     console.log("Tablero verificado:", tablero.id);
-
-//     for (const barco of barcos) {
-//                 console.log("Barco actual:", barco);
-//         //Verificamos que el barco pertenezca al tablero actual
-//         if(barco.posiciones.some(posicion => tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`))){
-//             console.log(`#${tablero.id.substring(0,6)}-${posicion}`);
-//             let hundido = true; // Asumimos que el barco está hundido al principio
-//             for (const posicion of barco.posiciones) {
-//                 const celda = tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`);
-//                 console.log("Celda verificada:", celda ? celda.id : "No encontrada");
-//                 if (!celda || !celda.querySelector('.hit')) { // Si alguna celda NO tiene .hit
-//                     hundido = false; // El barco NO está hundido
-//                     break; // Salir del bucle interno, no es necesario seguir verificando
-//                 }
-//             }
-
-//             console.log("Barco hundido?:", hundido);
-//             if (hundido && !barco.hundido) { // Si todas las celdas tienen .hit y el barco no estaba hundido
-//                 alert(`¡El barco de tipo ${barco.tipo} ha sido hundido en el tablero de ${nombreJugador}!`);
-//                 barco.hundido = true;
-//             }
-//         }
-//     }
-//     console.log("--- FIN verificarHundimiento ---");
-// }
-
 function verificarHundimiento(casillaId,gamePlayers){
     const indice= gamePlayers.indexOf(localStorage.getItem('nombreJugador'))+1;
     for (let i=0;i<barcos.length;i++)
     {
-        console.log (barcos[i].posiciones);
-        console.log(casillaId);
         for (let j=0;j<barcos[i].posiciones.length;j++)
         {
             if ('p'+indice+"-"+barcos[i].posiciones[j]===casillaId)
             {
-                    console.log('he entrado a verificar los barcos');
                     for (let k=0;k<barcos[i].posiciones.length;k++)
                     {
                         let casilla= document.getElementById('p'+indice+"-"+barcos[i].posiciones[k]);
                         if (!casilla.querySelector('.hit'))
-                        {
-                            console.log('he venido a decirte que no te hundieron');
-                            return false;
-                        }
+                            return false; 
                     }
-                console.log('he entrado a mostrarte que te hundieron');
                 ws.send(JSON.stringify({ type: 'ship-destroyed', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador'), tipoBarco: barcos[i].tipo}));
                 return true;
             }
@@ -764,12 +705,10 @@ function verificarHundimiento(casillaId,gamePlayers){
 
 
 function alterarTablero(casilla, resultadoAtaque, gamePlayers) {
-    console.log("--- INICIO alterarTablero ---");
     let casillaAtacada = document.getElementById(casilla);
     if (casillaAtacada) {
         if (resultadoAtaque) {
             puntaje += 5;
-            console.log('estoy marcando como atacada la casilla:' + casilla);
             let golpe = document.createElement("div");
             golpe.classList.add("hit");
             let barcoAtacado = casillaAtacada.querySelector(".barco");
@@ -782,5 +721,4 @@ function alterarTablero(casilla, resultadoAtaque, gamePlayers) {
             casillaAtacada.innerHTML = "❌";
         }
     }
-    console.log("--- FIN alterarTablero ---");
 }
