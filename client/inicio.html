@@ -418,7 +418,7 @@
                     case 'attack-done':
                         {
                             console.log(mensaje);
-                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque,mensaje.gamePlayers);
+                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque,mensaje.gamePlayers,mensaje.turno);
                             if (!verificarGameOver())
                             {
                                 modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
