@@ -698,7 +698,7 @@ let temporizador;
 
 // Función para iniciar el temporizador
 function iniciarTemporizador(callback) {
-    let tiempoRestante = 30;
+    let tiempoRestante = 60;
     modificarAnuncio("Te quedan " + tiempoRestante + " segundos");
 
     temporizador = setInterval(() => {
