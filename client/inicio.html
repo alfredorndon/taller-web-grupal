@@ -499,17 +499,27 @@
         {
             if (seleccionado)
             {
-                switch (seleccionado.textContent)
+                if (tuTurno)
                 {
-                    case 'Mina Marina 💣 - 10 puntos':
+                    switch (seleccionado.textContent)
                     {
-                        if (puntaje >= 10)
-                            powerUpActivo = "mina-marina";
-                    }
-                    default:{
-                        powerUpActivo = null;
+                        case 'Mina Marina 💣 - 10 puntos':
+                        {
+                            if (puntaje >= 10)
+                            {
+                                powerUpActivo = "mina-marina";
+                                alert ('Haz comprado el powerUp Mina Marina 💣, aparecerá una bomba en tu tablero una vez hayas terminado tu turno');
+                            }
+                            else
+                                alert ('No tienes puntos suficientes para comprar este potenciador');
+                        }
+                        default:{
+                            powerUpActivo = null;
+                        }
                     }
                 }
+                else
+                    alert('No puedes comprar potenciadores si no es tu turno');
             }
         });
 

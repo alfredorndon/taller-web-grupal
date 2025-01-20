@@ -15,6 +15,8 @@ let cantidadBarcos = { // Cantidad de barcos permitidos por tipo
 
 let powerUpActivo = null;
 let puntaje = 0;
+let tuTurno = false;
+
 
 function crearTablero (tableros)
 {
@@ -346,11 +348,13 @@ function asignarClicks(gamePlayers, turno) {
         });
 
         enemigos.forEach(casillaEnemiga => {
+            tuTurno = true;
             casillaEnemiga.addEventListener('click', manejarAtaque);
         });
     } else {
         detenerTemporizador();
         enemigos.forEach(casillaEnemiga => {
+            tuTurno = false;
             casillaEnemiga.removeEventListener('click', manejarAtaque);
         });
     }
