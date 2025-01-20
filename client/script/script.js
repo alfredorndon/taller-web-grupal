@@ -207,13 +207,8 @@ function verificarPowerUp (casillaAtacada,jugadorAtacado) //Es para quien compre
         break;
         case 'pem':{
             powerUpActivo = null;
-            if (empCooldown<=0)
-            {
                 empCooldown=10;
                 ws.send(JSON.stringify({ type: 'PEM-attack', gameId: localStorage.getItem('partidaActiva'), jugadorAtacado:jugadorAtacado, playerName: localStorage.getItem('nombreJugador')}));
-            }
-            else
-            alert('el emp está en cooldown, tiempo restante: '+empCooldown+' turnos');
         }
         break;
         default:{
