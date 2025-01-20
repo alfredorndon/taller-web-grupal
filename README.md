@@ -24,12 +24,10 @@ case 'Aviones de Ataque ✈️ - 10 puntos':
             coordenadas.push("p"+(jugadoresJuego.indexOf(localStorage.getItem('nombreJugador'))+1)+"-"+letra + numero);
         }
         ws.send(JSON.stringify({ type: 'attack-planes', gameId: localStorage.getItem('partidaActiva'), coordenadas: coordenadas, jugadorAtacado:jugadorAtacado }));
-
     } else {
         alert('No tienes puntos suficientes o tu portaaviones ha sido hundido.');
     }
     break;
-
 
 ---------------- Escudo Defensivo ----------------
 
@@ -42,7 +40,6 @@ function calcularArea(casillaCentralId) {
     let letraCentral = casillaCentralId.charAt(3);
     let numeroCentral = parseInt(casillaCentralId.charAt(4));
     let area = [];
-
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
             let nuevaLetra = String.fromCharCode(letraCentral.charCodeAt(0) + i);
@@ -61,14 +58,12 @@ case 'Escudo Defensivo ️ - 15 puntos':
         let tableroJugador = document.getElementById(localStorage.getItem('nombreJugador'));
         let tablero = tableroJugador.querySelector('.tablero');
         let jugadorActual = jugadoresJuego.indexOf(localStorage.getItem('nombreJugador')) + 1;
-
         function handleTableroClick(event) {
             let casillaCentralId = event.target.id;
             if(!casillaCentralId.includes("p"+jugadorActual)) return;
             if (casillaCentralId && event.target.classList.contains('table-cell')) {
                 let areaEscudo = calcularArea(casillaCentralId, jugadorActual); // Llamada a la función externa
                 console.log("Area del escudo:", areaEscudo);
-
                 ws.send(JSON.stringify({
                     type: 'defensive-shield-activate',
                     gameId: localStorage.getItem('partidaActiva'),
@@ -76,12 +71,10 @@ case 'Escudo Defensivo ️ - 15 puntos':
                     casillaCentral: casillaCentralId,
                     areaProtegida: areaEscudo
                 }));
-
                 areaEscudo.forEach(id => {
                     let casilla = document.getElementById(id);
                     if (casilla) casilla.classList.add('escudo-activo');
                 });
-
                 tablero.removeEventListener('click', handleTableroClick);
                 escudoUsado = true;
             }
@@ -90,7 +83,6 @@ case 'Escudo Defensivo ️ - 15 puntos':
                 alert("Debes seleccionar una casilla de tu tablero")
             }
         }
-
         tablero.addEventListener('click', handleTableroClick);
         alert('Selecciona la casilla central para activar el Escudo Defensivo.');
     } else {
@@ -117,7 +109,6 @@ case 'Misil Crucero  - 15 puntos':
                 jugadorAtacado=tablero.id;
             }
         })
-
         function handleTableroClickEnemigo(event) {
             let casillaCentralId = event.target.id;
             if(!casillaCentralId.includes("p")) return;
@@ -134,7 +125,6 @@ case 'Misil Crucero  - 15 puntos':
         }
         tableroEnemigo.addEventListener('click', handleTableroClickEnemigo);
         alert('Selecciona la casilla central para el ataque del Misil Crucero.');
-
     } else {
         alert('No tienes puntos suficientes o el misil está en recarga.');
     }
