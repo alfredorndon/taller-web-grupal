@@ -250,6 +250,7 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss') || casilla.classList.contains('barco'))
                 {   
                     let disponible = casilla.id;
+                    console.log (disponible);
                     disponibles.push(disponible);
                 }
             });
