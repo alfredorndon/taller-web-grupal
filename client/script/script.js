@@ -247,7 +247,7 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
             let disponibles = [];
             casillasDisponibles.forEach(casilla =>
             {
-                if (casilla.classList.contains('hit') || casilla.classList.contains('miss') || casilla.classList.contains('barco'))
+                if (!casilla.classList.contains('hit') || !casilla.classList.contains('miss') || !casilla.classList.contains('barco'))
                 {   
                     let disponible = casilla.id;
                     console.log (disponible);
@@ -278,7 +278,7 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             let disponibles = [];
             casillasDisponibles.forEach(casilla =>
             {
-                if (casilla.classList.contains('hit') || casilla.classList.contains('miss'))
+                if (!casilla.classList.contains('hit') || !casilla.classList.contains('miss'))
                 {   
                     let disponible = casilla.id;
                     disponibles.push(disponible);
