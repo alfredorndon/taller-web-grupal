@@ -704,12 +704,16 @@ function verificarHundimiento(casillaId,gamePlayers){
 }
 
 
-function alterarTablero(casilla, resultadoAtaque, gamePlayers) {
+function alterarTablero(casilla, resultadoAtaque, gamePlayers, turno) {
     let casillaAtacada = document.getElementById(casilla);
+    let jugador = turno == 0 ? gamePlayers[gamePlayers.length] : gamePlayers[turno-1];
     if (casillaAtacada) {
         if (resultadoAtaque) {
-            puntaje += 5;
-            let puntajeText = document.getElementById('puntaje');
+            if (turno != null && jugador === localStorage.getItem('nombreJugador'))
+            {
+                puntaje += 5;
+                let puntajeText = document.getElementById('puntaje');
+            }
             puntajeText.textContent = puntaje;
             let golpe = document.createElement("div");
             golpe.classList.add("hit");
