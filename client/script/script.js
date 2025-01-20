@@ -245,12 +245,11 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
             let tablaJugador = document.getElementById(localStorage.getItem('nombreJugador'));
             let tabla = tablaJugador.querySelector('.tablero');
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
-            casillasDisponibles = Array.from(casillasDisponibles);
-            let borrables = tabla.querySelectorAll('.hit');
-            borrables = Array.from(borrables);
-            borrables = borrables.concat(tabla.querySelectorAll('.miss'));
-            borrables = borrables.concat(tabla.querySelectorAll('.barco'));
-            casillasDisponibles = casillasDisponibles.filter(elemento => !borrables.includes(elemento));
+            casillasDisponibles.forEach(casilla =>
+            {
+                if (casilla.classList.contains('.hit') || casilla.classList.contains('.miss') || casilla.classList.contains('.barco'))
+                    casilla.remove();
+            });
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
             let mina = document.createElement('div');
             mina.classList.add('mina-marina');
@@ -272,11 +271,11 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             let tablaJugador = document.getElementById(mensaje.gamePlayers[mensaje.turno-1]);
             let tabla = tablaJugador.querySelector('.tablero');
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
-            casillasDisponibles = Array.from(casillasDisponibles);
-            let borrables = tabla.querySelectorAll('.hit');
-            borrables = Array.from(borrables);
-            borrables = borrables.concat(tabla.querySelectorAll('.miss'));
-            casillasDisponibles = casillasDisponibles.filter(elemento => !borrables.includes(elemento));
+            casillasDisponibles.forEach(casilla =>
+            {
+                if (casilla.classList.contains('.hit') || casilla.classList.contains('.miss'))
+                    casilla.remove();
+            });
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
             casilla = casilla.id;
             let atacante = mensaje.turno == 0 ? mensaje.gamePlayers[mensaje.gamePlayers.length-1] : mensaje.gamePlayers[mensaje.turno-1];
