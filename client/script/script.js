@@ -244,7 +244,9 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
         {
             let tablaJugador = document.getElementById(localStorage.getItem('nombreJugador'));
             let tabla = tablaJugador.querySelector('.tablero');
-            let casillasDisponibles = tabla.querySelectorAll('.table-cell:not(.table-cell.hit, .table-cell.miss, .table-cell.barco)');
+            let casillasDisponibles = tabla.querySelectorAll('.table-cell');
+            let borrables = tabla.querySelectorAll('.hit').concat(tabla.querySelectorAll('.miss').concat(tabla.querySelectorAll('.barco')));
+            casillasDisponibles = casillasDisponibles.filter(elemento => !borrables.includes(elemento));
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
             let mina = document.createElement('div');
             mina.classList.add('mina-marina');
@@ -265,7 +267,9 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             mensaje.casilla.removeChild(mina);
             let tablaJugador = document.getElementById(mensaje.gamePlayers[mensaje.turno-1]);
             let tabla = tablaJugador.querySelector('.tablero');
-            let casillasDisponibles = tabla.querySelectorAll('.table-cell:not(.table-cell.hit,.table-cell.miss)');
+            let casillasDisponibles = tabla.querySelectorAll('.table-cell');
+            let borrables = tabla.querySelectorAll('.hit').concat(tabla.querySelectorAll('.miss'));
+            casillasDisponibles = casillasDisponibles.filter(elemento => !borrables.includes(elemento));
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
             casilla = casilla.id;
             let atacante = mensaje.turno == 0 ? mensaje.gamePlayers[mensaje.gamePlayers.length-1] : mensaje.gamePlayers[mensaje.turno-1];
@@ -418,7 +422,7 @@ function eliminarTablas(playerOut){
 let estadoInicialSelector = []; // Variable global para guardar el estado inicial
 
 function crearTableroCreacion(jugadores, tableros, listaJugadores) {
-    puntaje = 0;
+    puntaje = 10;
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
 
     const selectorBarco = document.getElementById('selector-barco');
