@@ -13,6 +13,7 @@ Para la última entrega desarrollamos la totalidad de todos los modos de juego: 
 
 Disponible si el portaaviones del jugador no ha sido hundido. Se añade un case en comprarPowerUp. Se verifica si el portaaviones existe en barcos y si no está hundido. Costo: 10 puntos. Se generan hasta 5 coordenadas aleatorias dentro del tablero enemigo. Se envia un mensaje al servidor con las coordenadas attack-planes con la lista de casillas. El servidor procesa el ataque, enviando un mensaje a todos los jugadores con los resultados de cada misil (hit/miss) attack-planes-result. Se actualizan los tableros de los jugadores.
 
+```
 case 'Aviones de Ataque ✈️ - 10 puntos':
     if (puntaje >= 10 && barcos.some(barco => barco.tipo === 'portaaviones' && !barco.hundido)) {
         puntaje -= 10;
@@ -28,6 +29,7 @@ case 'Aviones de Ataque ✈️ - 10 puntos':
         alert('No tienes puntos suficientes o tu portaaviones ha sido hundido.');
     }
     break;
+```
 
 ---------------- Escudo Defensivo ----------------
 
@@ -36,6 +38,7 @@ Cuando un jugador con el escudo activo es atacado, el servidor verifica el area 
 
 Sin embargo, también haría falta una funcion auxiliar para calcular el área 3x3 del escudo dentro del tablero.
 
+```
 function calcularArea(casillaCentralId) {
     let letraCentral = casillaCentralId.charAt(3);
     let numeroCentral = parseInt(casillaCentralId.charAt(4));
@@ -89,6 +92,7 @@ case 'Escudo Defensivo ️ - 15 puntos':
         alert('No tienes puntos suficientes o ya has usado el escudo.');
     }
     break;
+```
 
 ---------------- Misil Crucero ----------------
 
@@ -96,6 +100,7 @@ Se añade un case en comprarPowerUp. Se verifica el tiempo de recarga. Costo: 15
 
 Se implementa la misma función utilizada en el power-up Escudo Defensivo para calcular el área 3x3 donde se va a realizar el ataque de Misil Crucero.
 
+```
 case 'Misil Crucero  - 15 puntos':
     if (puntaje >= 15 && misilCruceroCooldown <= 0) {
         puntaje -= 15;
@@ -129,11 +134,13 @@ case 'Misil Crucero  - 15 puntos':
         alert('No tienes puntos suficientes o el misil está en recarga.');
     }
     break;
+```
 
 ---------------- Reparación Rápida ----------------
 
 Se añade un case en comprarPowerUp. Se verifica si el barco seleccionado ya ha sido reparado. Costo: 10 puntos. Un solo uso por barco. Se pide al jugador que seleccione un barco propio que tenga al menos una parte dañada. Se busca en el array barcos la información del barco seleccionado. Se reparan hasta 2 casillas y se envia un mensaje al servidor fast-repair-result con las casillas reparadas. Se actualiza el tablero y se marca el barco como reparado.
 
+```
 case 'Reparación Rápida ️ - 10 puntos':
     if (puntaje >= 10) {
         // Pedir al jugador que seleccione un barco
@@ -151,3 +158,4 @@ case 'Reparación Rápida ️ - 10 puntos':
         alert('No tienes puntos suficientes.');
     }
     break;
+```
