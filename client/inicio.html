@@ -52,7 +52,7 @@
                 <h2>¿Qué es "Batalla Naval"?</h2>
                 <p>
                     Batalla naval es un juego por turnos dónde el objetivo es hundir la flota del enemigo tratando de
-                    adivinar la ubicación de los barcos hostiles dentro de un tablero con coordenadas preestablecidas. 
+                    adivinar la ubicación de los barcos hostiles dentro de un tablero con coordenadas preestablecidas.
                     ¡Sé más rápido que tus contrincantes y alcanza la victoria en medio del océano!
                 </p>
             </section>
@@ -121,7 +121,7 @@
         <main>
             <section id="tableros-barcos">
                 <div id="tableros-creacion"></div>
-                
+
                 <section id="preparacion">
                     <h2>Sus barcos disponibles</h2>
 
@@ -132,7 +132,7 @@
                         <option value="submarino">Submarino</option>
                         <option value="destructor">Destructor</option>
                     </select>
-                    
+
                     <select id="selector-orientacion">
                         <option value="horizontal">Horizontal</option>
                         <option value="vertical">Vertical</option>
@@ -161,7 +161,9 @@
 
     <div class="main-container" id="container-juego">
         <header>
-            <div id="modo-juego"><h1>Partida de </h1></div>
+            <div id="modo-juego">
+                <h1>Partida de </h1>
+            </div>
             <h2 id="encabezado-enemigo"> Tus enemigos son: </h2>
             <div id="anuncio">
                 <h3>anuncio</h3>
@@ -336,7 +338,7 @@
                     case 'gameStarted': {
                         console.log('se ha iniciado el juego');
                         cargarNuevaSeccion('container-juego', 'container-lobby', localStorage.getItem('cantidadJugadores'), mensaje.gamePlayers);
-                        modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                        modificarAnuncio("Ahora es el turno de " + mensaje.gamePlayers[mensaje.turno]);
                         recopilarEnemigos();
                         jugadoresJuego = mensaje.gamePlayers;
                         asignarClicks(mensaje.gamePlayers, mensaje.turno);
@@ -357,7 +359,7 @@
                         alert('El jugador ' + mensaje.name + ' ha abandonado la partida.');
                         recopilarEnemigos();
                         modificarEnemigos(mensaje.gamePlayers);
-                        modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                        modificarAnuncio("Ahora es el turno de " + mensaje.gamePlayers[mensaje.turno]);
                         asignarClicks(mensaje.gamePlayers, mensaje.turno);
                     }
                         break;
@@ -369,8 +371,8 @@
                     case 'game-ended':
                         console.log(mensaje.message);
                         break;
-                    case 'end-tournament':{
-                        cargarNuevaSeccion('container-lobby','container-juego',localStorage.getItem('cantidadJugadores'),mensaje.gamePlayers,mensaje.points);
+                    case 'end-tournament': {
+                        cargarNuevaSeccion('container-lobby', 'container-juego', localStorage.getItem('cantidadJugadores'), mensaje.gamePlayers, mensaje.points);
                         console.log(mensaje);
                     }
                         break;
@@ -381,51 +383,49 @@
                     }
                         break;
                     case 'mina-marina':
-                    {
-                        let casillaAtacada = mensaje.atacado;
-                        let casillaPropia = mensaje.propia;
-                        alterarTablero(casillaAtacada,false,mensaje.gamePlayers);
-                        alterarTablero(casillaPropia,mensaje.hitPropio,mensaje.gamePlayers);
-                        alert ('El jugador '+mensaje.jugadorAtacante+' ataco la mina del jugador '+mensaje.jugadorAtacado);
-                        if (!verificarGameOver() )
                         {
-                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
-                            asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                            let casillaAtacada = mensaje.atacado;
+                            let casillaPropia = mensaje.propia;
+                            alterarTablero(casillaAtacada, false, mensaje.gamePlayers);
+                            alterarTablero(casillaPropia, mensaje.hitPropio, mensaje.gamePlayers);
+                            alert('El jugador ' + mensaje.jugadorAtacante + ' ataco la mina del jugador ' + mensaje.jugadorAtacado);
+                            if (!verificarGameOver()) {
+                                modificarAnuncio("Ahora es el turno de " + mensaje.gamePlayers[mensaje.turno]);
+                                asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                            }
+                            else
+                                location.reload();
                         }
-                        else
-                            location.reload();
-                    }
-                    break;
+                        break;
                     case 'sonar-answer':
-                    {
-                        alert ('🗣️🔥 La ubicación de un trozo de barco de '+mensaje.name+' está en la posición '+mensaje.casilla);
-                    }
-                    break;
+                        {
+                            alert('🗣️🔥 La ubicación de un trozo de barco de ' + mensaje.name + ' está en la posición ' + mensaje.casilla);
+                        }
+                        break;
                     case 'mina-marina-espectador':
-                    {
-                        let casillaAtacada = mensaje.atacado;
-                        let casillaPropia = mensaje.propia;
-                        alterarTablero(casillaAtacada,false,mensaje.gamePlayers);
-                        alterarTablero(casillaPropia,mensaje.hitPropio,mensaje.gamePlayers);
-                        modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
-                        alert ('El jugador '+mensaje.jugadorAtacante+' ataco la mina del jugador '+mensaje.jugadorAtacado);
-                    }
-                    break;
+                        {
+                            let casillaAtacada = mensaje.atacado;
+                            let casillaPropia = mensaje.propia;
+                            alterarTablero(casillaAtacada, false, mensaje.gamePlayers);
+                            alterarTablero(casillaPropia, mensaje.hitPropio, mensaje.gamePlayers);
+                            modificarAnuncio("Ahora es el turno de " + mensaje.gamePlayers[mensaje.turno]);
+                            alert('El jugador ' + mensaje.jugadorAtacante + ' ataco la mina del jugador ' + mensaje.jugadorAtacado);
+                        }
+                        break;
                     case 'attack': {
-                        verificarAtaque(mensaje.casilla,mensaje);
+                        verificarAtaque(mensaje.casilla, mensaje);
                     }
-                    break;
+                        break;
                     case 'attack-mina': {
-                        verificarAtaqueMina(mensaje.casilla,mensaje);
+                        verificarAtaqueMina(mensaje.casilla, mensaje);
                     }
-                    break;
+                        break;
                     case 'attack-done':
                         {
                             console.log(mensaje);
-                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque,mensaje.gamePlayers,mensaje.turno);
-                            if (!verificarGameOver())
-                            {
-                                modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla, mensaje.resultadoAtaque, mensaje.gamePlayers, mensaje.turno);
+                            if (!verificarGameOver()) {
+                                modificarAnuncio("Ahora es el turno de " + mensaje.gamePlayers[mensaje.turno]);
                                 asignarClicks(mensaje.gamePlayers, mensaje.turno);
                                 verificarPEM();
                                 actualizarCooldowns();
@@ -437,8 +437,8 @@
                     case 'attack-done-espectador':
                         {
                             console.log(mensaje);
-                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque,mensaje.gamePlayers);
-                                modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla, mensaje.resultadoAtaque, mensaje.gamePlayers);
+                            modificarAnuncio("Ahora es el turno de " + mensaje.gamePlayers[mensaje.turno]);
                         }
                         break;
                     case 'player-defeat':
@@ -446,43 +446,43 @@
                             eliminarTablas(mensaje.name);
                             alert('El jugador ' + mensaje.name + ' ha sido derrotado.');
                             recopilarEnemigos();
-                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                            modificarAnuncio("Ahora es el turno de " + mensaje.gamePlayers[mensaje.turno]);
                             asignarClicks(mensaje.gamePlayers, mensaje.turno);
                         }
                         break;
                     case 'victory':
                         {
-                            alert ('felicidades, has ganado la partida');
+                            alert('felicidades, has ganado la partida');
                             location.reload();
                         }
                         break
                     case 'turn-passed':
                         {
-                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                            modificarAnuncio("Ahora es el turno de " + mensaje.gamePlayers[mensaje.turno]);
                             asignarClicks(mensaje.gamePlayers, mensaje.turno);
                         }
                         break;
                     case 'ship-destroyed':
                         {
-                            alert('le destruyeron el barco '+mensaje.tipoBarco+' al jugador '+mensaje.name);
+                            alert('le destruyeron el barco ' + mensaje.tipoBarco + ' al jugador ' + mensaje.name);
                         }
                         break;
                     case 'PEM-attacked':
                         {
-                            empDuration+=4;
-                            let boton=document.getElementById('compra-potenciador');
-                            boton.disabled=true;
-                            alert('has sufrido un ataque PEM del jugador: '+mensaje.name+' no podras usar power-Ups durante '+empDuration+' turnos');
+                            empDuration += 4;
+                            let boton = document.getElementById('compra-potenciador');
+                            boton.disabled = true;
+                            alert('has sufrido un ataque PEM del jugador: ' + mensaje.name + ' no podras usar power-Ups durante ' + empDuration + ' turnos');
                         }
                         break;
                     case 'sonar-active':
-                            mandarRespuestaSonar(mensaje.gamePlayers, mensaje.name);
+                        mandarRespuestaSonar(mensaje.gamePlayers, mensaje.name);
                         break;
                     default: {
                         alert('Ha ocurrido un error en el servidor.');
                         event.preventDefault();
                     }
-                    break;
+                        break;
                 }
             }
             catch (error) {
@@ -499,27 +499,22 @@
         let contenedorBoosters = document.getElementById("boosters");
         let boosters = contenedorBoosters.querySelectorAll("li");
         let seleccionado = null;
-        boosters.forEach((booster) => 
-        {
-            booster.addEventListener('click', () => 
-            {
+        boosters.forEach((booster) => {
+            booster.addEventListener('click', () => {
                 if (seleccionado != booster && seleccionado != null) seleccionado.classList.remove("seleccionado");
-                if (seleccionado === booster && seleccionado != null)
-                {
+                if (seleccionado === booster && seleccionado != null) {
                     seleccionado.classList.remove("seleccionado");
                     seleccionado = null;
                 }
-                else
-                {
+                else {
                     booster.classList.add("seleccionado");
                     seleccionado = booster;
                 }
             });
         });
 
-        document.getElementById("compra-potenciador").addEventListener('click', function () 
-        {
-            if (seleccionado) comprarPowerUp (seleccionado);
+        document.getElementById("compra-potenciador").addEventListener('click', function () {
+            if (seleccionado) comprarPowerUp(seleccionado);
         });
 
         document.getElementById('listo').addEventListener('click', () => {
@@ -534,11 +529,11 @@
         })
 
         document.getElementById('boton-salir').addEventListener('click', function (event) {
-            const tablero= document.getElementById(localStorage.getItem('nombreJugador'));
+            const tablero = document.getElementById(localStorage.getItem('nombreJugador'));
             if (tablero)
-            ws.send(JSON.stringify({ type: 'leave-party', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador') }));
+                ws.send(JSON.stringify({ type: 'leave-party', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador') }));
             else
-            ws.send(JSON.stringify({ type: 'leave-tournament', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador') }));
+                ws.send(JSON.stringify({ type: 'leave-tournament', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador') }));
             location.reload();
         })
         document.getElementById('boton-salir-lobby').addEventListener('click', function (event) {
@@ -567,4 +562,5 @@
         });
     </script>
 </body>
+
 </html>
