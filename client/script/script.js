@@ -237,7 +237,8 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             let casillasDisponibles = tabla.querySelectorAll('.table-cell:not(.hit,.miss)');
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
             casilla = casilla.id;
-            ws.send(JSON.stringify({ type: 'mina-marina', gameId: localStorage.getItem('partidaActiva'), atacado: mensaje.casilla, propia: casilla, jugadorAtacado: localStorage.getItem('nombreJugador'), Atacante: mensaje.gamePlayers[mensaje.turno-1]}));
+            let atacante = mensaje.turno == 0 ? mensaje.gamePlayers[mensaje.gamePlayers.length-1] : mensaje.gamePlayers[mensaje.turno-1];
+            ws.send(JSON.stringify({ type: 'mina-marina', gameId: localStorage.getItem('partidaActiva'), atacado: mensaje.casilla, propia: casilla, jugadorAtacado: localStorage.getItem('nombreJugador'), Atacante: atacante}));
         }
         break;
     }
