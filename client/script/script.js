@@ -242,14 +242,14 @@ function comprarPowerUp (seleccionado)
             break;
             case 'Ataque PEM 🔌 - 25 puntos':
             {
-                if (puntaje >= 25)
+                if (puntaje >= 25 && empCooldown<=0)
                 {
                     puntaje -= 25;
                     powerUpActivo = 'pem';
                     alert ('Haz comprado el powerUp Ataque PEM 🔌, clickea en algún rival y no haz que no pueda comprar powerUps por 3 turnos, después ataca cualquier casilla y continúa el juego');
                 }
                 else
-                    alert ('No tienes puntos suficientes para comprar este potenciador');
+                    alert ('No tienes puntos suficientes para comprar este potenciador o aún está en cooldown');
             }
             default:{
                 powerUpActivo = null;
