@@ -545,8 +545,23 @@
                         alert('El jugador ' + mensaje.name + ' ha abandonado la partida.');
                     }
                         break;
+                    case 'mina-marina':
+                    {
+                        let casillaAtacada = mensaje.atacado;
+                        let casillaPropia = mensaje.propia;
+                        alterarTablero(casillaAtacada,false);
+                        alterarTablero(casillaPropia,true);
+                        if (!verificarGameOver())
+                        {
+                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                            asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                        }
+                        else
+                            location.reload();
+                    }
+                    break;
                     case 'attack': {
-                        verificarAtaque(mensaje.casilla);
+                        verificarAtaque(mensaje.casilla,mensaje);
                     }
                     break;
                     case 'attack-done':
