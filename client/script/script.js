@@ -805,7 +805,7 @@ function verificarPEM()
     }
 }
 
-function actualizarCoolDowns()
+function actualizarCooldowns()
 {
     if (empCooldown>0)
         empCooldown--;
