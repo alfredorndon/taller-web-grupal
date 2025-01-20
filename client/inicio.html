@@ -405,6 +405,7 @@
                         let casillaPropia = mensaje.propia;
                         alterarTablero(casillaAtacada,false,mensaje.gamePlayers);
                         alterarTablero(casillaPropia,mensaje.hitPropio,mensaje.gamePlayers);
+                        modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                         alert ('El jugador '+mensaje.jugadorAtacante+' ataco la mina del jugador '+mensaje.jugadorAtacado);
                     }
                     break;
