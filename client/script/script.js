@@ -713,8 +713,8 @@ function alterarTablero(casilla, resultadoAtaque, gamePlayers, turno) {
             {
                 puntaje += 5;
                 let puntajeText = document.getElementById('puntaje');
+                puntajeText.textContent = puntaje;
             }
-            puntajeText.textContent = puntaje;
             let golpe = document.createElement("div");
             golpe.classList.add("hit");
             let barcoAtacado = casillaAtacada.querySelector(".barco");
