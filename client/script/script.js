@@ -244,6 +244,7 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
             let tablaJugador = document.getElementById(localStorage.getItem('nombreJugador'));
             let tabla = tablaJugador.querySelector('.tablero');
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
+            let disponibles = [];
             casillasDisponibles.forEach(casilla =>
             {
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss') || casilla.classList.contains('barco'))
@@ -273,6 +274,7 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             let tablaJugador = mensaje.turno == 0 ? document.getElementById(mensaje.gamePlayers[mensaje.gamePlayers.length-1]):document.getElementById(mensaje.gamePlayers[mensaje.turno-1]);
             let tabla = tablaJugador.querySelector('.tablero');
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
+            let disponibles = [];
             casillasDisponibles.forEach(casilla =>
             {
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss'))
