@@ -211,6 +211,11 @@ function verificarPowerUp (casillaAtacada,jugadorAtacado) //Es para quien compre
                 ws.send(JSON.stringify({ type: 'PEM-attack', gameId: localStorage.getItem('partidaActiva'), jugadorAtacado:jugadorAtacado, playerName: localStorage.getItem('nombreJugador')}));
         }
         break;
+        case 'sonar':{
+            powerUpActivo = null;
+            ws.send(JSON.stringify({ type: 'sonar', gameId: localStorage.getItem('partidaActiva'), jugadorAtacado:jugadorAtacado, playerName: localStorage.getItem('nombreJugador')}));
+        }
+        break;
         default:{
             ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada, jugadorAtacado:jugadorAtacado}));
         }
@@ -830,4 +835,27 @@ function actualizarCooldowns()
 {
     if (empCooldown>0)
         empCooldown--;
+}
+
+function mandarRespuestaSonar(gamePlayers, jugadorAtacante)
+{
+    let casillaDevuelta=false;
+    let indiceJugador=gamePlayers.indexOf(localStorage.getItem('nombreJugador'))+1;
+    while (!casillaDevuelta)
+    {
+        let indice= randomizador(0,barcos.length-1);
+        let barcoElegido= barcos[indice];
+        for (let i=0; i<barcoElegido.posiciones.length; i++)
+        {
+            let casillaId='p'+indiceJugador+'-'+barcoElegido.posiciones[i];
+            const casillaRevelada= document.getElementById(casillaId);
+            if (!casillaRevelada.querySelector('.hit'))
+            {
+                let casillaReveladaId=casillaRevelada.id;
+                casillaDevuelta=true;
+                ws.send(JSON.stringify({ type: 'sonar-revealed', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador'), casillaRevelada:casillaReveladaId, jugadorAtacante: jugadorAtacante}));
+                return;
+            }
+        }
+    }
 }
