@@ -356,12 +356,12 @@ function verificarAtaqueMina(casilla, mensaje){
         if (casillaAtacada.querySelector('.barco'))
         {
             console.log ('Barco encontrado');
-            ws.send (JSON.stringify({ type: 'mina-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, casillaAtacada:mensaje.casillaAtacada, hitPropio: true, jugadorAtacante:mensaje.jugadorAtacante}));
+            ws.send (JSON.stringify({ type: 'mina-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, casillaAtacada:mensaje.casillaAtacada, hitPropio: true, jugadorAtacante:mensaje.jugadorAtacante, jugadorAtacado:mensaje.jugadorAtacado}));
         }
         else 
         {
             console.log ('Barco no encontrado');
-            ws.send (JSON.stringify({ type: 'mina-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, casillaAtacada:mensaje.casillaAtacada, hitPropio: false, jugadorAtacante:mensaje.jugadorAtacante}));
+            ws.send (JSON.stringify({ type: 'mina-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, casillaAtacada:mensaje.casillaAtacada, hitPropio: false, jugadorAtacante:mensaje.jugadorAtacante, jugadorAtacado:mensaje.jugadorAtacado}));
         }
     }
     else
