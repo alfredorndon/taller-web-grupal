@@ -7,7 +7,7 @@ Apenas se inicia el juego, saldrá una pagina principal con las instrucciones y 
 
 El archivo railway.toml es unicamente configurativo para el despliegue en railway, no tiene incidencia real en la ejecucion del juego.
 
-Para la última entrega desarrollamos la totalidad de todos los modos de juego: dos jugadores, tres jugadores, cuatro jugadores y modo torneo (de máximo 8 jugadores). Nuestro modo torneo se desarrolla en una partida de 8 jugadores en simultáneo, como un Battle Royale, donde el último jugador que tenga al menos un barco sin hundir habrá ganado el torneo, mientras que cada jugador que vaya perdiendo entrará en un modo de expectador hasta el final de la partida. En cuanto a los power-ups, sólo están implementados el Sonar, la Mina Marina y el Ataque EMP. Sin embargo, esta es la lógica que sería utilizada para la implementación de los power-ups:
+Para la última entrega desarrollamos la totalidad de todos los modos de juego: dos jugadores, tres jugadores, cuatro jugadores y modo torneo (de máximo 8 jugadores). Nuestro modo torneo se desarrolla en una partida de 8 jugadores en simultáneo, como un Battle Royale, donde ganará la persona que tenga mas "hits" acertados a los barcos, los cuales se suman en forma de puntaje de forma interna para ser mostrados al final del torneo, mientras que cada jugador que vaya perdiendo entrará en un modo de expectador hasta el final de la partida. En cuanto a los power-ups, sólo están implementados el Sonar, la Mina Marina y el Ataque EMP. Sin embargo, esta es la lógica que sería utilizada para la implementación de los power-ups:
 
 ---------------- Aviones de Ataque ----------------
 
