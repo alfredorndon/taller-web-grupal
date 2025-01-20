@@ -252,6 +252,16 @@ function comprarPowerUp (seleccionado)
                     alert ('No tienes puntos suficientes para comprar este potenciador o aún está en cooldown');
             }
             break;
+            case 'Sonar 🔊 - 15 puntos':
+            {
+                if (puntaje >= 15)
+                {
+                    puntaje -= 15;
+                    powerUpActivo = "sonar";
+                    alert ('Haz comprado el powerUp Sonar 🔊, al darle click al tablero del rival lo siguiente que recibirás son las coordenadas de una de las posiciones de su barco');
+                }
+            }
+            break;
             default:{
                 powerUpActivo = null;
             }
