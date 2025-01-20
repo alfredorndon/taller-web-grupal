@@ -246,6 +246,7 @@ function comprarPowerUp (seleccionado)
                 else
                     alert ('No tienes puntos suficientes para comprar este potenciador o aún está en cooldown');
             }
+            break;
             default:{
                 powerUpActivo = null;
             }
