@@ -553,7 +553,7 @@
                         alterarTablero(casillaPropia,true);
                         if (!verificarGameOver() )
                         {
-                            if (mensaje.gamePlayers[mensaje.turno-1] === localStorage.getItem('nombreJugador'))
+                            if (mensaje.gamePlayers[mensaje.turno-1] !== localStorage.getItem('nombreJugador'))
                             {
                                 modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                                 asignarClicks(mensaje.gamePlayers, mensaje.turno);
