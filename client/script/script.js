@@ -161,7 +161,7 @@ function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores,
 function mostrarLeaderboard(listaJugadores, puntajes) {
     for (let i = 1; i <= listaJugadores.length; i++) {
         let jugador = document.getElementById('jugador' + i);
-        jugador.innerText = listaJugadores[i - 1] + ' - ' + puntajes[i - 1];
+        jugador.innerText = listaJugadores[i - 1] + ' - puntaje:' + puntajes[i - 1];
     }
 }
 
