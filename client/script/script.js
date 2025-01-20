@@ -419,8 +419,8 @@ function verificarGameOver ()
 function manejarAtaque(event){
     const casillaAtacada = event.target.id;
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
-    if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, ataque otra");
-    else{
+    if (verificarPrevioAtaque(casillaAtacada)) 
+    {
         detenerTemporizador();
         verificarPowerUp(casillaAtacada,jugadorAtacado);
     }
@@ -810,8 +810,6 @@ function verificarPEM()
         empDuration--;
         if (empDuration<=0)
             alert('el efecto del PEM ha desaparecido') ;
-        else
-            alert('el efecto del PEM seguirá por '+empDuration+' turnos') ;
     }
 }
 
