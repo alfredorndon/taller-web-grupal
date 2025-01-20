@@ -370,13 +370,13 @@
                         <tr>
                             <td id="jugador8"></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td id="jugador9"></td>
                         </tr>
                         <tr>
                             <td id="jugador10"></td>
                         </tr>
-                        <!-- <tr>
+                        <tr>
                             <td id="jugador11"></td>
                         </tr>
                         <tr>
@@ -567,7 +567,7 @@
                     case 'attack-done':
                         {
                             console.log(mensaje);
-                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
+                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque,mensaje.gamePlayers);
                             if (!verificarGameOver())
                             {
                                 modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
@@ -580,7 +580,7 @@
                     case 'attack-done-espectador':
                         {
                             console.log(mensaje);
-                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque);
+                            if (verificarPrevioAtaque(mensaje.casilla)) alterarTablero(mensaje.casilla,mensaje.resultadoAtaque,mensaje.gamePlayers);
                                 modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                         }
                         break;
@@ -599,6 +599,17 @@
                             location.reload();
                         }
                         break
+                    case 'turn-passed':
+                        {
+                            modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
+                            asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                        }
+                        break;
+                    case 'ship-destroyed':
+                        {
+                            alert('le destruyeron el barco '+mensaje.tipoBarco+' al jugador '+mensaje.name);
+                        }
+                        break;
                     default: {
                         alert('Ha ocurrido un error en el servidor.');
                         event.preventDefault();

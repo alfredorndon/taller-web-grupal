@@ -75,86 +75,6 @@ function crearTablero (tableros)
     tableroJuego.appendChild(tablero);
 }
 
-// function crearTableroPartida (jugadores, tableros, listaJugadores)
-// {
-//     const jugadorActual= listaJugadores.indexOf(localStorage.getItem('nombreJugador'))+1;
-//     for (let j=1; j<=jugadores; j++)
-//     {
-//         let tableroJuego = document.createElement('div');
-//         tableroJuego.setAttribute('class','tablero-juego');
-//         tableroJuego.setAttribute('id', listaJugadores[j-1]); 
-//         let tablero = document.createElement('div');
-//         tablero.setAttribute('class', 'tablero');
-//         tablero.setAttribute('id', 'tabla-p'+j)
-//         for (let i=0; i<=filas; i++)
-//         {
-//             let header = document.createElement('div');
-//             header.setAttribute('class', 'position table-head '+i);
-//             if (i != 0) header.innerText = i;
-//             tablero.appendChild(header);
-//             for (let k=1; k<=columnas; k++)
-//             {
-//                 if (i == 0)
-//                 {
-//                     let celda = document.createElement('div');
-//                     celda.setAttribute('class', 'position table-head '+abecedario[k]+i);
-//                     celda.innerText = abecedario[k];
-//                     tablero.appendChild(celda);
-//                 }
-//                 else
-//                 {
-//                     let celda = document.createElement('div');
-//                     celda.setAttribute('id', 'p'+j+'-'+abecedario[k]+i);
-//                     celda.setAttribute('class', 'position table-cell');
-//                     tablero.appendChild(celda);
-//                 }
-//             }
-//         }
-        
-//         let section = document.getElementById(tableros);
-//         let titulo= document.createElement('h2');
-//         j==jugadorActual ? titulo.innerText = 'Tu tablero ('+localStorage.getItem('nombreJugador')+')': titulo.innerText = listaJugadores[j-1];
-//         titulo.setAttribute('class','jugador');
-//         titulo.setAttribute('id','p'+j);
-//         let todasLasCeldas = tablero.querySelectorAll('table-cells');
-//         if (barcos.length != 0 && j == jugadorActual)
-//         {
-//             barcos.forEach(barco =>
-//             {
-//                 let posiciones = barco.posiciones;
-//                 let longitudBarco;
-//                 switch (barco.tipoBarco) {
-//                     case 'portaaviones': longitudBarco = 5; break;
-//                     case 'acorazado': longitudBarco = 4; break;
-//                     case 'crucero': longitudBarco = 3; break;
-//                     case 'submarino': longitudBarco = 3; break;
-//                     case 'destructor': longitudBarco = 2; break;
-//                 }
-//                 let aumentado = 1;
-//                 posiciones.forEach(posicion =>
-//                 {
-//                     todasLasCeldas.forEach(celda =>
-//                     {
-//                         let pos = celda.id.split('-')[1];
-//                         if (posicion === pos)
-//                         {
-//                             celda.classList.add('barco');
-//                             celda.classList.add('barco-'+barco.tipoBarco);
-//                             celda.classList.add('title-'+aumentado);
-//                             if (barco.orientacion === 'horizontal')
-//                                 celda.classList.add('horizontal')
-//                         }
-//                     });
-//                 });
-//                 aumentado++;
-//             });
-//         }
-//         tableroJuego.appendChild(titulo);
-//         tableroJuego.appendChild(tablero);
-//         section.prepend(tableroJuego);
-//     }
-// }
-
 function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
     let titulo= document.getElementById('etapa');
     if (cantidadJugadores<=4)
@@ -186,57 +106,6 @@ function alterarLobby(cantidadJugadores, gameId,nombresJugadores){
 function ocultarSeccion(id) {
     document.getElementById(id).style.display = 'none';
 }
-
-// function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
-//     document.getElementById(idNuevo).style.display = 'block';
-//     ocultarSeccion(idViejo);
-//     let tablerosElement = document.getElementById('tableros-creacion');
-//     let tablerosJugar= document.getElementById('tableros') // Obtener el elemento 'tableros'
-
-//     if (idNuevo==='container-tablero-barcos') {
-//         // Valores predeterminados para la fase de colocación
-//         crearTableroCreacion(1, tablerosElement, [localStorage.getItem('nombreJugador')]); // Un solo jugador y su nombre
-//     }
-
-//     if (idNuevo==='container-juego') {
-//         crearTableroPartida(cantidadJugadores, tablerosJugar, listaJugadores); // Usar los valores correctos
-//         if (cantidadJugadores!=8) {
-//             document.getElementById('modo-juego').innerText='Partida de '+cantidadJugadores+' Jugadores';
-//         } else {
-//             document.getElementById('modo-juego').innerText='Modo Torneo';
-//         }
-//         let enemigos='';
-//         for (let j=0;j<listaJugadores.length;j++) {
-//             if (listaJugadores[j]!=localStorage.getItem('nombreJugador')) {
-//                 enemigos+=listaJugadores[j];
-//                 if (j!=listaJugadores.length-1) {
-//                     enemigos+=',';
-//                 } else {
-//                     enemigos+='.';
-//                 }
-//             }
-//         }
-//         document.getElementById('encabezado-enemigo').innerText='Tus enemigos seran:'+ enemigos;
-//     }
-//     if (idViejo==='container-tablero-barcos')
-//     {
-//         const tablero= document.querySelector('.tablero-juego');
-//         if (tablero) tablero.remove();
-//     }
-//     if (idViejo==='container-lobby' || idViejo==='container-juego')
-//     {
-//         for (let i=1;i<=cantidadJugadores;i++)
-//             {
-//                 let jugador = document.getElementById('jugador'+i);
-//                 jugador.innerText='';
-//             }
-//     }
-//     if (idViejo==='container-juego') 
-//     {
-//         document.getElementById('tableros').innerHTML='';
-//         document.getElementById('anuncio').innerHTML='';
-//     }
-// }
 
 function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores, puntajes ) {
     document.getElementById(idNuevo).style.display = 'block';
@@ -393,27 +262,25 @@ function verificarPrevioAtaque(casillaId)
     return true;
 }
 
-function alterarTablero(casilla, resultadoAtaque)
-{
-    let casillaAtacada= document.getElementById(casilla);
-    let barcoAtacado = casillaAtacada.querySelector('.barco');
-    if (casillaAtacada)
-    {
-        if (resultadoAtaque)
-        {   
-            puntaje += 5;
-            console.log('estoy marcando como atacada la casilla:'+casilla);
-            let golpe = document.createElement('div');
-            golpe.classList.add('hit');
-            barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
-        }
-        else
-        {
-            casillaAtacada.classList.add('miss');
-            casillaAtacada.innerHTML = '❌';
-        }
-    } 
-}
+    // function alterarTablero(casilla, resultadoAtaque) {
+    //     let casillaAtacada = document.getElementById(casilla);
+    //     if (casillaAtacada) {
+    //         if (resultadoAtaque) {
+    //             puntaje += 5;
+    //             console.log('estoy marcando como atacada la casilla:' + casilla);
+    //             let golpe = document.createElement("div");
+    //             golpe.classList.add("hit");
+    //             let barcoAtacado = casillaAtacada.querySelector(".barco");
+    //             barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
+
+    //             const tableroId = casillaAtacada.closest('.tablero').id;
+    //             verificarHundimiento(tableroId);
+    //         } else {
+    //             casillaAtacada.classList.add('miss');
+    //             casillaAtacada.innerHTML = "❌";
+    //         }
+    //     }
+    // }
 
 function verificarAtaque(casilla, mensaje){
     let casillaAtacada= document.getElementById(casilla);
@@ -460,6 +327,7 @@ function verificarGameOver ()
     let todosLosHits = tabla.querySelectorAll('.hit');
     if (todosLosHits.length == 17)
     {
+        detenerTemporizador();
         if (localStorage.getItem('cantidadJugadores')<5)
         {
             eliminarTablas (localStorage.getItem('nombreJugador'));
@@ -479,20 +347,27 @@ function verificarGameOver ()
 function manejarAtaque(event){
     const casillaAtacada = event.target.id;
     const jugadorAtacado= event.target.closest('.tablero-juego').id;
-    if (!verificarPrevioAtaque(casillaAtacada)) alert ('La casilla ya ha sido atacada, has perdido tu turno');
-    verificarPowerUp(casillaAtacada,jugadorAtacado);
+    if (!verificarPrevioAtaque(casillaAtacada)) alert ("La casilla ya ha sido atacada, ataque otra");
+    else{
+        detenerTemporizador();
+        verificarPowerUp(casillaAtacada,jugadorAtacado);
+    }
 }
 
-function asignarClicks(gamePlayers, turno)
-{
-    if (gamePlayers[turno]===localStorage.getItem('nombreJugador'))
-    {
+function asignarClicks(gamePlayers, turno) {
+    if (gamePlayers[turno] === localStorage.getItem('nombreJugador')) {
+        // El temporizador se inicia SIEMPRE que sea el turno del jugador
+        iniciarTemporizador(() => {
+            console.log("Tiempo agotado para " + localStorage.getItem('nombreJugador'));
+            // Ya no se envía mensaje al servidor. Simplemente se pasa el turno.
+            ws.send(JSON.stringify({ type: 'time-out', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem("nombreJugador") }));
+        });
+
         enemigos.forEach(casillaEnemiga => {
             casillaEnemiga.addEventListener('click', manejarAtaque);
         });
-    }
-    else 
-    {
+    } else {
+        detenerTemporizador();
         enemigos.forEach(casillaEnemiga => {
             casillaEnemiga.removeEventListener('click', manejarAtaque);
         });
@@ -777,56 +652,130 @@ function habilitarBotonesInicio(botonUnion, botonCreacion) {
     }
 }
 
+// Variable global para el temporizador
+let temporizador;
 
+// Función para iniciar el temporizador
+function iniciarTemporizador(callback) {
+    let tiempoRestante = 30;
+    modificarAnuncio("Te quedan " + tiempoRestante + " segundos");
 
+    temporizador = setInterval(() => {
+        tiempoRestante--;
+        modificarAnuncio("Te quedan " + tiempoRestante + " segundos");
 
+        if (tiempoRestante < 0) {
+            clearInterval(temporizador);
+            modificarAnuncio("¡Tiempo agotado!");
+            callback(); // Llamar al callback para pasar al siguiente turno
+        }
+    }, 1000);
+}
 
+// Función para detener el temporizador
+function detenerTemporizador() {
+    clearInterval(temporizador);
+}
 
+// function verificarHundimiento(casilla) {
+//     console.log("--- INICIO verificarHundimiento ---");
+//     console.log("Casilla recibida:", casilla);
 
+//     const casillaAtacada = document.getElementById(casilla);
+//     if (!casillaAtacada) {
+//         console.error("Casilla no encontrada:", casilla);
+//         console.log("--- FIN verificarHundimiento (Casilla no encontrada) ---");
+//         return;
+//     }
 
-//logica anterior
+//     const tablero = casillaAtacada.closest('.tablero');
+//     if (!tablero) {
+//         console.error("Tablero no encontrado para la casilla:", casilla);
+//         console.log("--- FIN verificarHundimiento (Tablero no encontrada) ---");
+//         return;
+//     }
+//         const tableroJuego = tablero.closest('.tablero-juego');
+//     if (!tableroJuego) {
+//         console.error("Tablero juego no encontrado para el tablero:", tablero);
+//         console.log("--- FIN verificarHundimiento (Tablero juego no encontrada) ---");
+//         return;
+//     }
+//     const nombreJugador = tableroJuego.id;
 
-// function cargarNuevaSeccion(idNuevo, idViejo, cantidadJugadores, listaJugadores ){
-//     document.getElementById(idNuevo).style.display = 'block';
-//     ocultarSeccion(idViejo);
-//     if (idNuevo==='container-tablero-barcos') crearTablero('tableros-barcos');
-//     if (idNuevo==='container-juego')
-//     {
-//         crearTableroPartida(cantidadJugadores,'tableros',listaJugadores);
-//         if (cantidadJugadores!=8)
-//             document.getElementById('modo-juego').innerText='Partida de '+cantidadJugadores+' Jugadores';
-//         else
-//             document.getElementById('modo-juego').innerText='Modo Torneo';
-//         let enemigos='';
-//         for (let j=0;j<listaJugadores.length;j++)
-//         {
-//             if (listaJugadores[j]!=localStorage.getItem('nombreJugador'))
-//             {
-//                 enemigos+=listaJugadores[j];
-//                 if (j!=listaJugadores.length-1)
-//                     enemigos+=',';
-//                 else
-//                     enemigos+='.';
+//     console.log("Tablero verificado:", tablero.id);
+
+//     for (const barco of barcos) {
+//                 console.log("Barco actual:", barco);
+//         //Verificamos que el barco pertenezca al tablero actual
+//         if(barco.posiciones.some(posicion => tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`))){
+//             console.log(`#${tablero.id.substring(0,6)}-${posicion}`);
+//             let hundido = true; // Asumimos que el barco está hundido al principio
+//             for (const posicion of barco.posiciones) {
+//                 const celda = tablero.querySelector(`#${tablero.id.substring(0,6)}-${posicion}`);
+//                 console.log("Celda verificada:", celda ? celda.id : "No encontrada");
+//                 if (!celda || !celda.querySelector('.hit')) { // Si alguna celda NO tiene .hit
+//                     hundido = false; // El barco NO está hundido
+//                     break; // Salir del bucle interno, no es necesario seguir verificando
+//                 }
+//             }
+
+//             console.log("Barco hundido?:", hundido);
+//             if (hundido && !barco.hundido) { // Si todas las celdas tienen .hit y el barco no estaba hundido
+//                 alert(`¡El barco de tipo ${barco.tipo} ha sido hundido en el tablero de ${nombreJugador}!`);
+//                 barco.hundido = true;
 //             }
 //         }
-//         document.getElementById('encabezado-enemigo').innerText='Tus enemigos seran:'+ enemigos;
 //     }
-//     if (idViejo==='container-tablero-barcos')
-//     {
-//         const tablero= document.querySelector('.tablero-juego');
-//         if (tablero) tablero.remove();
-//     }
-//     if (idViejo==='container-lobby' || idViejo==='container-juego')
-//     {
-//         for (let i=1;i<=cantidadJugadores;i++)
-//             {
-//                 let jugador = document.getElementById('jugador'+i);
-//                 jugador.innerText='';
-//             }
-//     }
-//     if (idViejo==='container-juego') 
-//     {
-//         document.getElementById('tableros').innerHTML='';
-//         document.getElementById('anuncio').innerHTML='';
-//     }
+//     console.log("--- FIN verificarHundimiento ---");
 // }
+
+function verificarHundimiento(casillaId,gamePlayers){
+    const indice= gamePlayers.indexOf(localStorage.getItem('nombreJugador'))+1;
+    for (let i=0;i<barcos.length;i++)
+    {
+        console.log (barcos[i].posiciones);
+        console.log(casillaId);
+        for (let j=0;j<barcos[i].posiciones.length;j++)
+        {
+            if ('p'+indice+"-"+barcos[i].posiciones[j]===casillaId)
+            {
+                    console.log('he entrado a verificar los barcos');
+                    for (let k=0;k<barcos[i].posiciones.length;k++)
+                    {
+                        let casilla= document.getElementById('p'+indice+"-"+barcos[i].posiciones[k]);
+                        if (!casilla.querySelector('.hit'))
+                        {
+                            console.log('he venido a decirte que no te hundieron');
+                            return false;
+                        }
+                    }
+                console.log('he entrado a mostrarte que te hundieron');
+                ws.send(JSON.stringify({ type: 'ship-destroyed', gameId: localStorage.getItem('partidaActiva'), playerName: localStorage.getItem('nombreJugador'), tipoBarco: barcos[i].tipo}));
+                return true;
+            }
+        }
+    }
+}
+
+
+function alterarTablero(casilla, resultadoAtaque, gamePlayers) {
+    console.log("--- INICIO alterarTablero ---");
+    let casillaAtacada = document.getElementById(casilla);
+    if (casillaAtacada) {
+        if (resultadoAtaque) {
+            puntaje += 5;
+            console.log('estoy marcando como atacada la casilla:' + casilla);
+            let golpe = document.createElement("div");
+            golpe.classList.add("hit");
+            let barcoAtacado = casillaAtacada.querySelector(".barco");
+            barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
+
+            verificarHundimiento(casilla,gamePlayers);
+
+        } else {
+            casillaAtacada.classList.add('miss');
+            casillaAtacada.innerHTML = "❌";
+        }
+    }
+    console.log("--- FIN alterarTablero ---");
+}

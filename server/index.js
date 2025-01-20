@@ -97,10 +97,16 @@ function handleMessage(ws, message) {
             getPlayers(ws,message.gameId);
             break;
         case 'player-defeat':
-            handlePlayerDefeat(ws, message.gameId, message.playerName)
+            handlePlayerDefeat(ws, message.gameId, message.playerName);
             break;
         case 'player-defeat-tournament':
-            handlePlayerDefeatTournament(ws, message.gameId, message.playerName)
+            handlePlayerDefeatTournament(ws, message.gameId, message.playerName);
+            break;
+        case 'time-out':
+            handleTimeOut(ws, message.gameId, message.playerName);
+            break;
+        case 'ship-destroyed':
+            handleShipDestroyed(ws,message.gameId,message.playerName,message.tipoBarco);
             break;
         default:
             // Si el tipo de mensaje no es reconocido, se envía un mensaje de error al jugador.
@@ -397,6 +403,43 @@ function handlePlayerDefeatTournament(ws, gameId, playerName) {
         );
         torneo.players.forEach((player) =>
             sendMessage(player.ws, { type: 'player-defeat', gameId, name:playerName, gamePlayers: gamePlayers, turno: game.turn}),
+        );
+    }
+}
+
+
+function handleTimeOut(ws, gameId,playerName)
+{
+    const game=games[gameId];
+    const torneo=torneos[gameId];
+    const gamePlayers = game.players.map(player => player.name);
+    if (game.turn==game.players.length-1)
+    game.turn=0;
+    else
+    game.turn++;
+    game.players.forEach((player) =>
+        sendMessage(player.ws, { type: 'turn-passed', gameId, name:playerName, gamePlayers: gamePlayers, turno: game.turn}),
+    );
+    if (torneo)
+    {
+        torneo.players.forEach((player) =>
+            sendMessage(player.ws, { type: 'turn-passed', gameId, name:playerName, gamePlayers: gamePlayers, turno: game.turn}),
+        );
+    }
+}
+
+function handleShipDestroyed(ws,gameId,playerName,tipoBarco)
+{
+    const game=games[gameId];
+    const torneo=torneos[gameId];
+    const gamePlayers = game.players.map(player => player.name);
+    game.players.forEach((player) =>
+        sendMessage(player.ws, { type: 'ship-destroyed', gameId, name:playerName, gamePlayers: gamePlayers, tipoBarco:tipoBarco}),
+    );
+    if (torneo)
+    {
+        torneo.players.forEach((player) =>
+            sendMessage(player.ws, { type: 'ship-destroyed', gameId, name:playerName, gamePlayers: gamePlayers, tipoBarco:tipoBarco}),
         );
     }
 }
