@@ -14,7 +14,7 @@ let cantidadBarcos = { // Cantidad de barcos permitidos por tipo
 };
 
 let powerUpActivo = null;
-let puntaje = 100;
+let puntaje = 0;
 let tuTurno = false;
 let empCooldown=0;
 let empDuration=0;
@@ -249,12 +249,15 @@ function comprarPowerUp (seleccionado)
             break;
             case 'Sonar 🔊 - 15 puntos':
             {
-                if (puntaje >= 15)
+                let submarino = document.querySelectorAll('.barco-submarino.hit');
+                if (puntaje >= 15 && submarino.length < 3 && submarino != null)
                 {
                     puntaje -= 15;
                     powerUpActivo = "sonar";
                     alert ('Haz comprado el powerUp Sonar 🔊, al darle click al tablero del rival lo siguiente que recibirás son las coordenadas de una de las posiciones de su barco');
                 }
+                else
+                    alert ('No tienes puntos suficientes para comprar este potenciador o tu submarino ha sido hundido');
             }
             break;
             default:{
@@ -468,7 +471,7 @@ function eliminarTablas(playerOut){
 let estadoInicialSelector = []; // Variable global para guardar el estado inicial
 
 function crearTableroCreacion(jugadores, tableros, listaJugadores) {
-    puntaje = 100;
+    puntaje = 0;
     let puntajeText = document.getElementById('puntaje');
     puntajeText.textContent = puntaje+' puntos';
     const jugadorActual = listaJugadores.indexOf(localStorage.getItem('nombreJugador')) + 1;
