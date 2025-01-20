@@ -387,8 +387,8 @@
                     {
                         let casillaAtacada = mensaje.atacado;
                         let casillaPropia = mensaje.propia;
-                        alterarTablero(casillaAtacada,false);
-                        alterarTablero(casillaPropia,mensaje.hitPropio);
+                        alterarTablero(casillaAtacada,false,mensaje.gamePlayers);
+                        alterarTablero(casillaPropia,mensaje.hitPropio,mensaje.gamePlayers);
                         alert ('El jugador '+mensaje.jugadorAtacante+' ataco la mina del jugador'+mensaje.gamePlayers[game.turn]);
                         if (!verificarGameOver() )
                         {
@@ -403,8 +403,8 @@
                     {
                         let casillaAtacada = mensaje.atacado;
                         let casillaPropia = mensaje.propia;
-                        alterarTablero(casillaAtacada,false);
-                        alterarTablero(casillaPropia,mensaje.hitPropio);
+                        alterarTablero(casillaAtacada,false,mensaje.gamePlayers);
+                        alterarTablero(casillaPropia,mensaje.hitPropio,mensaje.gamePlayers);
                     }
                     break;
                     case 'attack': {
