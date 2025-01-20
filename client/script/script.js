@@ -234,9 +234,10 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             mensaje.casilla.removeChild(mina);
             let tablaJugador = document.getElementById(mensaje.gamePlayers[mensaje.turno-1]);
             let tabla = tablaJugador.querySelector('.tablero');
-            let casillasDisponibles = tabla.querySelectorAll('.barco:not(.hit)');
+            let casillasDisponibles = tabla.querySelectorAll('.table-cell:not(.hit,.miss)');
             let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
-            ws.send(JSON.stringify({ type: 'mina-marina', gameId: localStorage.getItem('partidaActiva'), atacado: mensaje.casilla, propia: casilla}));
+            casilla = casilla.id;
+            ws.send(JSON.stringify({ type: 'mina-marina', gameId: localStorage.getItem('partidaActiva'), atacado: mensaje.casilla, propia: casilla, jugadorAtacado: localStorage.getItem('nombreJugador'), Atacante: mensaje.gamePlayers[mensaje.turno-1]}));
         }
         break;
     }
@@ -261,26 +262,6 @@ function verificarPrevioAtaque(casillaId)
     else
     return true;
 }
-
-    // function alterarTablero(casilla, resultadoAtaque) {
-    //     let casillaAtacada = document.getElementById(casilla);
-    //     if (casillaAtacada) {
-    //         if (resultadoAtaque) {
-    //             puntaje += 5;
-    //             console.log('estoy marcando como atacada la casilla:' + casilla);
-    //             let golpe = document.createElement("div");
-    //             golpe.classList.add("hit");
-    //             let barcoAtacado = casillaAtacada.querySelector(".barco");
-    //             barcoAtacado ? barcoAtacado.appendChild(golpe) : casillaAtacada.appendChild(golpe);
-
-    //             const tableroId = casillaAtacada.closest('.tablero').id;
-    //             verificarHundimiento(tableroId);
-    //         } else {
-    //             casillaAtacada.classList.add('miss');
-    //             casillaAtacada.innerHTML = "❌";
-    //         }
-    //     }
-    // }
 
 function verificarAtaque(casilla, mensaje){
     let casillaAtacada= document.getElementById(casilla);
