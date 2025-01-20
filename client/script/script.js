@@ -287,6 +287,25 @@ function verificarAtaque(casilla, mensaje){
     console.error('la casilla atacada no existe');
 }
 
+function verificarAtaqueMina(casilla, mensaje){
+    let casillaAtacada= document.getElementById(casilla);
+    if (casillaAtacada)
+    {
+        if (casillaAtacada.querySelector('.barco'))
+        {
+            console.log ('Barco encontrado');
+            ws.send (JSON.stringify({ type: 'mina-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, casillaAtacada:mensaje.casillaAtacada, hitPropio: true, jugadorAtacante:mensaje.jugadorAtacante}));
+        }
+        else 
+        {
+            console.log ('Barco no encontrado');
+            ws.send (JSON.stringify({ type: 'mina-attacked', gameId:localStorage.getItem('partidaActiva'), casilla: casilla, casillaAtacada:mensaje.casillaAtacada, hitPropio: false, jugadorAtacante:mensaje.jugadorAtacante}));
+        }
+    }
+    else
+    console.error('la casilla atacada no existe');
+}
+
 function recopilarEnemigos(){
     enemigos=[];
     const tableros = document.querySelectorAll('.tablero-juego');

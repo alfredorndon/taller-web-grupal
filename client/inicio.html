@@ -550,7 +550,8 @@
                         let casillaAtacada = mensaje.atacado;
                         let casillaPropia = mensaje.propia;
                         alterarTablero(casillaAtacada,false);
-                        alterarTablero(casillaPropia,true);
+                        alterarTablero(casillaPropia,mensaje.hitPropio);
+                        alert ('El jugador '+mensaje.jugadorAtacante+' ataco la mina del jugador'+mensaje.gamePlayers[game.turn]);
                         if (!verificarGameOver() )
                         {
                             modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
@@ -565,11 +566,15 @@
                         let casillaAtacada = mensaje.atacado;
                         let casillaPropia = mensaje.propia;
                         alterarTablero(casillaAtacada,false);
-                        alterarTablero(casillaPropia,true);
+                        alterarTablero(casillaPropia,mensaje.hitPropio);
                     }
                     break;
                     case 'attack': {
                         verificarAtaque(mensaje.casilla,mensaje);
+                    }
+                    break;
+                    case 'attack-mina': {
+                        verificarAtaqueMina(mensaje.casilla,mensaje);
                     }
                     break;
                     case 'attack-done':
