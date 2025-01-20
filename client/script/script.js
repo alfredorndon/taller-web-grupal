@@ -268,7 +268,7 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
         {
             let casillaMina = document.getElementById(mensaje.casilla);
             let mina = casillaMina.querySelector('.mina-marina');
-            mensaje.casilla.removeChild(mina);
+            casillaMina.removeChild(mina);
             let tablaJugador = document.getElementById(mensaje.gamePlayers[mensaje.turno-1]);
             let tabla = tablaJugador.querySelector('.tablero');
             let casillasDisponibles = tabla.querySelectorAll('.table-cell');
