@@ -423,6 +423,8 @@
                             {
                                 modificarAnuncio("Ahora es el turno de "+mensaje.gamePlayers[mensaje.turno]);
                                 asignarClicks(mensaje.gamePlayers, mensaje.turno);
+                                verificarPEM();
+                                actualizarCooldowns();
                             }
                             else
                                 location.reload();
@@ -459,6 +461,14 @@
                     case 'ship-destroyed':
                         {
                             alert('le destruyeron el barco '+mensaje.tipoBarco+' al jugador '+mensaje.name);
+                        }
+                        break;
+                    case 'PEM-attacked':
+                        {
+                            empDuration+=3;
+                            let boton=document.getElementById('compra-potenciador');
+                            boton.disabled=true;
+                            alert('has sufrido un ataque PEM del jugador: '+mensaje.name+' no podras usar power-Ups durante '+empDuration+' turnos');
                         }
                         break;
                     default: {

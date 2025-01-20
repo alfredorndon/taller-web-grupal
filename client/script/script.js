@@ -16,6 +16,8 @@ let cantidadBarcos = { // Cantidad de barcos permitidos por tipo
 let powerUpActivo = null;
 let puntaje = 10;
 let tuTurno = false;
+let empCooldown=0;
+let empDuration=0;
 
 function crearTablero (tableros)
 {
@@ -201,6 +203,17 @@ function verificarPowerUp (casillaAtacada,jugadorAtacado) //Es para quien compre
             powerUpActivo = null;
             prepararPowerUp ('mina-marina');
             ws.send(JSON.stringify({ type: 'attack', gameId: localStorage.getItem('partidaActiva'), casilla: casillaAtacada, jugadorAtacado:jugadorAtacado}));
+        }
+        break;
+        case 'pem':{
+            powerUpActivo = null;
+            if (empCooldown<=0)
+            {
+                empCooldown=10;
+                ws.send(JSON.stringify({ type: 'PEM-attack', gameId: localStorage.getItem('partidaActiva'), jugadorAtacado:jugadorAtacado, playerName: localStorage.getItem('nombreJugador')}));
+            }
+            else
+            alert('el emp está en cooldown, tiempo restante: '+empCooldown+' turnos');
         }
         break;
         default:{
@@ -774,4 +787,27 @@ function alterarTablero(casilla, resultadoAtaque, gamePlayers, turno) {
             casillaAtacada.innerHTML = "❌";
         }
     }
+}
+
+function verificarPEM()
+{
+    let boton= document.getElementById('compra-potenciador');
+    if (empDuration<=0)
+    {
+        boton.disabled=false;
+    }
+    else
+    {
+        empDuration--;
+        if (empDuration<=0)
+        alert('el efecto del PEM ha desaparecido') ;
+        else
+        alert('el efecto del PEM seguirá por '+empDuration+' turnos') ;
+    }
+}
+
+function actualizarCoolDowns()
+{
+    if (empCooldown>0)
+        empCooldown--;
 }
