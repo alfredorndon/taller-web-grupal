@@ -17,7 +17,6 @@ let powerUpActivo = null;
 let puntaje = 10;
 let tuTurno = false;
 
-
 function crearTablero (tableros)
 {
     let j=1;
@@ -244,17 +243,13 @@ function prepararPowerUp (powerUp) //Es para quien compra el powerUp
         {
             let tablaJugador = document.getElementById(localStorage.getItem('nombreJugador'));
             let tabla = tablaJugador.querySelector('.tablero');
-            let casillasDisponibles = tabla.querySelectorAll('.table-cell');
-            let disponibles = [];
+            let casillasDisponibles = Array.from(tabla.querySelectorAll('.table-cell')).map(casilla => casilla);
             casillasDisponibles.forEach(casilla =>
             {
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss') || casilla.classList.contains('barco'))
-                {   
-                    let disponible = casilla.id;
-                    disponibles = disponibles.push(disponible);
-                }
+                    casilla.remove();
             });
-            let casilla = disponibles.getElementById(disponibles[randomizador(0, disponibles.length-1)]);
+            let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
             let mina = document.createElement('div');
             mina.classList.add('mina-marina');
             mina.innerHTML = '💣';
@@ -274,17 +269,14 @@ function activarPowerUp (powerUp, mensaje) //Es para quien compra el powerUp o s
             casillaMina.removeChild(mina);
             let tablaJugador = mensaje.turno == 0 ? document.getElementById(mensaje.gamePlayers[mensaje.gamePlayers.length-1]):document.getElementById(mensaje.gamePlayers[mensaje.turno-1]);
             let tabla = tablaJugador.querySelector('.tablero');
-            let casillasDisponibles = tabla.querySelectorAll('.table-cell');
-            let disponibles = [];
+            let casillasDisponibles = Array.from(tabla.querySelectorAll('.table-cell')).map(casilla => casilla);
             casillasDisponibles.forEach(casilla =>
             {
                 if (casilla.classList.contains('hit') || casilla.classList.contains('miss'))
-                {   
-                    let disponible = casilla.id;
-                    disponibles = disponibles.push(disponible);
-                }
+                    casilla.remove();
             });
-            let casilla = disponibles[randomizador(0, disponibles.length-1)];
+            let casilla = casillasDisponibles[randomizador(0, casillasDisponibles.length-1)];
+            casilla = casilla.id;
             let atacante = mensaje.turno == 0 ? mensaje.gamePlayers[mensaje.gamePlayers.length-1] : mensaje.gamePlayers[mensaje.turno-1];
             ws.send(JSON.stringify({ type: 'mina-marina', gameId: localStorage.getItem('partidaActiva'), atacado: mensaje.casilla, propia: casilla, jugadorAtacado: localStorage.getItem('nombreJugador'), Atacante: atacante}));
         }
