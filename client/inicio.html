@@ -502,32 +502,7 @@
 
         document.getElementById("compra-potenciador").addEventListener('click', function () 
         {
-            if (seleccionado)
-            {
-                if (tuTurno)
-                {
-                    switch (seleccionado.textContent)
-                    {
-                        case 'Mina Marina 💣 - 10 puntos':
-                        {
-                            if (puntaje >= 10)
-                            {
-                                console.log("Voy a asignar una mina");
-                                powerUpActivo = "mina-marina";
-                                console.log(powerUpActivo);
-                                alert ('Haz comprado el powerUp Mina Marina 💣, aparecerá una bomba en tu tablero una vez hayas terminado tu turno');
-                            }
-                            else
-                                alert ('No tienes puntos suficientes para comprar este potenciador');
-                        }
-                        default:{
-                            powerUpActivo = null;
-                        }
-                    }
-                }
-                else
-                    alert('No puedes comprar potenciadores si no es tu turno');
-            }
+            if (seleccionado) comprarPowerUp (seleccionado);
         });
 
         document.getElementById('listo').addEventListener('click', () => {

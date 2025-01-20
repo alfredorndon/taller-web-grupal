@@ -210,6 +210,31 @@ function verificarPowerUp (casillaAtacada,jugadorAtacado) //Es para quien compre
     }
 }
 
+function comprarPowerUp (seleccionado)
+{
+    if (tuTurno)
+    {
+        switch (seleccionado.textContent)
+        {
+            case 'Mina Marina 💣 - 10 puntos':
+            {
+                if (puntaje >= 10)
+                {
+                    powerUpActivo = "mina-marina";
+                    alert ('Haz comprado el powerUp Mina Marina 💣, aparecerá una bomba en tu tablero una vez hayas terminado tu turno');
+                }
+                else
+                    alert ('No tienes puntos suficientes para comprar este potenciador');
+            }
+            default:{
+                powerUpActivo = null;
+            }
+        }
+    }
+    else
+        alert('No puedes comprar potenciadores si no es tu turno');
+}
+
 function prepararPowerUp (powerUp) //Es para quien compra el powerUp
 {
     console.log ('Estoy preparando el powerup: '+powerUp);
@@ -702,7 +727,6 @@ function verificarHundimiento(casillaId,gamePlayers){
         }
     }
 }
-
 
 function alterarTablero(casilla, resultadoAtaque, gamePlayers, turno) {
     let casillaAtacada = document.getElementById(casilla);
