@@ -213,7 +213,7 @@ function verificarPowerUp (casillaAtacada,jugadorAtacado) //Es para quien compre
                 ws.send(JSON.stringify({ type: 'PEM-attack', gameId: localStorage.getItem('partidaActiva'), jugadorAtacado:jugadorAtacado, playerName: localStorage.getItem('nombreJugador')}));
             }
             else
-            alert('El EMP está en cooldown, tiempo restante: '+empCooldown+' turnos');
+                alert('El PEM está en cooldown, tiempo restante: '+empCooldown+' turnos');
         }
         break;
         default:{
@@ -232,6 +232,7 @@ function comprarPowerUp (seleccionado)
             {
                 if (puntaje >= 10)
                 {
+                    puntaje -= 10;
                     powerUpActivo = "mina-marina";
                     alert ('Haz comprado el powerUp Mina Marina 💣, aparecerá una bomba en tu tablero una vez hayas terminado tu turno. Cuando otro jugador le de click a tu mina recibirá aleatoriamente un ataque en su tablero');
                 }
@@ -239,12 +240,13 @@ function comprarPowerUp (seleccionado)
                     alert ('No tienes puntos suficientes para comprar este potenciador');
             }
             break;
-            case 'Ataque EMP 🔌 - 25 puntos':
+            case 'Ataque PEM 🔌 - 25 puntos':
             {
                 if (puntaje >= 25)
                 {
+                    puntaje -= 25;
                     powerUpActivo = 'pem';
-                    alert ('Haz comprado el powerUp Ataque EMP 🔌, clickea en algún rival y no haz que no pueda comprar powerUps por 3 turnos, después ataca cualquier casilla y continúa el juego');
+                    alert ('Haz comprado el powerUp Ataque PEM 🔌, clickea en algún rival y no haz que no pueda comprar powerUps por 3 turnos, después ataca cualquier casilla y continúa el juego');
                 }
                 else
                     alert ('No tienes puntos suficientes para comprar este potenciador');
@@ -809,9 +811,9 @@ function verificarPEM()
     {
         empDuration--;
         if (empDuration<=0)
-        alert('el efecto del PEM ha desaparecido') ;
+            alert('el efecto del PEM ha desaparecido') ;
         else
-        alert('el efecto del PEM seguirá por '+empDuration+' turnos') ;
+            alert('el efecto del PEM seguirá por '+empDuration+' turnos') ;
     }
 }
 
