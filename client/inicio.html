@@ -473,6 +473,9 @@
                             alert('has sufrido un ataque PEM del jugador: '+mensaje.name+' no podras usar power-Ups durante '+empDuration+' turnos');
                         }
                         break;
+                    case 'sonar-active':
+                            mandarRespuestaSonar(playerName, mensaje.name);
+                        break;
                     default: {
                         alert('Ha ocurrido un error en el servidor.');
                         event.preventDefault();
