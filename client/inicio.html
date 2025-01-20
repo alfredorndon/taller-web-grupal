@@ -560,6 +560,14 @@
                             location.reload();
                     }
                     break;
+                    case 'mina-marina-espectador':
+                    {
+                        let casillaAtacada = mensaje.atacado;
+                        let casillaPropia = mensaje.propia;
+                        alterarTablero(casillaAtacada,false);
+                        alterarTablero(casillaPropia,true);
+                    }
+                    break;
                     case 'attack': {
                         verificarAtaque(mensaje.casilla,mensaje);
                     }
